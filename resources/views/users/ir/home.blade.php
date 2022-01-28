@@ -16,7 +16,7 @@ $active = 'home';
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
-                <h4 class="page-title">Tableau de bord</h4>
+                <h4 class="page-title">Tableau de bord | Ingénieur</h4>
             </div>
         </div>
     </div>

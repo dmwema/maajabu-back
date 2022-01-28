@@ -17,14 +17,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        if (User::count() == 0) {
-            User::create([
-                'name'           => 'Admin',
-                'email'          => 'admin@admin.com',
-                'identity'          => '1',
-                'password'       => Hash::make('password'),
-                'remember_token' => Str::random(60),
-            ]);
-        }
+        User::create([
+            'name'           => 'Jules Kibens',
+            'email'          => 'jules@neema.com',
+            'identity'          => '2',
+            'password'       => Hash::make('password'),
+            'remember_token' => Str::random(60),
+        ]);
     }
 }

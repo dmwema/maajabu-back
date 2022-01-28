@@ -35,15 +35,27 @@ Route::post('login/post', [LoginController::class, 'login'])->name('login.post')
 
 
 // ADMIN ROUTES
-
 Route::middleware('AdminAuth')->group(function () {
     Route::prefix('admin')->group(function () {
-        Route::get('/home', [GesWelcomeController::class, 'index'])->name('admin.home');
+        Route::get('/home', [GesWelcomeController::class, 'admin'])->name('admin.home');
         Route::get('/logout', [LoginController::class, 'admin_logout'])->name('admin.logout');
     });
 });
 
 
-Route::get('ges_clients', function () {
-    return view('ges_clients');
+// IRS ROUTES
+Route::middleware('IRAuth')->group(function () {
+    Route::prefix('ir')->group(function () {
+        Route::get('/home', [GesWelcomeController::class, 'ir'])->name('ir.home');
+        Route::get('/logout', [LoginController::class, 'ir_logout'])->name('ir.logout');
+    });
+});
+
+
+// FINACES ROUTES
+Route::middleware('FinanceAuth')->group(function () {
+    Route::prefix('finance')->group(function () {
+        Route::get('/home', [GesWelcomeController::class, 'finance'])->name('finance.home');
+        Route::get('/logout', [LoginController::class, 'finance_logout'])->name('finance.logout');
+    });
 });

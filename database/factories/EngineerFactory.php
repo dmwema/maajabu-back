@@ -24,7 +24,7 @@ class EngineerFactory extends Factory
         return [
             //
             'name' => $this->faker->unique()->name,
-            'year_experience' => random_int(1,5),
+            'year_experience' => random_int(1, 5),
 
         ];
     }
