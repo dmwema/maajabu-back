@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GesWelcomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StudioController;
 use App\Http\Controllers\UserController;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,7 @@ Route::middleware('AdminAuth')->group(function () {
         Route::get('/home', [GesWelcomeController::class, 'admin'])->name('admin.home');
         Route::get('/logout', [LoginController::class, 'admin_logout'])->name('admin.logout');
         Route::get('/clients', [UserController::class, 'clients'])->name('admin.clients');
+        Route::get('/studio', [StudioController::class, 'get_infos'])->name('admin.studio');
         Route::post('/client/update', [UserController::class, 'update_client'])->name('client.update');
     });
 });

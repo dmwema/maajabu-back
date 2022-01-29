@@ -32,26 +32,26 @@ class StudioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     //
-    //     if (!Gate::allows('access-admin')) {
-    //         return response([
-    //             'message' => 'pas autorisé'
-    //         ],403);
-    //     }
+    public function store(Request $request)
+    {
+        //
+        if (!Gate::allows('access-admin')) {
+            return response([
+                'message' => 'pas autorisé'
+            ],403);
+        }
 
-    //     if ($studio=Studio::create($request->all())) {
-    //         $pathImage = $request->img_url->store('galeries', 'public');
-    //         $image = new Image(['img_url' => $pathImage]);
-    //         $studio->image()->save($image);
-    //         return [
-    //             'success' => true,
-    //             'message' => 'Enregistrement effectué',
-    //             'data' => $studio
-    //         ];
-    //     }
-    // }
+        if ($studio=Studio::create($request->all())) {
+            $pathImage = $request->img_url->store('galeries', 'public');
+            $image = new Image(['img_url' => $pathImage]);
+            $studio->image()->save($image);
+            return [
+                'success' => true,
+                'message' => 'Enregistrement effectué',
+                'data' => $studio
+            ];
+        }
+    }
 
     /**
      * Display the specified resource.
@@ -59,18 +59,18 @@ class StudioController extends Controller
      * @param  \App\Models\Studio  $studio
      * @return \Illuminate\Http\Response
      */
-    public function show(Studio $studio)
-    {
-        //
-        $phones = $studio->phones;
-        $social_networks = $studio->social_networks;
-        $images = $studio->images;
-        $services = Service::all();
-        return [
-            'studio' => $studio,
-            'services' => $services,
-        ];
-    }
+    // public function show(Studio $studio)
+    // {
+    //     //
+    //     $phones = $studio->phones;
+    //     $social_networks = $studio->social_networks;
+    //     $images = $studio->images;
+    //     $services = Service::all();
+    //     return [
+    //         'studio' => $studio,
+    //         'services' => $services,
+    //     ];
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -102,20 +102,36 @@ class StudioController extends Controller
      * @param  \App\Models\Studio  $studio
      * @return \Illuminate\Http\Response
      */
-    // public function destroy(Studio $studio)
-    // {
-    //     //
-    //     if (!Gate::allows('access-admin')) {
-    //         return response([
-    //             'message' => 'pas autorisé'
-    //         ],403);
-    //     }
-    //     if ($studio->delete()) {
-    //         return [
-    //             "success" => true,
-    //             "message" => "La modification a reussie",
-    //             "data" => $studio
-    //         ];
-    //     }
-    // }
+    public function destroy(Studio $studio)
+    {
+        //
+        if (!Gate::allows('access-admin')) {
+            return response([
+                'message' => 'pas autorisé'
+            ],403);
+        }
+        if ($studio->delete()) {
+            return [
+                "success" => true,
+                "message" => "La modification a reussie",
+                "data" => $studio
+            ];
+        }
+    }
+
+    public function get_infos(){
+        $studio = Studio::all()->first();
+        $phones = $studio->phones;
+        $social_networks = $studio->social_networks;
+        $images = $studio->images;
+        $services = Service::all();
+        $infos = [
+            'studio' => $studio,
+            'phones' => $phones,
+            'social_network' => $social_networks,
+            'galeries' => $images,
+            'services' => $services
+        ];
+        return view('users.admin.studio', ['infos' => $infos]);
+    }
 }

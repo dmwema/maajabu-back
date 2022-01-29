@@ -89,7 +89,7 @@ if (session()->has('admin')) {
                         href="icon-material.html" aria-expanded="false"><i class="fas fa-money-check-alt"></i><span
                             class="hide-menu">Paiements</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="icon-material.html" aria-expanded="false"><i class="mdi mdi-microphone"></i><span
+                        href="{{ route($type . '.studio') }}"><i class="mdi mdi-microphone"></i><span
                             class="hide-menu">Studio</span></a></li>
             </ul>
 
