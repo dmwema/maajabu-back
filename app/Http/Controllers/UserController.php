@@ -26,6 +26,13 @@ class UserController extends Controller
         return User::all();
     }
 
+    public function edit_client(Request $request)
+    {
+        $client = User::find($request->id);
+
+        return view('client_edit', ['client' => $client]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -64,6 +71,26 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function store_client(Request $request)
+    {
+        $user = new User();
+
+        $user->identity = CLIENTS_ID;
+        $user->name = $request->name;
+        $user->firstname = $request->firstname;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->address = $request->address;
+
+        $user->password = Hash::make('password');
+
+        if ($user->save()) {
+            return redirect()->back()->with('success', 'Client enrégistré avec succès');
+        }
+        return redirect()->back()->with('fail', 'Une erreur est survenue lors de l\'enrégistrement');
+    }
+
 
     /**
      * Display the specified resource.
@@ -130,5 +157,14 @@ class UserController extends Controller
                 'data' => $user
             ]);
         }
+    }
+
+    public function delete(Request $request)
+    {
+        $user = User::find($request->id);
+        if ($user->delete()) {
+            return redirect()->back()->with('success', 'Client supprimé avec succès');
+        }
+        return redirect()->back()->with('fail', 'Une erreur est survénue');
     }
 }

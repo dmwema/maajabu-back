@@ -60,3 +60,7 @@ Route::middleware('FinanceAuth')->group(function () {
         Route::get('/logout', [LoginController::class, 'finance_logout'])->name('finance.logout');
     });
 });
+
+Route::post('/client', [UserController::class, 'store_client'])->name('clients.store');
+Route::delete('/user', [UserController::class, 'delete'])->name('user.delete');
+Route::get('/client/edit/{id}', [UserController::class, 'edit_client'])->name('client.edit');
