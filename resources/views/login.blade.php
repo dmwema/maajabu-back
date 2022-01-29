@@ -153,7 +153,6 @@
                         <h2 class="text-center">Identifiez-vous !</h2>
                         <p style="text-align: center;">Vous devez vous connecter pour continuer d'utiliser l'application
                         </p>
-
                         <hr>
 
                         <div class="form-group">

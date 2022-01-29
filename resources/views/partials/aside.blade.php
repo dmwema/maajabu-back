@@ -77,10 +77,10 @@ if (session()->has('admin')) {
                         aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span
                             class="hide-menu">Clients</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="table-basic.html" aria-expanded="false"><i class="mdi mdi-account-star"></i><span
+                        href="table-basic.html" aria-expanded="false"><i class="fas fa-headphones-alt"></i><span
                             class="hide-menu">Ingénieurs</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="icon-material.html" aria-expanded="false"><i class="mdi mdi-music-note"></i><span
+                        href="icon-material.html" aria-expanded="false"><i class="fas fa-tasks"></i><span
                             class="hide-menu">Projets</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                         href="icon-material.html" aria-expanded="false"><i class="mdi mdi-music-note"></i><span
