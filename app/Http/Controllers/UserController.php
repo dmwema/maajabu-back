@@ -33,6 +33,22 @@ class UserController extends Controller
         return view('client_edit', ['client' => $client]);
     }
 
+    public function update_client(Request $request)
+    {
+        $client = User::find($request->id);
+
+        $client->name = $request->name;
+        $client->firstname = $request->firstname;
+        $client->email = $request->email;
+        $client->phone = $request->phone;
+        $client->address = $request->address;
+
+        if ($client->save()) {
+            return redirect()->route('admin.clients')->with('success', 'Client modifié avec succès');
+        }
+        return redirect()->route('admin.clients')->with('fail', 'Une erreur est survenue lors de la modification');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

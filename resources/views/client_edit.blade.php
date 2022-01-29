@@ -13,9 +13,10 @@ $i = 0;
     <!-- Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
     <div class="page-breadcrumb">
-        <div class="row align-items-center">
+        <div class="row align-items-center justify-content-center">
             <div class="col-5">
-                <h4 class="page-title">Modifier les informations du client | {{ $client->firstname }}
+                <h4 class="page-title" style="text-align: center">Modifier les informations du client |
+                    {{ $client->firstname }}
                     {{ $client->name }}</h4>
             </div>
         </div>
@@ -27,57 +28,62 @@ $i = 0;
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
-        FORMULAIRE ICI
+        <div class="row">
+            <div class="col-lg-8 col-xlg-9 col-md-7 offset-md-2">
+                <div class=" card">
+                    <div class="card-body">
+                        <form class="form-horizontal form-material mx-2" method="POST"
+                            action="{{ route('client.update') }}">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $client->id }}">
+                            <div class="form-group">
+                                <label class="col-md-12">Nom</label>
+                                <div class="col-md-12">
+                                    <input type="text" value="{{ $client->name }}" required
+                                        class="form-control form-control-line" name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Prenom</label>
+                                <div class="col-md-12">
+                                    <input type="text" value="{{ $client->firstname }}" required
+                                        class="form-control form-control-line" name="firstname">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Email</label>
+                                <div class="col-md-12">
+                                    <input type="text" value="{{ $client->email }}" required
+                                        class="form-control form-control-line" name="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Téléphone</label>
+                                <div class="col-md-12">
+                                    <input type="text" value="{{ $client->phone }}" required
+                                        class="form-control form-control-line" name="phone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Adresse</label>
+                                <div class="col-md-12">
+                                    <textarea rows="3" required name="address"
+                                        class="form-control form-control-line">{{ $client->address }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-success text-white">Enrégistrer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un client</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="POST" action="{{ route('clients.store') }}">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label for="name" class="form-label">Nom</label>
-                                <input type="text" class="form-control" required id="name" name="name">
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="firstname" class="form-label">Prénom</label>
-                                <input type="text" class="form-control" required id="firstname" name="firstname">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label for="email" class="form-label">Adresse Email</label>
-                                <input type="email" class="form-control" required id="email" name="email">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label for="phone" class="form-label">Téléphone</label>
-                                <input type="text" class="form-control" required id="phone" name="phone">
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="adress" class="form-label">Adresse</label>
-                                <textarea name="address" id="adress" required cols="1" rows="3"
-                                    class="form-control"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-primary">Enrégistrer</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
