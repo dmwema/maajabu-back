@@ -39,6 +39,7 @@ Route::middleware('AdminAuth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/home', [GesWelcomeController::class, 'admin'])->name('admin.home');
         Route::get('/logout', [LoginController::class, 'admin_logout'])->name('admin.logout');
+        Route::get('/clients', [UserController::class, 'clients'])->name('admin.clients');
     });
 });
 

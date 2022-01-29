@@ -108,6 +108,12 @@ class UserController extends Controller
         }
     }
 
+    public function clients()
+    {
+        $users = User::where('identity', CLIENTS_ID)->get();
+        return view('users.admin.clients', ['clients' => $users]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
