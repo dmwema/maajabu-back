@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EngineerController;
 use App\Http\Controllers\GesWelcomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StudioController;
@@ -42,7 +43,12 @@ Route::middleware('AdminAuth')->group(function () {
         Route::get('/logout', [LoginController::class, 'admin_logout'])->name('admin.logout');
         Route::get('/clients', [UserController::class, 'clients'])->name('admin.clients');
         Route::get('/studio', [StudioController::class, 'get_infos'])->name('admin.studio');
+        Route::get('/engineer', [EngineerController::class, 'get_infos'])->name('admin.engineer');
         Route::post('/client/update', [UserController::class, 'update_client'])->name('client.update');
+
+        Route::post('/engineer', [EngineerController::class, 'store'])->name('engineer.store');
+        Route::delete('/user', [EngineerController::class, 'delete'])->name('engineer.delete');
+        Route::get('/client/edit/{id}', [EngineerController::class, 'edit_engineer'])->name('engineer.edit');
     });
 });
 

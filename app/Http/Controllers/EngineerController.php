@@ -6,7 +6,9 @@ use App\Models\Image;
 use App\Models\Engineer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\Engineer as ResourcesEngineer;
+use Illuminate\Support\Facades\Storage;
 
 class EngineerController extends Controller
 {
@@ -28,29 +30,26 @@ class EngineerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     //
-    //     if (!Gate::allows('access-admin')) {
-    //         return response([
-    //             'message' => 'pas autorisé'
-    //         ],403);
-    //     }
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'year_experience' => 'required',
-    //     ]);
-    //     if ($engineer = Engineer::create($request->all())) {
-    //         $pathImage = $request->img_url->store('engineers', 'public');
-    //         $image = new Image(['img_url' => $pathImage]);
-    //         $engineer->image()->save($image);
-    //         return [
-    //             "success" => true,
-    //             "message" => "Enregistrement effectué",
-    //             "data" => $engineer
-    //         ];
-    //     }
-    // }
+    public function store(Request $request)
+    {
+        //
+        $pathImage = $request->file->store('public');
+        if ($engineer = Engineer::create([
+            'name' => $request->name,
+            'year_experience' => $request->year_experience,
+            'img_url' => $pathImage,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'email' => $request->phone
+        ])) {
+            $image = new Image(['img_url' => $pathImage]);
+            $engineer->image()->save($image);
+            return redirect()->back()->with('success', 'Client enrégistré avec succès');
+        }else{
+            Storage::delete($pathImage);
+            return redirect()->back()->with('fail', 'Une erreur est survenue lors de l\'enrégistrement');
+        }
+    }
 
     /**
      * Display the specified resource.
@@ -114,4 +113,10 @@ class EngineerController extends Controller
     //         ];
     //     }
     // }
+
+    public function get_infos()
+    {
+            $infos = Engineer::all();
+            return view('users.admin.engineer', ['engineers' => $infos]);
+    }
 }
