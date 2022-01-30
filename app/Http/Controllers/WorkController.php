@@ -7,6 +7,8 @@ use App\Models\Work;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Resources\Work as ResourcesWork;
+use App\Models\Artist;
+use App\Models\Engineer;
 
 class WorkController extends Controller
 {
@@ -22,6 +24,13 @@ class WorkController extends Controller
         return ResourcesWork::collection($works);
     }
 
+    public function all(Request $request)
+    {
+        $works = Work::all();
+
+        return view('users.admin.project', ['works' => $works]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -34,7 +43,7 @@ class WorkController extends Controller
         if (!Gate::allows('access-admin')) {
             return response([
                 'message' => 'pas autorisé'
-            ],403);
+            ], 403);
         }
 
         $request->validate([
@@ -50,24 +59,30 @@ class WorkController extends Controller
                 "data" => $request->work
             ];
         }
+    }
 
+    public function new(Request $request)
+    {
+        $engineers = Engineer::all();
+        $artists = Artist::all();
+        return view('users.admin.new_work', ['engineers' => $engineers, 'artists' => $artists]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Work  $work
+     * @param  \App\Models\Work  $workModelsArtist
      * @return \Illuminate\Http\Response
      */
     public function show(Work $work)
     {
         //
-        $engineer=$work->engineer;
-        $artist=$work->artist;
-        $categories=$work->categories;
+        $engineer = $work->engineer;
+        $artist = $work->artist;
+        $categories = $work->categories;
 
         return [
-            'works'=>$work
+            'works' => $work
         ];
     }
 
@@ -85,7 +100,7 @@ class WorkController extends Controller
         if (!Gate::allows('access-admin')) {
             return response([
                 'message' => 'pas autorisé'
-            ],403);
+            ], 403);
         }
         if ($work->update($request->all())) {
             return [
@@ -108,7 +123,7 @@ class WorkController extends Controller
         if (!Gate::allows('access-admin')) {
             return response([
                 'message' => 'pas autorisé'
-            ],403);
+            ], 403);
         }
         if ($work->delete()) {
             return [
@@ -117,6 +132,5 @@ class WorkController extends Controller
                 "data" => $work
             ];
         }
-
     }
 }

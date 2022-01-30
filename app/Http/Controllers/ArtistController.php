@@ -28,22 +28,22 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*
         if (!Gate::allows('access-admin')) {
             return response([
                 'message' => 'pas autorisé'
-            ],403);
+            ], 403);
         }
+        */
+
         $request->validate([
             'name' => 'required|string',
+            'address' => 'required|string',
+            'phone' => 'required|string',
         ]);
+
         if (Artist::create($request->all())) {
-            dd($request);
-            return [
-                "success" => true,
-                "message" => "Enregistrement effectué",
-                "data" => $request->artist
-            ];
+            return redirect()->back()->with('success', 'Nouveau ingénieur enrégistré avec succès');
         }
     }
 
@@ -75,7 +75,7 @@ class ArtistController extends Controller
         if (!Gate::allows('access-admin')) {
             return response([
                 'message' => 'pas autorisé'
-            ],403);
+            ], 403);
         }
         $request->validate([
             'name' => 'required|string'
@@ -101,7 +101,7 @@ class ArtistController extends Controller
         if (!Gate::allows('access-admin')) {
             return response([
                 'message' => 'pas autorisé'
-            ],403);
+            ], 403);
         }
         if ($artist->delete()) {
             return [

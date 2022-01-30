@@ -10,9 +10,15 @@ class Artist extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'phone',
+        'email',
+        'address',
+    ];
 
-    public function works(){
+    public function works()
+    {
         return $this->hasMany(Work::class);
     }
 }
