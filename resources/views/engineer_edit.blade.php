@@ -75,14 +75,14 @@ $i = 0;
                             <div class="form-group">
                                 <label class="col-md-12">Logiciels</label>
                                 <div class="col-md-12">
-                                    @foreach ($engineer->logiciels as $logiciel )
-                                    <input type="text" value="{{ $logiciel->name }}" required
-                                    class="form-control form-control-line" name="logiciel"><br/>
-                                    @endforeach
-                                    @if (count($engineer->logiciels)==0)
-                                    <input type="text" required
-                                    class="form-control form-control-line" name="logiciel"><br/>
-                                    @endif
+                                    <ul id="" class="">
+                                        @foreach ($engineer->logiciels as $logiciel )
+                                        <li value="{{ $logiciel->name }}"
+                                            class="" required>{{ $logiciel->name }}</li>
+                                        @endforeach
+                                    </ul>
+                                    <a href="#" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                                        class="mdi mdi-plus"></i>Ajouter un logiciel</a>
                                 </div>
                             </div>
                             <hr>
@@ -116,4 +116,34 @@ $i = 0;
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
 
+
+    <!--Modal-->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un logiciel</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label for="name" class="form-label">Logiciels</label><br/>
+                                @foreach ($logiciels as $logiciel )
+                                <input type="checkbox" name="logiciel" value="{{ $logiciel->name }}">
+                                <label for="logiciel"> {{ $logiciel->name }}</label><br/>
+                                @endforeach
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enrégistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection

@@ -84,9 +84,8 @@ class EngineerController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        $new_logiciels = [];
         $mdfPwd = false;
-
         $engineer = Engineer::find($request->id);
 
         if($request->password != "" && ($request->password == $request->password_confirm)){
@@ -102,41 +101,28 @@ class EngineerController extends Controller
         if ($mdfPwd) {
             $engineer->password = Hash::make($password);
         }
-        if ($request->img_url!=null) {
+        if (empty($request->img_url)) {
             if ($engineer->img_url == "") {
-                $filename = time(). '.' .$request->img_url->extension();
-                $pathImage = $request->file('img_url')->storeAs(
+                $pathImage = "/engineers/default.png";
+            }else {
+                $pathImage = $engineer->img_url;
+            }
+        }else{
+            $filename = time(). '.' .$request->img_url->extension();
+            $pathImage = $request->file('img_url')->storeAs(
                 'engineers',
                 $filename,
                 'public'
-                );
-            }else{
-                $filename = time(). '.' .$request->img_url->extension();
-                $pathImage = $request->file('img_url')->storeAs(
-                    'engineers',
-                    $filename,
-                    'public'
-                );
-                Storage::delete($engineer->img_url);
-            }
-        }else {
-            $pathImage="engineers/default.png";
+            );
+            Storage::delete($pathImage);
         }
         $engineer->img_url = $pathImage;
 
-        if (count($engineer->logiciels)==0) {
-            $logiciel = new Logiciel();
-            $logiciel->name = $request->logiciel;
-            $engineer->logiciels()->save($logiciel);
-        }else{
-            foreach($engineer->logiciels as $logiciel){
-                if ($request->logiciel != $logiciel->name) {
-                    $logiciel = new Logiciel();
-                    $logiciel->name = $request->logiciel;
-                    $engineer->logiciels()->save($logiciel);
-                }
-            }
-        }
+        // if () {
+        //     $logiciel = new Logiciel();
+        //     $logiciel->name = $request->logiciel;
+        //     $engineer->logiciels()->save($logiciel);
+        // }
 
         if ($engineer->save()) {
             return redirect()->route('admin.engineer')->with('success', 'Ingénieur modifié avec succès');
@@ -170,8 +156,9 @@ class EngineerController extends Controller
     public function edit_engineer(Request $request)
     {
         $engineer = Engineer::find($request->id);
+        $logiciels = Logiciel::all();
 
-        return view('engineer_edit', ['engineer' => $engineer]);
+        return view('engineer_edit', ['engineer' => $engineer, 'logiciels' => $logiciels ]);
     }
 
     public function get_infos()
