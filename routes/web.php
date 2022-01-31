@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\EngineerController;
+
+use App\Http\Controllers\ArtistController;
+
 use App\Http\Controllers\GesWelcomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkController;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 //voyager route
 Route::group(['prefix' => 'admin'], function () {
@@ -49,6 +52,11 @@ Route::middleware('AdminAuth')->group(function () {
         Route::post('/engineer', [EngineerController::class, 'store'])->name('engineer.store');
         Route::delete('/user', [EngineerController::class, 'delete'])->name('engineer.delete');
         Route::get('/client/edit/{id}', [EngineerController::class, 'edit_engineer'])->name('engineer.edit');
+
+        Route::get('/works', [WorkController::class, 'all'])->name('works');
+        Route::get('/works/new', [WorkController::class, 'new'])->name('works.new');
+
+        Route::post('/artist/store', [ArtistController::class, 'store'])->name('artist.store');
     });
 });
 

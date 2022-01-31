@@ -75,12 +75,12 @@ if (session()->has('admin')) {
                 <li class="sidebar-item {{ $active == 'clients' ? 'selected' : '' }}"> <a
                         class="sidebar-link waves-effect waves-dark sidebar-link"
                         href="{{ route($type . '.clients') }}" aria-expanded="false"><i
-                            class="mdi mdi-account-multiple"></i><span class="hide-menu">Clients</span></a></li>
+                            class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                         href="{{ route($type . '.engineer') }}" aria-expanded="false"><i class="fas fa-headphones-alt"></i><span
                             class="hide-menu">Ingénieurs</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="icon-material.html" aria-expanded="false"><i class="fas fa-tasks"></i><span
+                        href="{{ route('works') }}" aria-expanded="false"><i class="fas fa-tasks"></i><span
                             class="hide-menu">Projets</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                         href="icon-material.html" aria-expanded="false"><i class="far fa-hand-pointer"></i><span

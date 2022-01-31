@@ -2,6 +2,10 @@
 if ($temps) {
     $current_temp = $temps['forecast'][0]['forecast']['temp'] - 273.15;
 }
+
+if ($current_day == 0) {
+    $current_day = 7;
+}
 @endphp
 
 @if ($temps)
