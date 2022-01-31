@@ -79,6 +79,7 @@ $i = 0;
                                                 <th scope="row">{{ $i }}</th>
                                                 <td>{{ $engineer->name }}</td>
                                                 <td>{{ $engineer->year_experience }}</td>
+                                                
                                                 <td><img style="width: 100px; height: 100px;" src="{{ Storage::url($engineer->img_url) }}" alt=""></td>
                                                 <td>
                                                     @foreach ($engineer->logiciels as $key => $logiciel)
@@ -146,7 +147,8 @@ $i = 0;
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="year_experience" class="form-label">Expérience (Année)</label>
-                                <input type="number" class="form-control" required id="year_experience" name="year_experience">
+                                <input type="number" class="form-control" required id="year_experience"
+                                    name="year_experience">
                             </div>
                         </div>
                         <div class="row">

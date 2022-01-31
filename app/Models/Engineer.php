@@ -18,11 +18,13 @@ class Engineer extends Model
         'pivot'
     ];
 
-    public function works(){
+    public function works()
+    {
         return $this->hasMany(Work::class);
     }
 
-    public function logiciels(){
+    public function logiciels()
+    {
         return $this->belongsToMany(Logiciel::class);
     }
 }

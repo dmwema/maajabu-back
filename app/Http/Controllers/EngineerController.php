@@ -53,7 +53,7 @@ class EngineerController extends Controller
 
             $engineer->logiciels()->save($logiciel);
             return redirect()->back()->with('success', 'Client enrégistré avec succès');
-        }else{
+        } else {
             Storage::delete($pathImage);
             return redirect()->back()->with('fail', 'Une erreur est survenue lors de l\'enrégistrement');
         }
@@ -71,7 +71,7 @@ class EngineerController extends Controller
         $works = $engineer->works;
         $logiciels = $engineer->logiciels;
         return [
-            'engineer'=>$engineer
+            'engineer' => $engineer
         ];
     }
 
@@ -163,7 +163,7 @@ class EngineerController extends Controller
 
     public function get_infos()
     {
-            $infos = Engineer::all();
-            return view('users.admin.engineer', ['engineers' => $infos]);
+        $infos = Engineer::all();
+        return view('users.admin.engineer', ['engineers' => $infos]);
     }
 }

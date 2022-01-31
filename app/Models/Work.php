@@ -11,21 +11,24 @@ class Work extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','description','engineer_id','artist_id'];
+    protected $fillable = ['name', 'description', 'engineer_id', 'artist_id', 'end'];
 
     protected $hidden = [
         'pivot'
     ];
 
-    public function artist(){
+    public function artist()
+    {
         return $this->belongsTo(Artist::class);
     }
 
-    public function engineer(){
+    public function engineer()
+    {
         return $this->belongsTo(Engineer::class);
     }
 
-    public function categories(){
+    public function categories()
+    {
         return $this->belongsToMany(Category::class);
     }
 }
