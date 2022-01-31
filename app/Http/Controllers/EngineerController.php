@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\Engineer as ResourcesEngineer;
+use App\Models\Logiciel;
 use Illuminate\Support\Facades\Storage;
 
 class EngineerController extends Controller
@@ -33,17 +34,24 @@ class EngineerController extends Controller
     public function store(Request $request)
     {
         //
-        $pathImage = $request->file->store('public');
+        $filename = time(). '.' .$request->img_url->extension();
+        $pathImage = $request->file('img_url')->storeAs(
+            'engineers',
+            $filename,
+            'public'
+        );
         if ($engineer = Engineer::create([
             'name' => $request->name,
             'year_experience' => $request->year_experience,
             'img_url' => $pathImage,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'email' => $request->phone
+            'phone' => $request->phone
         ])) {
-            $image = new Image(['img_url' => $pathImage]);
-            $engineer->image()->save($image);
+            $logiciel = new Logiciel();
+            $logiciel->name = $request->logiciel;
+
+            $engineer->logiciels()->save($logiciel);
             return redirect()->back()->with('success', 'Client enrégistré avec succès');
         }else{
             Storage::delete($pathImage);
@@ -74,22 +82,67 @@ class EngineerController extends Controller
      * @param  \App\Models\Engineer  $engineer
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, Engineer $engineer)
-    // {
-    //     //
-    //     if (!Gate::allows('access-admin')) {
-    //         return response([
-    //             'message' => 'pas autorisé'
-    //         ],403);
-    //     }
-    //     if ($engineer->update($request->all())) {
-    //         return [
-    //             "success" => true,
-    //             "message" => "La modification a reussie",
-    //             "data" => $request->engineer
-    //         ];
-    //     }
-    // }
+    public function update(Request $request)
+    {
+        //
+        $mdfPwd = false;
+
+        $engineer = Engineer::find($request->id);
+
+        if($request->password != "" && ($request->password == $request->password_confirm)){
+            $password = $request->password;
+            $mdfPwd = true;
+        }
+
+        $engineer->name = $request->name;
+        $engineer->year_experience = $request->year_experience;
+        $engineer->email = $request->email;
+        $engineer->phone = $request->phone;
+
+        if ($mdfPwd) {
+            $engineer->password = Hash::make($password);
+        }
+        if ($request->img_url!=null) {
+            if ($engineer->img_url == "") {
+                $filename = time(). '.' .$request->img_url->extension();
+                $pathImage = $request->file('img_url')->storeAs(
+                'engineers',
+                $filename,
+                'public'
+                );
+            }else{
+                $filename = time(). '.' .$request->img_url->extension();
+                $pathImage = $request->file('img_url')->storeAs(
+                    'engineers',
+                    $filename,
+                    'public'
+                );
+                Storage::delete($engineer->img_url);
+            }
+        }else {
+            $pathImage="engineers/default.png";
+        }
+        $engineer->img_url = $pathImage;
+
+        if (count($engineer->logiciels)==0) {
+            $logiciel = new Logiciel();
+            $logiciel->name = $request->logiciel;
+            $engineer->logiciels()->save($logiciel);
+        }else{
+            foreach($engineer->logiciels as $logiciel){
+                if ($request->logiciel != $logiciel->name) {
+                    $logiciel = new Logiciel();
+                    $logiciel->name = $request->logiciel;
+                    $engineer->logiciels()->save($logiciel);
+                }
+            }
+        }
+
+        if ($engineer->save()) {
+            return redirect()->route('admin.engineer')->with('success', 'Ingénieur modifié avec succès');
+        }
+        return redirect()->route('admin.engineer')->with('fail', 'Une erreur est survenue lors de la modification');
+    }
 
     // /**
     //  * Remove the specified resource from storage.
@@ -113,6 +166,13 @@ class EngineerController extends Controller
     //         ];
     //     }
     // }
+
+    public function edit_engineer(Request $request)
+    {
+        $engineer = Engineer::find($request->id);
+
+        return view('engineer_edit', ['engineer' => $engineer]);
+    }
 
     public function get_infos()
     {
