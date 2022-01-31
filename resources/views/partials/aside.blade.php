@@ -80,6 +80,9 @@ if (session()->has('admin')) {
                         href="table-basic.html" aria-expanded="false"><i class="fas fa-headphones-alt"></i><span
                             class="hide-menu">Ingénieurs</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="table-basic.html" aria-expanded="false"><i class="fas fa-headphones-alt"></i><span
+                            class="hide-menu">Artistes</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                         href="{{ route('works') }}" aria-expanded="false"><i class="fas fa-tasks"></i><span
                             class="hide-menu">Projets</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
