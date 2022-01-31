@@ -1,6 +1,6 @@
 @php
 
-$active = 'project';
+$active = 'ir';
 $i = 0;
 
 //dd($temps['forecast'][0]['forecast']);
@@ -15,12 +15,12 @@ $i = 0;
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
-                <h4 class="page-title">Tous les projets</h4>
+                <h4 class="page-title">Toutes les reservations</h4>
             </div>
             <div class="col-7">
                 <div class="text-end upgrade-btn">
-                    <a href="{{ route('works.new') }}" class="btn btn-success text-white"><i
-                            class="mdi mdi-plus"></i>Nouveau projet</a>
+                    <a href="{{ route('reservation.new') }}" class="btn btn-success text-white" class="mdi mdi-plus"></i>
+                        Enrégistrer une reservation</a>
                 </div>
             </div>
         </div>
@@ -52,48 +52,45 @@ $i = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tous les projets enrégistrés</h4>
+                        <h4 class="card-title">Toutes les reservations enrégistrées</h4>
                         <hr>
-                        @if (count($works) > 0)
+                        @if (count($reservations) > 0)
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Nom du projet</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Ingénieur</th>
-                                            <th scope="col">Artiste</th>
-                                            <th scope="col">Date de création</th>
-                                            <th scope="col">Date de fin</th>
+                                            <th scope="col">Date de reservation</th>
+                                            <th scope="col">Client</th>
+                                            <th scope="col">Service reservé</th>
+                                            <th scope="col">Quantité</th>
+                                            <th scope="col">Coût total</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($works as $work)
+                                        @foreach ($reservations as $reservation)
                                             @php
                                                 $i++;
                                             @endphp
                                             <tr>
                                                 <th scope="row">{{ $i }}</th>
-                                                <td>{{ $work->name }}</td>
-                                                <td>{{ $work->description }}</td>
-                                                <td>{{ $work->engineer->name }}</td>
-                                                <td>{{ $work->artist->name }}</td>
-                                                <td>{{ $work->created_at }}</td>
-                                                <td>{{ $work->end }}</td>
+                                                <td>{{ $reservation->date_reservation }}</td>
+                                                <td>{{ $reservation->user->name }}</td>
+                                                <td>{{ $reservation->service }}</td>
+                                                <td>{{ $reservation->qte }}</td>
+                                                <td>{{ $reservation->service->price * $reservation->qte }}</td>
                                                 <td>
-
                                                     <form
-                                                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet enrégistrement ?')"
-                                                        action="{{ route('work.delete') }}" method="POST">
+                                                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet enrégistrement ? ?')"
+                                                        action="{{ route('reservation.delete') }}" method="POST">
                                                         @csrf
-                                                        <input type="hidden" name="id" value="{{ $work->id }}">
+                                                        <input type="hidden" name="id" value="{{ $reservation->id }}">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <a title="Modifier" style="color: #fff"
-                                                            href="{{ route('work.edit', ['id' => $work->id]) }}"
+                                                            href="{{ route('reservation.edit', ['id' => $reservation->id]) }}"
                                                             class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
-                                                        <button title="Supprimer" style="color: #azsazd"
+                                                        <button title="Supprimer" style="color: #fff"
                                                             class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                                     </form>
 
@@ -105,7 +102,7 @@ $i = 0;
                             </div>
                         @else
                             <div class="alert alert-danger">
-                                <p style="margin-bottom: 0;">Aucun projet enrégistré</p>
+                                <p style="margin-bottom: 0;">Aucune reservation enrégistrée</p>
                             </div>
                         @endif
 

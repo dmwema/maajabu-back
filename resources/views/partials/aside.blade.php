@@ -77,8 +77,8 @@ if (session()->has('admin')) {
                         href="{{ route($type . '.clients') }}" aria-expanded="false"><i
                             class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ route($type . '.engineer') }}" aria-expanded="false"><i class="fas fa-headphones-alt"></i><span
-                            class="hide-menu">Ingénieurs</span></a></li>
+                        href="{{ route($type . '.engineer') }}" aria-expanded="false"><i
+                            class="fas fa-headphones-alt"></i><span class="hide-menu">Ingénieurs</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                         href="table-basic.html" aria-expanded="false"><i class="fas fa-headphones-alt"></i><span
                             class="hide-menu">Artistes</span></a></li>
@@ -86,8 +86,8 @@ if (session()->has('admin')) {
                         href="{{ route('works') }}" aria-expanded="false"><i class="fas fa-tasks"></i><span
                             class="hide-menu">Projets</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="icon-material.html" aria-expanded="false"><i class="far fa-hand-pointer"></i><span
-                            class="hide-menu">Reservations</span></a></li>
+                        href="{{ route('reservations') }}" aria-expanded="false"><i
+                            class="far fa-hand-pointer"></i><span class="hide-menu">Reservations</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                         href="icon-material.html" aria-expanded="false"><i class="fas fa-money-check-alt"></i><span
                             class="hide-menu">Paiements</span></a></li>

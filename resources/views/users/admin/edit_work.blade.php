@@ -1,6 +1,6 @@
 @php
 
-$active = 'project';
+$active = 'work';
 $i = 0;
 
 //dd($temps['forecast'][0]['forecast']);
@@ -15,7 +15,7 @@ $i = 0;
     <div class="page-breadcrumb">
         <div class="row align-items-center justify-content-center">
             <div class="col-5">
-                <h4 class="page-title" style="text-align: center">Enrégistrer un nouveau projet</h4>
+                <h4 class="page-title" style="text-align: center">Modifier le projet</h4>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@ $i = 0;
         @endif
 
         @if (session()->has('fail'))
-            <div class="alert alert-adnger alert-dismissible fade show" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Erreur ! </strong>{{ session()->get('fail') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -44,13 +44,14 @@ $i = 0;
             <div class="col-lg-8 col-xlg-9 col-md-7 offset-md-2">
                 <div class=" card">
                     <div class="card-body">
-                        <form class="form-horizontal form-material mx-2" method="POST" action="{{ route('work.store') }}">
+                        <form class="form-horizontal form-material mx-2" method="POST"
+                            action="{{ route('work.update') }}">
                             @csrf
                             <input type="hidden" name="id" value="{{ old('name') }}">
                             <div class="form-group">
                                 <label class="col-md-12">Nom du projet</label>
                                 <div class="col-md-12">
-                                    <input type="text" value="{{ old('name') }}" required
+                                    <input type="text" value={{ $work->name }} required
                                         class="form-control form-control-line" name="name">
                                 </div>
                             </div>
@@ -58,7 +59,7 @@ $i = 0;
                                 <label class="col-md-12">Déscription</label>
                                 <div class="col-md-12">
                                     <textarea name="description" id="" cols="30" rows="3" required
-                                        class="form-control">{{ old('description') }}</textarea>
+                                        class="form-control">{{ $work->description }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -66,8 +67,15 @@ $i = 0;
                                 <div class="col-md-12">
                                     <select name="engineer_id" id="engineer" class="form-select">
                                         @foreach ($engineers as $ir)
-                                            <option value="{{ $ir->id }}">{{ $ir->name }} ({{ $ir->phone }})
-                                            </option>
+                                            @if ($ir->id == $work->engineer->id)
+                                                <option selected value="{{ $ir->id }}">{{ $ir->name }}
+                                                    ({{ $ir->phone }})
+                                                </option>
+                                            @else
+                                                <option value="{{ $ir->id }}">{{ $ir->name }}
+                                                    ({{ $ir->phone }})
+                                                </option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -77,9 +85,15 @@ $i = 0;
                                 <div class="col-md-12">
                                     <select name="artist_id" id="artits" class="form-select">
                                         @foreach ($artists as $art)
-                                            <option value="{{ $art->id }}">{{ $art->name }}
-                                                ({{ $art->phone }})
-                                            </option>
+                                            @if ($ir->id == $work->engineer->id)
+                                                <option selected value="{{ $art->id }}">{{ $art->name }}
+                                                    ({{ $art->phone }})
+                                                </option>
+                                            @else
+                                                <option selected value="{{ $art->id }}">{{ $art->name }}
+                                                    ({{ $art->phone }})
+                                                </option>
+                                            @endif
                                         @endforeach
                                     </select>
                                     <a href="#" class="btn btn-primary" data-bs-toggle="modal"
@@ -89,13 +103,13 @@ $i = 0;
                             <div class="form-group">
                                 <label class="col-md-12">Date de fin du projet</label>
                                 <div class="col-md-12">
-                                    <input type="date" value="{{ old('end') }}" required
+                                    <input type="date" value="{{ $work->end }}" required
                                         class="form-control form-control-line" name="end">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-success text-white">Enrégistrer</button>
+                                    <button class="btn btn-success text-white">Modifier</button>
                                 </div>
                             </div>
                         </form>

@@ -6,6 +6,7 @@ use App\Http\Controllers\ArtistController;
 
 use App\Http\Controllers\GesWelcomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkController;
@@ -50,13 +51,26 @@ Route::middleware('AdminAuth')->group(function () {
         Route::post('/client/update', [UserController::class, 'update_client'])->name('client.update');
 
         Route::post('/engineer', [EngineerController::class, 'store'])->name('engineer.store');
-        Route::delete('/user', [EngineerController::class, 'delete'])->name('engineer.delete');
-        Route::get('/client/edit/{id}', [EngineerController::class, 'edit_engineer'])->name('engineer.edit');
+        Route::delete('/engineer', [EngineerController::class, 'delete'])->name('engineer.delete');
 
-        Route::get('/works', [WorkController::class, 'all'])->name('works');
-        Route::get('/works/new', [WorkController::class, 'new'])->name('works.new');
+        Route::get('/engineer/edit/{id}', [EngineerController::class, 'edit_engineer'])->name('engineer.edit');
+
+        Route::get('/work', [WorkController::class, 'all'])->name('works');
+        Route::get('/work/new', [WorkController::class, 'new'])->name('works.new');
+        Route::get('/work/edit/{id}', [WorkController::class, 'edit'])->name('work.edit');
+        Route::post('/work/update', [WorkController::class, 'update'])->name('work.update');
 
         Route::post('/artist/store', [ArtistController::class, 'store'])->name('artist.store');
+
+        Route::post('/work/store', [WorkController::class, 'store'])->name('work.store');
+
+        Route::get('/reservation', [ReservationController::class, 'index'])->name('reservations');
+        Route::get('/reservation/edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
+        Route::get('/reservation/new', [ReservationController::class, 'new'])->name('reservation.new');
+
+        Route::delete('/user', [UserController::class, 'delete'])->name('user.delete');
+
+        Route::delete('/work', [WorkController::class, 'destroy'])->name('work.delete');
     });
 });
 
@@ -79,5 +93,4 @@ Route::middleware('FinanceAuth')->group(function () {
 });
 
 Route::post('/client', [UserController::class, 'store_client'])->name('clients.store');
-Route::delete('/user', [UserController::class, 'delete'])->name('user.delete');
 Route::get('/client/edit/{id}', [UserController::class, 'edit_client'])->name('client.edit');

@@ -12,17 +12,19 @@ class Engineer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','year_experience','img_url'];
+    protected $fillable = ['name', 'year_experience', 'img_url', 'email', 'password', 'phone'];
 
     protected $hidden = [
         'pivot'
     ];
 
-    public function works(){
+    public function works()
+    {
         return $this->hasMany(Work::class);
     }
 
-    public function logiciels(){
+    public function logiciels()
+    {
         return $this->belongsToMany(Logiciel::class);
     }
     // public function image(){

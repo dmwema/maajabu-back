@@ -32,20 +32,28 @@ class EngineerController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $pathImage = $request->file->store('public');
+
+        if (!$request->hasFile('img_url')) {
+            return redirect()->back()->with('fail', 'Veillez entrer une image de profile');
+        }
+
+
+        $request->validate([
+            'image' => 'mimes:jpeg,bmp,png,jpg' // Only allow .jpg, .bmp and .png file types.
+        ]);
+
+        $pathImage = $request->img_url->store('irs', 'public');
+
         if ($engineer = Engineer::create([
             'name' => $request->name,
             'year_experience' => $request->year_experience,
             'img_url' => $pathImage,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'email' => $request->phone
+            'phone' => $request->phone
         ])) {
-            $image = new Image(['img_url' => $pathImage]);
-            $engineer->image()->save($image);
             return redirect()->back()->with('success', 'Client enrégistré avec succès');
-        }else{
+        } else {
             Storage::delete($pathImage);
             return redirect()->back()->with('fail', 'Une erreur est survenue lors de l\'enrégistrement');
         }
@@ -63,7 +71,7 @@ class EngineerController extends Controller
         $works = $engineer->works;
         $logiciels = $engineer->logiciels;
         return [
-            'engineer'=>$engineer
+            'engineer' => $engineer
         ];
     }
 
@@ -116,7 +124,7 @@ class EngineerController extends Controller
 
     public function get_infos()
     {
-            $infos = Engineer::all();
-            return view('users.admin.engineer', ['engineers' => $infos]);
+        $infos = Engineer::all();
+        return view('users.admin.engineer', ['engineers' => $infos]);
     }
 }

@@ -6,6 +6,8 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Resources\Reservation as ResourcesReservation;
+use App\Models\Service;
+use App\Models\User;
 
 class ReservationController extends Controller
 {
@@ -16,14 +18,9 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
-        if (!Gate::allows('access-admin')) {
-            return response([
-                'message' => 'pas autorisé'
-            ],403);
-        }
         $reservations = Reservation::all();
-        return ResourcesReservation::collection($reservations);
+
+        return view('users.admin.reservations', ['reservations' => $reservations]);
     }
 
     /**
@@ -47,6 +44,13 @@ class ReservationController extends Controller
         }
     }
 
+    public function new(Request $request)
+    {
+        $users = User::where('identity', '!=', '1')->where('identity', '!=', '2')->where('identity', '!=', '3')->get();
+        $services = Service::all();
+        return view('users.admin.new_reservation', ['users' => $users, 'services' => $services]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -58,7 +62,7 @@ class ReservationController extends Controller
         $user = $reservation->user;
         $services = $reservation->services;
         return [
-            'reservation'=>$reservation
+            'reservation' => $reservation
         ];
     }
 
@@ -96,6 +100,4 @@ class ReservationController extends Controller
             ];
         }
     }
-
-
 }

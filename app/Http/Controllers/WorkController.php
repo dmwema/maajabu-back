@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Resources\Work as ResourcesWork;
 use App\Models\Artist;
 use App\Models\Engineer;
+use App\Models\Service;
 
 class WorkController extends Controller
 {
@@ -39,25 +40,15 @@ class WorkController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        if (!Gate::allows('access-admin')) {
-            return response([
-                'message' => 'pas autorisé'
-            ], 403);
-        }
-
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'engineer_id' => 'required',
             'artist_id' => 'required',
         ]);
+
         if (Work::create($request->all())) {
-            return [
-                "success" => "true",
-                "message" => "Enregistrement effectué",
-                "data" => $request->work
-            ];
+            return redirect()->route('works')->with('success', 'Projet enrégistré avec succès');
         }
     }
 
@@ -66,6 +57,16 @@ class WorkController extends Controller
         $engineers = Engineer::all();
         $artists = Artist::all();
         return view('users.admin.new_work', ['engineers' => $engineers, 'artists' => $artists]);
+    }
+
+
+    public function edit(Request $request)
+    {
+        $work = Work::find($request->id);
+        $irs = Engineer::all();
+        $artists = Artist::all();
+
+        return view('users.admin.edit_work', ['work' => $work, 'engineers' => $irs, 'artists' => $artists]);
     }
 
     /**
@@ -95,19 +96,10 @@ class WorkController extends Controller
      */
     public function update(Request $request, Work $work)
     {
-        //
-
-        if (!Gate::allows('access-admin')) {
-            return response([
-                'message' => 'pas autorisé'
-            ], 403);
-        }
         if ($work->update($request->all())) {
-            return [
-                "success" => "true",
-                "message" => "La modification a reussie",
-                "data" => $request->work
-            ];
+            return redirect()->route('works')->with('success', 'Modifications éffectuées');
+        } else {
+            return redirect()->route('works')->with('fail', 'Veuillez réessayer, une erreur est survenue');
         }
     }
 
@@ -117,20 +109,11 @@ class WorkController extends Controller
      * @param  \App\Models\Work  $work
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Work $work)
+    public function destroy(Request $request)
     {
-        //
-        if (!Gate::allows('access-admin')) {
-            return response([
-                'message' => 'pas autorisé'
-            ], 403);
-        }
+        $work = Work::find($request->id);
         if ($work->delete()) {
-            return [
-                "success" => "true",
-                "message" => "Enregistrement supprimé",
-                "data" => $work
-            ];
+            return redirect()->back()->with('success', 'Projet supprimé avec succès');
         }
     }
 }
