@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\Engineer as ResourcesEngineer;
+use App\Models\Logiciel;
 use Illuminate\Support\Facades\Storage;
 
 class EngineerController extends Controller
@@ -32,18 +33,13 @@ class EngineerController extends Controller
      */
     public function store(Request $request)
     {
-
-        if (!$request->hasFile('img_url')) {
-            return redirect()->back()->with('fail', 'Veillez entrer une image de profile');
-        }
-
-
-        $request->validate([
-            'image' => 'mimes:jpeg,bmp,png,jpg' // Only allow .jpg, .bmp and .png file types.
-        ]);
-
-        $pathImage = $request->img_url->store('irs', 'public');
-
+        //
+        $filename = time(). '.' .$request->img_url->extension();
+        $pathImage = $request->file('img_url')->storeAs(
+            'engineers',
+            $filename,
+            'public'
+        );
         if ($engineer = Engineer::create([
             'name' => $request->name,
             'year_experience' => $request->year_experience,
@@ -52,6 +48,10 @@ class EngineerController extends Controller
             'password' => Hash::make($request->password),
             'phone' => $request->phone
         ])) {
+            $logiciel = new Logiciel();
+            $logiciel->name = $request->logiciel;
+
+            $engineer->logiciels()->save($logiciel);
             return redirect()->back()->with('success', 'Client enrégistré avec succès');
         } else {
             Storage::delete($pathImage);
@@ -82,22 +82,53 @@ class EngineerController extends Controller
      * @param  \App\Models\Engineer  $engineer
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, Engineer $engineer)
-    // {
-    //     //
-    //     if (!Gate::allows('access-admin')) {
-    //         return response([
-    //             'message' => 'pas autorisé'
-    //         ],403);
-    //     }
-    //     if ($engineer->update($request->all())) {
-    //         return [
-    //             "success" => true,
-    //             "message" => "La modification a reussie",
-    //             "data" => $request->engineer
-    //         ];
-    //     }
-    // }
+    public function update(Request $request)
+    {
+        $new_logiciels = [];
+        $mdfPwd = false;
+        $engineer = Engineer::find($request->id);
+
+        if($request->password != "" && ($request->password == $request->password_confirm)){
+            $password = $request->password;
+            $mdfPwd = true;
+        }
+
+        $engineer->name = $request->name;
+        $engineer->year_experience = $request->year_experience;
+        $engineer->email = $request->email;
+        $engineer->phone = $request->phone;
+
+        if ($mdfPwd) {
+            $engineer->password = Hash::make($password);
+        }
+        if (empty($request->img_url)) {
+            if ($engineer->img_url == "") {
+                $pathImage = "/engineers/default.png";
+            }else {
+                $pathImage = $engineer->img_url;
+            }
+        }else{
+            $filename = time(). '.' .$request->img_url->extension();
+            $pathImage = $request->file('img_url')->storeAs(
+                'engineers',
+                $filename,
+                'public'
+            );
+            Storage::delete($pathImage);
+        }
+        $engineer->img_url = $pathImage;
+
+        // if () {
+        //     $logiciel = new Logiciel();
+        //     $logiciel->name = $request->logiciel;
+        //     $engineer->logiciels()->save($logiciel);
+        // }
+
+        if ($engineer->save()) {
+            return redirect()->route('admin.engineer')->with('success', 'Ingénieur modifié avec succès');
+        }
+        return redirect()->route('admin.engineer')->with('fail', 'Une erreur est survenue lors de la modification');
+    }
 
     // /**
     //  * Remove the specified resource from storage.
@@ -121,6 +152,14 @@ class EngineerController extends Controller
     //         ];
     //     }
     // }
+
+    public function edit_engineer(Request $request)
+    {
+        $engineer = Engineer::find($request->id);
+        $logiciels = Logiciel::all();
+
+        return view('engineer_edit', ['engineer' => $engineer, 'logiciels' => $logiciels ]);
+    }
 
     public function get_infos()
     {

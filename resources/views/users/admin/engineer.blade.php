@@ -70,6 +70,7 @@ $i = 0;
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         @foreach ($engineers as $engineer)
                                             @php
                                                 $i++;
@@ -78,8 +79,16 @@ $i = 0;
                                                 <th scope="row">{{ $i }}</th>
                                                 <td>{{ $engineer->name }}</td>
                                                 <td>{{ $engineer->year_experience }}</td>
-                                                <td><img src="{{ $engineer->img_url }}" alt=""></td>
-                                                <td>{{ implode(' - ', $engineer->logiciels->toArray()) }}</td>
+                                                
+                                                <td><img style="width: 100px; height: 100px;" src="{{ Storage::url($engineer->img_url) }}" alt=""></td>
+                                                <td>
+                                                    @foreach ($engineer->logiciels as $key => $logiciel)
+                                                    {{
+                                                        $logiciel->name
+                                                    }}
+                                                    <br/>
+                                                    @endforeach
+                                                </td>
                                                 <td>{{ $engineer->phone }}</td>
                                                 <td>
 
@@ -145,7 +154,7 @@ $i = 0;
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label for="img_url" class="form-label">Photo</label>
-                                <input type="file" class="form-control" id="img_url" name="img_url">
+                                <input type="file" class="form-control" required id="img_url" name="img_url" accept="image/png, image/jpeg">
                             </div>
                         </div>
                         <div class="row">

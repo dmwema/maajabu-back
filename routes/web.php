@@ -25,9 +25,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 //voyager route
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
+// Route::group(['prefix' => 'admin'], function () {
+//     Voyager::routes();
+// });
 
 
 Route::get('/connexion', [LoginController::class, 'connexion'])->name('login');
@@ -50,6 +50,7 @@ Route::middleware('AdminAuth')->group(function () {
         Route::get('/engineer', [EngineerController::class, 'get_infos'])->name('admin.engineer');
         Route::post('/client/update', [UserController::class, 'update_client'])->name('client.update');
 
+        Route::post('/engineer/update', [EngineerController::class, 'update'])->name('engineer.update');
         Route::post('/engineer', [EngineerController::class, 'store'])->name('engineer.store');
         Route::delete('/engineer', [EngineerController::class, 'delete'])->name('engineer.delete');
 
@@ -94,3 +95,5 @@ Route::middleware('FinanceAuth')->group(function () {
 
 Route::post('/client', [UserController::class, 'store_client'])->name('clients.store');
 Route::get('/client/edit/{id}', [UserController::class, 'edit_client'])->name('client.edit');
+
+Route::get('/engineer/edit/{id}', [EngineerController::class, 'edit_engineer'])->name('engineer.edit');
