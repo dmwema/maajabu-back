@@ -73,9 +73,9 @@ if (session()->has('admin')) {
                             de bord</span></a></li>
 
                 @if ($type == 'admin')
-                    <li class="sidebar-item {{ $active == 'clients' ? 'selected' : '' }}"> <a
+                    <li class="sidebar-item {{ $active == 'users' ? 'selected' : '' }}"> <a
                             class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="{{ route($type . '.clients') }}" aria-expanded="false"><i
+                            href="{{ route($type . '.users') }}" aria-expanded="false"><i
                                 class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a>
                     </li>
 
@@ -111,7 +111,8 @@ if (session()->has('admin')) {
 
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ route($type . '.profile') }}" aria-expanded="false">
+                        href="{{ route($type . '.profile', ['id' => session()->get($type)->id]) }}"
+                        aria-expanded="false">
                         <i class="fas fa-user-cog"></i><span class="hide-menu"> Compte</span>
                     </a>
                 </li>

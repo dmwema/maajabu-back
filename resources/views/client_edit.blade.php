@@ -15,7 +15,7 @@ $i = 0;
     <div class="page-breadcrumb">
         <div class="row align-items-center justify-content-center">
             <div class="col-5">
-                <h4 class="page-title" style="text-align: center">Modifier les informations du client |
+                <h4 class="page-title" style="text-align: center">Modifier les informations de l'utilisateur |
                     {{ $client->firstname }}
                     {{ $client->name }}</h4>
             </div>
@@ -33,7 +33,7 @@ $i = 0;
                 <div class=" card">
                     <div class="card-body">
                         <form class="form-horizontal form-material mx-2" method="POST"
-                            action="{{ route('client.update') }}">
+                            action="{{ route('user.update') }}">
                             @csrf
                             <input type="hidden" name="id" value="{{ $client->id }}">
                             <div class="form-group">
@@ -55,6 +55,19 @@ $i = 0;
                                 <div class="col-md-12">
                                     <input type="text" value="{{ $client->email }}" required
                                         class="form-control form-control-line" name="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12" for="identity">Type d'utilisateur</label>
+                                <div class="col-md-12">
+                                    <select name="identity" id="identity" class="form-select">
+                                        <option {{ $client->identity == CLIENTS_ID ? 'selected' : '' }}
+                                            value="{{ CLIENTS_ID }}">Utilisateur simple</option>
+                                        <option {{ $client->identity == ADMIN_ID ? 'selected' : '' }}
+                                            value="{{ ADMIN_ID }}">Gestionnaire</option>
+                                        <option {{ $client->identity == FINANCE_ID ? 'selected' : '' }}
+                                            value="{{ FINANCE_ID }}">Financier</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">

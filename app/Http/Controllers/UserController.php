@@ -26,6 +26,11 @@ class UserController extends Controller
         return User::all();
     }
 
+    public function profile()
+    {
+        return view('users.admin.profile');
+    }
+
     public function edit_client(Request $request)
     {
         $client = User::find($request->id);
@@ -41,12 +46,13 @@ class UserController extends Controller
         $client->firstname = $request->firstname;
         $client->email = $request->email;
         $client->phone = $request->phone;
+        $client->identity = $request->identity;
         $client->address = $request->address;
 
         if ($client->save()) {
-            return redirect()->route('admin.clients')->with('success', 'Client modifié avec succès');
+            return redirect()->route('admin.users')->with('success', 'Utilisateur modifié avec succès');
         }
-        return redirect()->route('admin.clients')->with('fail', 'Une erreur est survenue lors de la modification');
+        return redirect()->route('admin.users')->with('fail', 'Une erreur est survenue lors de la modification');
     }
 
     /**
@@ -97,12 +103,17 @@ class UserController extends Controller
         $user->firstname = $request->firstname;
         $user->phone = $request->phone;
         $user->email = $request->email;
+        $user->identity = $request->identity;
         $user->address = $request->address;
+
+        if (count(User::where('email', $request->email)->get()) > 0) {
+            return redirect()->back()->with('fail', 'L\'addresse email entrée est déjà prise');
+        }
 
         $user->password = Hash::make('password');
 
         if ($user->save()) {
-            return redirect()->back()->with('success', 'Client enrégistré avec succès');
+            return redirect()->back()->with('success', 'Utilisateur enrégistré avec succès');
         }
         return redirect()->back()->with('fail', 'Une erreur est survenue lors de l\'enrégistrement');
     }
@@ -151,10 +162,10 @@ class UserController extends Controller
         }
     }
 
-    public function clients()
+    public function users(Request $request)
     {
-        $users = User::where('identity', CLIENTS_ID)->get();
-        return view('users.admin.clients', ['clients' => $users]);
+        $users = User::where('id', '!=', $request->session()->get('admin')->id)->get();
+        return view('users.admin.users', ['users' => $users]);
     }
 
     /**
@@ -179,7 +190,7 @@ class UserController extends Controller
     {
         $user = User::find($request->id);
         if ($user->delete()) {
-            return redirect()->back()->with('success', 'Client supprimé avec succès');
+            return redirect()->back()->with('success', 'Utilisateur supprimé avec succès');
         }
         return redirect()->back()->with('fail', 'Une erreur est survénue');
     }

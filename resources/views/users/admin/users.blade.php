@@ -1,7 +1,9 @@
 @php
 
-$active = 'clients';
+$active = 'users';
 $i = 0;
+
+$color = '#000';
 
 //dd($temps['forecast'][0]['forecast']);
 
@@ -15,13 +17,13 @@ $i = 0;
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
-                <h4 class="page-title">Tous les clients</h4>
+                <h4 class="page-title">Tous les Utilisateurs</h4>
             </div>
             <div class="col-7">
                 <div class="text-end upgrade-btn">
                     <a href="#" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
                             class="mdi mdi-plus"></i> Ajouter un
-                        nouveau client</a>
+                        nouvel utilisateur</a>
                 </div>
             </div>
         </div>
@@ -42,7 +44,7 @@ $i = 0;
         @endif
 
         @if (session()->has('fail'))
-            <div class="alert alert-adnger alert-dismissible fade show" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Erreur ! </strong>{{ session()->get('fail') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -53,9 +55,9 @@ $i = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tous les clients enrégistrés</h4>
+                        <h4 class="card-title">Tous les utilisateurs enrégistrés</h4>
                         <hr>
-                        @if (count($clients) > 0)
+                        @if (count($users) > 0)
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -64,32 +66,49 @@ $i = 0;
                                             <th scope="col">Nom</th>
                                             <th scope="col">Prenom</th>
                                             <th scope="col">Email</th>
+                                            <th scope="col">Type d'utilisateur</th>
                                             <th scope="col">Adresse</th>
                                             <th scope="col">Téléphone</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($clients as $client)
+                                        @foreach ($users as $user)
                                             @php
                                                 $i++;
+                                                
+                                                if ($user->identity == ADMIN_ID) {
+                                                    $color = 'green';
+                                                } elseif ($user->identity == FINANCE_ID) {
+                                                    $color = 'rgb(184, 136, 16)';
+                                                }
+                                                
                                             @endphp
-                                            <tr>
+
+                                            <tr style="color:{{ $color }}">
                                                 <th scope="row">{{ $i }}</th>
-                                                <td>{{ $client->name }}</td>
-                                                <td>{{ $client->firstname }}</td>
-                                                <td>{{ $client->email }}</td>
-                                                <td>{{ $client->address }}</td>
-                                                <td>{{ $client->phone }}</td>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->firstname }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                @if ($user->identity == ADMIN_ID)
+                                                    <td>Gestionnaire</td>
+                                                @elseif ($user->identity == FINANCE_ID)
+                                                    <td>Financier</td>
+                                                @else
+                                                    <td>Utilisateur normal</td>
+                                                @endif
+                                                <td>{{ $user->address }}</td>
+                                                <td>{{ $user->phone }}</td>
                                                 <td>
 
-                                                    <form onsubmit="return confirm('azsazd ?')"
+                                                    <form
+                                                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"
                                                         action="{{ route('user.delete') }}" method="POST">
                                                         @csrf
-                                                        <input type="hidden" name="id" value="{{ $client->id }}">
+                                                        <input type="hidden" name="id" value="{{ $user->id }}">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <a title="Modifier" style="color: #fff"
-                                                            href="{{ route('client.edit', ['id' => $client->id]) }}"
+                                                            href="{{ route('user.edit', ['id' => $user->id]) }}"
                                                             class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
                                                         <button title="Supprimer" style="color: #fff"
                                                             class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
@@ -103,7 +122,7 @@ $i = 0;
                             </div>
                         @else
                             <div class="alert alert-danger">
-                                <p style="margin-bottom: 0;">Aucun client enrégistré</p>
+                                <p style="margin-bottom: 0;">Aucun utilisateur enrégistré</p>
                             </div>
                         @endif
 
@@ -125,10 +144,10 @@ $i = 0;
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un client</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un user</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="{{ route('clients.store') }}">
+                <form method="POST" action="{{ route('users.store') }}">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -146,6 +165,16 @@ $i = 0;
                                 <label for="email" class="form-label">Adresse Email</label>
                                 <input type="email" class="form-control" required id="email" name="email">
                             </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12" for="identity">Type d'utilisateur</label>
+                                <div class="col-md-12">
+                                    <select name="identity" id="identity" class="form-select">
+                                        <option value="{{ CLIENTS_ID }}">Utilisateur simple</option>
+                                        <option value="{{ ADMIN_ID }}">Gestionnaire</option>
+                                        <option value="{{ FINANCE_ID }}">Financier</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="mb-3 col-md-6">
@@ -158,13 +187,20 @@ $i = 0;
                                     class="form-control"></textarea>
                             </div>
                         </div>
+                        <div style="text-align: center">
+                            <small style="color: red;">L'utilisateur est créé avec pour mot de passe par
+                                défaut :
+                                <strong>password</strong></small>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                         <button type="submit" class="btn btn-primary">Enrégistrer</button>
                     </div>
+
                 </form>
             </div>
         </div>
+
     </div>
 @endsection

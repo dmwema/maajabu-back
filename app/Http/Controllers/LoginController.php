@@ -18,8 +18,10 @@ class LoginController extends Controller
 
         $route_prefix = '';
 
+
         if ($type == ADMIN_ID) {
             $user = User::where('email', $email)->where('identity', $type)->first();
+            //dd($user);
             if ($user) {
                 if (Hash::check($pass, $user->password)) {
                     $route_prefix = 'admin';

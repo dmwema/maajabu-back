@@ -78,8 +78,6 @@ $i = 0;
                                                 @endforeach
                                             </select>
                                         </div>
-
-
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="qte" class="form-label">Quantité</label>
