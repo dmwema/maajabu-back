@@ -46,7 +46,11 @@ Route::middleware('AdminAuth')->group(function () {
         Route::get('/home', [GesWelcomeController::class, 'admin'])->name('admin.home');
         Route::get('/logout', [LoginController::class, 'admin_logout'])->name('admin.logout');
         Route::get('/clients', [UserController::class, 'clients'])->name('admin.clients');
+
         Route::get('/studio', [StudioController::class, 'get_infos'])->name('admin.studio');
+        Route::put('/studio', [StudioController::class, 'update'])->name('studio.update');
+
+
         Route::get('/engineer', [EngineerController::class, 'get_infos'])->name('admin.engineer');
         Route::post('/client/update', [UserController::class, 'update_client'])->name('client.update');
 
@@ -72,6 +76,11 @@ Route::middleware('AdminAuth')->group(function () {
         Route::delete('/user', [UserController::class, 'delete'])->name('user.delete');
 
         Route::delete('/work', [WorkController::class, 'destroy'])->name('work.delete');
+
+        Route::post('/phone', [StudioController::class, 'add_phone'])->name('phone.store');
+        Route::delete('/phone', [StudioController::class, 'delete_phone'])->name('phone.delete');
+
+        Route::get('/admin/profile/{id}', UserController::class, 'profile')->name('admin.profile');
     });
 });
 

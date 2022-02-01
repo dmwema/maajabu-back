@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Studio;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -17,12 +18,5 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name'           => 'Admin2',
-            'email'          => 'admin2@neema.com',
-            'identity'          => '1',
-            'password'       => Hash::make('password'),
-            'remember_token' => Str::random(60),
-        ]);
     }
 }

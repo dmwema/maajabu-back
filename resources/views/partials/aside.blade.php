@@ -67,33 +67,57 @@ if (session()->has('admin')) {
                                     class="fa fa-plus-square"></i> <span class="hide-menu m-l-5">Create New</span> </a>
                         </li>-->
 
-                <!-- User Profile-->
                 <li class="sidebar-item {{ $active == 'home' ? 'selected' : '' }}"> <a
                         class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route($type . '.home') }}"
                         aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Tableau
                             de bord</span></a></li>
-                <li class="sidebar-item {{ $active == 'clients' ? 'selected' : '' }}"> <a
-                        class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ route($type . '.clients') }}" aria-expanded="false"><i
-                            class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ route($type . '.engineer') }}" aria-expanded="false"><i
-                            class="fas fa-headphones-alt"></i><span class="hide-menu">Ingénieurs</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="table-basic.html" aria-expanded="false"><i class="fas fa-headphones-alt"></i><span
-                            class="hide-menu">Artistes</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ route('works') }}" aria-expanded="false"><i class="fas fa-tasks"></i><span
-                            class="hide-menu">Projets</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ route('reservations') }}" aria-expanded="false"><i
-                            class="far fa-hand-pointer"></i><span class="hide-menu">Reservations</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="icon-material.html" aria-expanded="false"><i class="fas fa-money-check-alt"></i><span
-                            class="hide-menu">Paiements</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ route($type . '.studio') }}"><i class="mdi mdi-microphone"></i><span
-                            class="hide-menu">Studio</span></a></li>
+
+                @if ($type == 'admin')
+                    <li class="sidebar-item {{ $active == 'clients' ? 'selected' : '' }}"> <a
+                            class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route($type . '.clients') }}" aria-expanded="false"><i
+                                class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a>
+                    </li>
+
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route($type . '.engineer') }}" aria-expanded="false"><i
+                                class="fas fa-headphones-alt"></i><span class="hide-menu">Ingénieurs</span></a>
+                    </li>
+
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="table-basic.html" aria-expanded="false"><i class="fas fa-headphones-alt"></i><span
+                                class="hide-menu">Artistes</span></a>
+                    </li>
+
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route('works') }}" aria-expanded="false"><i class="fas fa-tasks"></i><span
+                                class="hide-menu">Projets</span></a>
+                    </li>
+
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route('reservations') }}" aria-expanded="false"><i
+                                class="far fa-hand-pointer"></i><span class="hide-menu">Reservations</span></a></li>
+
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route($type . '.studio') }}"><i class="mdi mdi-microphone"></i><span
+                                class="hide-menu">Studio</span></a>
+                    </li>
+
+                @else
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="icon-material.html" aria-expanded="false"><i class="fas fa-money-check-alt"></i><span
+                                class="hide-menu">Paiements</span></a></li>
+                @endif
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ route($type . '.profile') }}" aria-expanded="false">
+                        <i class="fas fa-user-cog"></i><span class="hide-menu"> Compte</span>
+                    </a>
+                </li>
+
+
+
             </ul>
 
         </nav>

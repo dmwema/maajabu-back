@@ -28,7 +28,7 @@ class StudioFactory extends Factory
             'history' => $this->faker->paragraph,
             'adresse' => $this->faker->address,
             'url_maps' => $this->faker->url,
-
+            'logo' => $this->faker->imageUrl,
         ];
     }
 }

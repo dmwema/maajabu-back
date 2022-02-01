@@ -3,8 +3,6 @@
 $active = 'project';
 $i = 0;
 
-//dd($temps['forecast'][0]['forecast']);
-
 @endphp
 @extends('layout.main')
 
@@ -115,7 +113,7 @@ $i = 0;
                     @csrf
                     <div class="modal-body">
                         <div class="row">
-                            <div class="mb-3 col-md-6">
+                            <div class="mb-3 coclientl-md-6">
                                 <label for="name" class="form-label">Nom</label>
                                 <input type="text" class="form-control" required id="name" name="name">
                             </div>

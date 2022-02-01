@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Resources\Studio as ResourcesStudio;
 use App\Models\Image;
+use App\Models\Phone;
 
 class StudioController extends Controller
 {
@@ -26,6 +27,30 @@ class StudioController extends Controller
         ];
     }
 
+    public function add_phone(Request $request)
+    {
+        $phone = new Phone();
+        $phone->number = $request->number;
+        $phone->studio_id = Studio::all()->first()->id;
+
+        if (Count(Phone::where('number', $phone->number)->get()) > 0) {
+            return redirect()->back()->with('fail', 'ce numéro de contact existe déjà');
+        }
+
+        if ($phone->save()) {
+            return redirect()->back()->with('success', 'Numéro de contact enrégistré avec succès');
+        }
+    }
+
+    public function delete_phone(Request $request)
+    {
+        $phone = Phone::find($request->id);
+
+        if ($phone->delete()) {
+            return redirect()->back()->with('success', 'Numéro de contact supprimé avec succès');
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,10 +63,10 @@ class StudioController extends Controller
         if (!Gate::allows('access-admin')) {
             return response([
                 'message' => 'pas autorisé'
-            ],403);
+            ], 403);
         }
 
-        if ($studio=Studio::create($request->all())) {
+        if ($studio = Studio::create($request->all())) {
             $pathImage = $request->img_url->store('galeries', 'public');
             $image = new Image(['img_url' => $pathImage]);
             $studio->image()->save($image);
@@ -79,22 +104,39 @@ class StudioController extends Controller
      * @param  \App\Models\Studio  $studio
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, Studio $studio)
-    // {
-    //     //
-    //     if (!Gate::allows('access-admin')) {
-    //         return response([
-    //             'message' => 'pas autorisé'
-    //         ],403);
-    //     }
-    //     if ($studio->update($request->all())) {
-    //         return [
-    //             "success" => true,
-    //             "message" => "La modification a reussie",
-    //             "data" => $request->studio
-    //         ];
-    //     }
-    // }
+    public function update(Request $request, Studio $studio)
+    {
+        $studio = Studio::all()->first();
+
+        if ($request->name) {
+            $studio->name = $request->name;
+        }
+
+        if ($request->description) {
+            $studio->description = $request->description;
+        }
+
+        if ($request->history) {
+            $studio->history = $request->history;
+        }
+
+        if ($request->adresse) {
+            $studio->adresse = $request->adresse;
+        }
+
+        if ($request->logo) {
+            $studio->logo = $request->logo;
+        }
+
+        if ($request->url_maps) {
+            $studio->url_maps = $request->url_maps;
+        }
+
+        if ($studio->save()) {
+            return redirect()->back()->with('success', 'Informations mises à jour avec succès');
+        }
+        return redirect()->back()->with('fail', 'Une erreur est survénue');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -108,7 +150,7 @@ class StudioController extends Controller
         if (!Gate::allows('access-admin')) {
             return response([
                 'message' => 'pas autorisé'
-            ],403);
+            ], 403);
         }
         if ($studio->delete()) {
             return [
@@ -119,19 +161,10 @@ class StudioController extends Controller
         }
     }
 
-    public function get_infos(){
+    public function get_infos()
+    {
         $studio = Studio::all()->first();
-        $phones = $studio->phones;
-        $social_networks = $studio->social_networks;
-        $images = $studio->images;
         $services = Service::all();
-        $infos = [
-            'studio' => $studio,
-            'phones' => $phones,
-            'social_network' => $social_networks,
-            'galeries' => $images,
-            'services' => $services
-        ];
-        return view('users.admin.studio', ['infos' => $infos]);
+        return view('users.admin.studio', ['studio' => $studio, 'services' => $services]);
     }
 }
