@@ -31,17 +31,15 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $request->validate([
             'date_reservation' => 'required',
             'user_id' => 'required',
         ]);
+
         if (Reservation::create($request->all())) {
-            return [
-                "success" => true,
-                "message" => "Enregistrement effectué"
-            ];
+            return redirect()->back()->with('success', 'Réservation enrégistrée avec succès');
         }
+        return redirect()->back()->with('fail', 'Veuillez réessayer, une erreur est survenue');
     }
 
     public function new(Request $request)
@@ -92,12 +90,9 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
         if ($reservation->delete()) {
-            return [
-                "success" => true,
-                "message" => "Enregistrement supprimé"
-            ];
+            return redirect()->back()->with('success', 'Réservation supprimé avec succès');
         }
+        return redirect()->back()->with('fail', 'Veuillez réessayer, une erreur est survenue');
     }
 }

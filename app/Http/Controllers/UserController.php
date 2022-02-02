@@ -103,7 +103,7 @@ class UserController extends Controller
         $user->firstname = $request->firstname;
         $user->phone = $request->phone;
         $user->email = $request->email;
-        $user->identity = $request->identity;
+        $user->identity = $request->identity ?? CLIENTS_ID;
         $user->address = $request->address;
 
         if (count(User::where('email', $request->email)->get()) > 0) {

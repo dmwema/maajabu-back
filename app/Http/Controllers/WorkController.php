@@ -120,9 +120,8 @@ class WorkController extends Controller
 
         if ($work->save()) {
             return redirect()->back()->with('success', 'Modifications éffectuées');
-        } else {
-            return redirect()->back()->with('fail', 'Veuillez réessayer, une erreur est survenue');
         }
+        return redirect()->back()->with('fail', 'Veuillez réessayer, une erreur est survenue');
     }
 
     /**

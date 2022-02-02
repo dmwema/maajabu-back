@@ -42,7 +42,7 @@ $i = 0;
             <div class="col-lg-8 col-xlg-9 col-md-7 offset-md-2">
                 <div class=" card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('reservation.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('reservations.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
@@ -73,7 +73,6 @@ $i = 0;
                                             <select name="service_id" id="sevices" class="form-select">
                                                 @foreach ($services as $service)
                                                     <option value="{{ $service->id }}">{{ $service->name }}
-                                                        ({{ $service->phone }})
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -107,7 +106,7 @@ $i = 0;
                     <h5 class="modal-title" id="exampleModalLabel">Ajouter un nouveau client</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="{{ route('clients.store') }}">
+                <form method="POST" action="{{ route('users.store') }}">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
