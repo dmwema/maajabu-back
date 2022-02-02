@@ -124,9 +124,9 @@ if (session()->has('admin')) {
 
                 @else
                     <li class="sidebar-item {{ $active == 'paiement' ? 'selected' : '' }}"> <a
-                            class="sidebar-link waves-effect waves-dark sidebar-link" href="icon-material.html"
-                            aria-expanded="false"><i class="fas fa-money-check-alt"></i><span
-                                class="hide-menu">Paiements</span></a></li>
+                            class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route($type . '.paiement') }}" aria-expanded="false"><i
+                                class="fas fa-money-check-alt"></i><span class="hide-menu">Paiements</span></a></li>
                 @endif
 
                 <li class="sidebar-item">

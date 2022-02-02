@@ -53,6 +53,13 @@ class UserController extends Controller
         return view('users.admin.profile', ['user' => $user]);
     }
 
+    public function profile_fin(Request $request)
+    {
+        $user = User::find($request->session()->get('finance')->id);
+
+        return view('users.finance.profile', ['user' => $user]);
+    }
+
     public function edit_client(Request $request)
     {
         $client = User::find($request->id);

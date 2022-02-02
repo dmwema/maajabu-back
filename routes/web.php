@@ -119,6 +119,8 @@ Route::middleware('FinanceAuth')->group(function () {
     Route::prefix('finance')->group(function () {
         Route::get('/home', [GesWelcomeController::class, 'finance'])->name('finance.home');
         Route::get('/logout', [LoginController::class, 'finance_logout'])->name('finance.logout');
+        Route::get('/finance/profile/{id}', [UserController::class, 'profile_fin'])->name('finance.profile');
+        Route::get('/finance/profile/{id}', [UserController::class, 'paiement'])->name('finance.paiement');
     });
 });
 
