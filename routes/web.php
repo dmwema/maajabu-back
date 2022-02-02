@@ -7,6 +7,7 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\GesWelcomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkController;
@@ -60,10 +61,20 @@ Route::middleware('AdminAuth')->group(function () {
         Route::get('/work/new', [WorkController::class, 'new'])->name('works.new');
         Route::get('/work/edit/{id}', [WorkController::class, 'edit'])->name('work.edit');
         Route::post('/work/update', [WorkController::class, 'update'])->name('work.update');
-
-        Route::post('/artist/store', [ArtistController::class, 'store'])->name('artist.store');
-
         Route::post('/work/store', [WorkController::class, 'store'])->name('work.store');
+
+        Route::get('/artist', [ArtistController::class, 'get_infos'])->name('admin.artist');
+        Route::post('/artist/store', [ArtistController::class, 'store'])->name('artist.store');
+        Route::delete('/artist', [ArtistController::class, 'delete'])->name('artist.delete');
+        Route::get('/artist/edit/{id}', [ArtistController::class, 'edit'])->name('artist.edit');
+        Route::post('/artist/update', [ArtistController::class, 'update'])->name('artist.update');
+
+        Route::get('/service', [ServiceController::class, 'get_infos'])->name('admin.service');
+        Route::delete('/service', [ServiceController::class, 'delete'])->name('service.delete');
+        Route::post('/service/store', [ServiceController::class, 'store'])->name('service.store');
+        Route::get('/service/edit/{id}', [ServiceController::class, 'edit_service'])->name('service.edit');
+        Route::post('/service/update', [ServiceController::class, 'update'])->name('service.update');
+
 
         Route::get('/reservation', [ReservationController::class, 'index'])->name('reservations');
         Route::get('/reservation/edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');

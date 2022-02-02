@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Models\Tarif;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\Service as ResourcesService;
 
 class ServiceController extends Controller
@@ -28,36 +30,26 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-
-    //     if (!Gate::allows('access-admin')) {
-    //         return response([
-    //             'message' => 'pas autorisé'
-    //         ],403);
-    //     }
-    //     $request->validate([
-    //         'name' => 'required|string',
-    //         'description' => 'required',
-    //         'tarif_id' => 'required',
-    //     ]);
-    //     $pathImage = $request->img_url->store('services','public');
-    //     if ($service = Service::create([
-    //         'name' => $request->name,
-    //         'description' => $request->description,
-    //         'tarif_id' => $request->tarif_id
-    //     ])) {
-    //         $pathImage = $request->img_url->store('services', 'public');
-    //         $image = new Image(['img_url' => $pathImage]);
-    //         $service->image()->save($image);
-    //         return [
-    //             "success" => true,
-    //             "message" => "Enregistrement effectué",
-    //             "data" => $service
-    //         ];
-    //     }
-
-    // }
+    public function store(Request $request)
+    {
+        $filename = time() . '.' . $request->img_url->extension();
+        $pathImage = $request->file('img_url')->storeAs(
+            'services',
+            $filename,
+            'public'
+        );
+        if ($service = Service::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'img_url' => $pathImage,
+            'tarif_id' => $request->tarif
+        ])) {
+            return redirect()->back()->with('success', 'Service enregistré avec succès');
+        } else {
+            Storage::delete($pathImage);
+            return redirect()->back()->with('fail', 'Une erreur est survenue lors de l\'enrégistrement');
+        }
+    }
 
     /**
      * Display the specified resource.
@@ -82,22 +74,36 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, Service $service)
-    // {
-    //     //
-    //     if (!Gate::allows('access-admin')) {
-    //         return response([
-    //             'message' => 'pas autorisé'
-    //         ],403);
-    //     }
-    //     if ($service->update($request->all())) {
-    //         return [
-    //             "success" => true,
-    //             "message" => "La modification a reussie",
-    //             "data" => $request->service
-    //         ];
-    //     }
-    // }
+    public function update(Request $request)
+    {
+        $service = Service::find($request->id);
+
+        $service->name = $request->name;
+        $service->description = $request->description;
+        $service->tarif_id = $request->tarif;
+
+        if (empty($request->img_url)) {
+            if ($service->img_url == "") {
+                $pathImage = "/default.png";
+            }else {
+                $pathImage = $service->img_url;
+            }
+        }else{
+            $filename = time(). '.' .$request->img_url->extension();
+            $pathImage = $request->file('img_url')->storeAs(
+                'services',
+                $filename,
+                'public'
+            );
+            Storage::delete($pathImage);
+        }
+        $service->img_url = $pathImage;
+
+        if ($service->save()) {
+            return redirect()->route('admin.service')->with('success', 'Service modifié avec succès');
+        }
+        return redirect()->route('admin.service')->with('fail', 'Une erreur est survenue lors de la modification');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -105,20 +111,27 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    // public function destroy(Service $service)
-    // {
-    //     //
-    //     if (!Gate::allows('access-admin')) {
-    //         return response([
-    //             'message' => 'pas autorisé'
-    //         ],403);
-    //     }
-    //     if ($service->delete()) {
-    //         return [
-    //             "success" => true,
-    //             "message" => "Enregistrement supprimé",
-    //             "data" => $service
-    //         ];
-    //     }
-    // }
+    public function delete(Request $request)
+    {
+        $service = Service::find($request->id);
+        if ($service->delete()) {
+            return redirect()->back()->with('success', 'Service supprimé avec succès');
+        }
+        return redirect()->back()->with('fail', 'Une erreur est survénue');
+    }
+
+    public function get_infos()
+    {
+        $infos = Service::all();
+        $tarifs = Tarif::all();
+        return view('users.admin.service', ['services' => $infos, 'tarifs' => $tarifs]);
+    }
+
+    public function edit_service(Request $request)
+    {
+        $service = Service::find($request->id);
+        $tarifs = Tarif::all();
+
+        return view('users.admin.service_edit', ['service' => $service, 'tarifs' => $tarifs]);
+    }
 }

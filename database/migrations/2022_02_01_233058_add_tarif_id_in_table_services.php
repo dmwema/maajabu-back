@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDatasToEngineers extends Migration
+class AddTarifIdInTableServices extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddDatasToEngineers extends Migration
      */
     public function up()
     {
-        Schema::table('engineers', function (Blueprint $table) {
-            $table->string('email');
-            $table->string('password');
-            $table->string('phone');
+        Schema::table('services', function (Blueprint $table) {
+            $table->foreignId('tarif_id')->constrained();
         });
     }
 
@@ -27,7 +25,7 @@ class AddDatasToEngineers extends Migration
      */
     public function down()
     {
-        Schema::table('engineers', function (Blueprint $table) {
+        Schema::table('table_services', function (Blueprint $table) {
             //
         });
     }

@@ -121,15 +121,9 @@ class StudioController extends Controller
 
     public function get_infos(){
         $studio = Studio::all()->first();
-        $phones = $studio->phones;
-        $social_networks = $studio->social_networks;
-        $images = $studio->images;
         $services = Service::all();
         $infos = [
             'studio' => $studio,
-            'phones' => $phones,
-            'social_network' => $social_networks,
-            'galeries' => $images,
             'services' => $services
         ];
         return view('users.admin.studio', ['infos' => $infos]);
