@@ -14,12 +14,9 @@ class Service extends Model
 
     protected $fillable = ['name','description','tarif_id','img_url'];
 
-    protected $hidden = [
-        'pivot'
-    ];
 
-    public function tarifs(){
-        return $this->belongsToMany(Tarif::class);
+    public function tarif(){
+        return $this->belongsTo(Tarif::class);
     }
 
     public function reservations(){

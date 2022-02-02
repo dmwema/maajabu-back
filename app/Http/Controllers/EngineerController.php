@@ -52,7 +52,7 @@ class EngineerController extends Controller
             $logiciel->name = $request->logiciel;
 
             $engineer->logiciels()->save($logiciel);
-            return redirect()->back()->with('success', 'Client enrégistré avec succès');
+            return redirect()->back()->with('success', 'Client enregistré avec succès');
         } else {
             Storage::delete($pathImage);
             return redirect()->back()->with('fail', 'Une erreur est survenue lors de l\'enrégistrement');
@@ -136,22 +136,14 @@ class EngineerController extends Controller
     //  * @param  \App\Models\Engineer  $engineer
     //  * @return \Illuminate\Http\Response
     //  */
-    // public function destroy(Engineer $engineer)
-    // {
-    //     //
-    //     if (!Gate::allows('access-admin')) {
-    //         return response([
-    //             'message' => 'pas autorisé'
-    //         ],403);
-    //     }
-    //     if ($engineer->delete()) {
-    //         return [
-    //             "success" => true,
-    //             "message" => "Enregistrement supprimé",
-    //             "data" => $engineer
-    //         ];
-    //     }
-    // }
+    public function delete(Request $request)
+    {
+        $engineer = Engineer::find($request->id);
+        if ($engineer->delete()) {
+            return redirect()->back()->with('success', 'Ingénieur supprimé avec succès');
+        }
+        return redirect()->back()->with('fail', 'Une erreur est survénue');
+    }
 
     public function edit_engineer(Request $request)
     {

@@ -165,6 +165,7 @@ class StudioController extends Controller
     {
         $studio = Studio::all()->first();
         $services = Service::all();
+
         return view('users.admin.studio', ['studio' => $studio, 'services' => $services]);
     }
 }

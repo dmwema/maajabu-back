@@ -39,11 +39,12 @@ class ArtistController extends Controller
         $request->validate([
             'name' => 'required|string',
             'address' => 'required|string',
+            'email' => 'required|email',
             'phone' => 'required|string',
         ]);
 
         if (Artist::create($request->all())) {
-            return redirect()->back()->with('success', 'Nouveau ingénieur enrégistré avec succès');
+            return redirect()->back()->with('success', 'Nouveau artiste enregistré avec succès');
         }
     }
 
@@ -69,23 +70,13 @@ class ArtistController extends Controller
      * @param  \App\Models\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Artist $artist)
+    public function update(Request $request)
     {
-        //
-        if (!Gate::allows('access-admin')) {
-            return response([
-                'message' => 'pas autorisé'
-            ], 403);
-        }
-        $request->validate([
-            'name' => 'required|string'
-        ]);
+        $artist = Artist::find($request->id);
         if ($artist->update($request->all())) {
-            return [
-                "success" => true,
-                "message" => "La modification a reussie",
-                "data" => $request->artist
-            ];
+            return redirect()->route('admin.artist')->with('success', 'Modifications éffectuées');
+        } else {
+            return redirect()->route('admin.artist')->with('fail', 'Veuillez réessayer, une erreur est survenue');
         }
     }
 
@@ -95,20 +86,23 @@ class ArtistController extends Controller
      * @param  \App\Models\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Artist $artist)
+    public function delete(Request $request)
     {
-        //
-        if (!Gate::allows('access-admin')) {
-            return response([
-                'message' => 'pas autorisé'
-            ], 403);
-        }
+        $artist = Artist::find($request->id);
         if ($artist->delete()) {
-            return [
-                "success" => true,
-                "message" => "Enregistrement supprimé",
-                "data" => $artist
-            ];
+            return redirect()->back()->with('success', 'Artiste supprimé avec succès');
         }
+        return redirect()->back()->with('fail', 'Une erreur est survénue');
+    }
+
+    public function get_infos(){
+        $infos = Artist::all();
+        return view('users.admin.artist', ['artists' => $infos]);
+    }
+
+    public function edit(Request $request){
+        $artist = Artist::find($request->id);
+
+        return view('users.admin.artist_edit', ['artist' => $artist ]);
     }
 }
