@@ -63,6 +63,8 @@ $i = 0;
                                             <th scope="col">Date de reservation</th>
                                             <th scope="col">Client</th>
                                             <th scope="col">Service reservé</th>
+                                            <th scope="col">Quantité</th>
+                                            <th scope="col">Frais</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
@@ -75,7 +77,21 @@ $i = 0;
                                                 <th scope="row">{{ $i }}</th>
                                                 <td>{{ $reservation->date_reservation }}</td>
                                                 <td>{{ $reservation->user->name }}</td>
-                                                <td>{{ $reservation->service }}</td>
+                                                <td>
+                                                    @if (isset($reservation->service))
+                                                        {{ $reservation->service->name }} ({{ $reservation->service->tarif->price }} $ US)
+                                                    @else
+                                                        Aucun service
+                                                    @endif
+                                                </td>
+                                                <td>{{ $reservation->quatity }}</td>
+                                                <td>
+                                                    @if (isset($reservation->service))
+                                                     {{ (($reservation->service->tarif->price)*1)*$reservation->quatity }} $ US
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <form
                                                         onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet enrégistrement ? ?')"

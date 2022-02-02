@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTarifIdInTableServices extends Migration
+class AddColumnServiceIdInReservations extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddTarifIdInTableServices extends Migration
      */
     public function up()
     {
-        Schema::table('services', function (Blueprint $table) {
-           $table->foreignId('tarif_id')->constrained();
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->foreignId('service_id')->constrained();
         });
     }
 
@@ -25,7 +25,7 @@ class AddTarifIdInTableServices extends Migration
      */
     public function down()
     {
-        Schema::table('table_services', function (Blueprint $table) {
+        Schema::table('reservations', function (Blueprint $table) {
             //
         });
     }

@@ -85,6 +85,7 @@ Route::middleware('AdminAuth')->group(function () {
         Route::get('/reservation/new', [ReservationController::class, 'new'])->name('reservation.new');
         Route::post('/reservation', [ReservationController::class, 'store'])->name('reservations.store');
         Route::delete('/reservation', [ReservationController::class, 'destroy'])->name('reservation.delete');
+        Route::post('/reservation/update', [ReservationController::class, 'update_reservation'])->name('reservation.update');
 
         Route::delete('/user', [UserController::class, 'delete'])->name('user.delete');
 
