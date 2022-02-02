@@ -26,9 +26,38 @@ class UserController extends Controller
         return User::all();
     }
 
-    public function profile()
+    public function edit_pass(Request $request)
     {
-        return view('users.admin.profile');
+        $user = User::find($request->id);
+
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()->with('fail', 'Vous avez saisi un mot de passe actuel incorrect');
+        }
+
+        if ($request->newpassword != $request->newpassword_c) {
+            return redirect()->back()->with('fail', 'Les deux mot de passes actuels ne correspondent pas');
+        }
+
+        $user->password = Hash::make($request->newpassword);
+
+        if ($user->save()) {
+            return redirect()->back()->with('success', 'Nouveau mot de passe enrégistré avec succès');
+        }
+        return redirect()->back()->with('fail', 'Un problème est survenu');
+    }
+
+    public function profile(Request $request)
+    {
+        $user = User::find($request->session()->get('admin')->id);
+        //dd($user);
+        return view('users.admin.profile', ['user' => $user]);
+    }
+
+    public function profile_fin(Request $request)
+    {
+        $user = User::find($request->session()->get('finance')->id);
+
+        return view('users.finance.profile', ['user' => $user]);
     }
 
     public function edit_client(Request $request)
@@ -46,13 +75,15 @@ class UserController extends Controller
         $client->firstname = $request->firstname;
         $client->email = $request->email;
         $client->phone = $request->phone;
-        $client->identity = $request->identity;
+        if ($request->identity) {
+            $client->identity = $request->identity;
+        }
         $client->address = $request->address;
 
         if ($client->save()) {
-            return redirect()->route('admin.users')->with('success', 'Utilisateur modifié avec succès');
+            return redirect()->back()->with('success', 'Utilisateur modifié avec succès');
         }
-        return redirect()->route('admin.users')->with('fail', 'Une erreur est survenue lors de la modification');
+        return redirect()->back()->with('fail', 'Une erreur est survenue lors de la modification');
     }
 
     /**

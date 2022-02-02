@@ -72,22 +72,23 @@ if (session()->has('admin')) {
                         aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Tableau
                             de bord</span></a>
                 </li>
-                            
+
                 @if ($type == 'admin')
                     <li class="sidebar-item {{ $active == 'users' ? 'selected' : '' }}"> <a
-                        class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ route($type . '.users') }}" aria-expanded="false"><i
-                            class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a>
+                            class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route($type . '.users') }}" aria-expanded="false"><i
+                                class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a>
                     </li>
-                
+
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                             href="{{ route($type . '.engineer') }}" aria-expanded="false"><i
                                 class="fas fa-headphones-alt"></i><span class="hide-menu">Ingénieurs</span></a>
                     </li>
 
-                    <li class="sidebar-item {{ $active == 'artist' ? 'selected' : '' }}"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ route($type . '.artist') }}" aria-expanded="false"><i class="fas fa-headphones-alt"></i><span
-                            class="hide-menu">Artistes</span></a>
+                    <li class="sidebar-item {{ $active == 'artist' ? 'selected' : '' }}"> <a
+                            class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route($type . '.artist') }}" aria-expanded="false"><i
+                                class="fas fa-headphones-alt"></i><span class="hide-menu">Artistes</span></a>
                     </li>
 
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -103,16 +104,29 @@ if (session()->has('admin')) {
                             href="{{ route($type . '.studio') }}"><i class="mdi mdi-microphone"></i><span
                                 class="hide-menu">Studio</span></a>
                     </li>
-                    
-                    <li class="sidebar-item {{ $active == 'clients' ? 'selected' : '' }}"> <a
-                        class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route($type . '.service') }}"
-                        aria-expanded="false"><i class=""></i><span class="hide-menu">Services</span></a>
+
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route($type . '.service') }}" aria-expanded="false"><i
+                                class="fas fa-network-wired"></i><span class="hide-menu">Services</span></a>
+                    </li>
+
+                @elseif ($type == 'ir')
+                    <li class="sidebar-item {{ $active == 'artist' ? 'selected' : '' }}"> <a
+                            class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route($type . '.artist') }}" aria-expanded="false"><i
+                                class="fas fa-headphones-alt"></i><span class="hide-menu">Artistes</span></a>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route('works.ir') }}" aria-expanded="false"><i class="fas fa-tasks"></i><span
+                                class="hide-menu">Mes
+                                Projets</span></a>
+                    </li>
                     </li>
 
                 @else
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="icon-material.html" aria-expanded="false"><i class="fas fa-money-check-alt"></i><span
-                                class="hide-menu">Paiements</span></a></li>
+                    <li class="sidebar-item {{ $active == 'paiement' ? 'selected' : '' }}"> <a
+                            class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route($type . '.paiement') }}" aria-expanded="false"><i
+                                class="fas fa-money-check-alt"></i><span class="hide-menu">Paiements</span></a></li>
                 @endif
 
                 <li class="sidebar-item">
@@ -123,7 +137,7 @@ if (session()->has('admin')) {
                     </a>
                 </li>
             </ul>
-<!--fa-thin fa-timeline-->
+            <!--fa-thin fa-timeline-->
         </nav>
         <!-- End Sidebar navigation -->
     </div>

@@ -10,9 +10,11 @@ const IR_ID = 2;
 const FINANCE_ID = 3;
 const CLIENTS_ID = 4;
 
+const ONLINE_PAIEMENT = 11;
+const PHYSICAL_PAIEMENT = 12;
+
 
 if (!function_exists('is_connected')) {
-
 
     function is_connected(Request $request)
     {

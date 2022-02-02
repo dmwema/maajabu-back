@@ -25,6 +25,34 @@ class EngineerController extends Controller
         return ResourcesEngineer::collection($engineers);
     }
 
+    public function edit_pass(Request $request)
+    {
+        $user = Engineer::find($request->id);
+
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()->with('fail', 'Vous avez saisi un mot de passe actuel incorrect');
+        }
+
+        if ($request->newpassword != $request->newpassword_c) {
+            return redirect()->back()->with('fail', 'Les deux mot de passes actuels ne correspondent pas');
+        }
+
+        $user->password = Hash::make($request->newpassword);
+
+        if ($user->save()) {
+            return redirect()->back()->with('success', 'Nouveau mot de passe enrégistré avec succès');
+        }
+        return redirect()->back()->with('fail', 'Un problème est survenu');
+    }
+
+    public function profile(Request $request)
+    {
+        $ir = Engineer::find($request->session()->get('ir')->id);
+        //dd($user);
+        return view('users.ir.profile', ['ir' => $ir]);
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -34,7 +62,7 @@ class EngineerController extends Controller
     public function store(Request $request)
     {
         //
-        $filename = time(). '.' .$request->img_url->extension();
+        $filename = time() . '.' . $request->img_url->extension();
         $pathImage = $request->file('img_url')->storeAs(
             'engineers',
             $filename,
@@ -88,7 +116,7 @@ class EngineerController extends Controller
         $mdfPwd = false;
         $engineer = Engineer::find($request->id);
 
-        if($request->password != "" && ($request->password == $request->password_confirm)){
+        if ($request->password != "" && ($request->password == $request->password_confirm)) {
             $password = $request->password;
             $mdfPwd = true;
         }
@@ -107,8 +135,8 @@ class EngineerController extends Controller
             }else {
                 $pathImage = $engineer->img_url;
             }
-        }else{
-            $filename = time(). '.' .$request->img_url->extension();
+        } else {
+            $filename = time() . '.' . $request->img_url->extension();
             $pathImage = $request->file('img_url')->storeAs(
                 'engineers',
                 $filename,
@@ -125,9 +153,9 @@ class EngineerController extends Controller
         // }
 
         if ($engineer->save()) {
-            return redirect()->route('admin.engineer')->with('success', 'Ingénieur modifié avec succès');
+            return redirect()->back()->with('success', 'Ingénieur modifié avec succès');
         }
-        return redirect()->route('admin.engineer')->with('fail', 'Une erreur est survenue lors de la modification');
+        return redirect()->back()->with('fail', 'Une erreur est survenue lors de la modification');
     }
 
     // /**
@@ -150,7 +178,7 @@ class EngineerController extends Controller
         $engineer = Engineer::find($request->id);
         $logiciels = Logiciel::all();
 
-        return view('engineer_edit', ['engineer' => $engineer, 'logiciels' => $logiciels ]);
+        return view('engineer_edit', ['engineer' => $engineer, 'logiciels' => $logiciels]);
     }
 
     public function get_infos()

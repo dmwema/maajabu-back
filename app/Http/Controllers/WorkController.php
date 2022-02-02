@@ -32,6 +32,13 @@ class WorkController extends Controller
         return view('users.admin.project', ['works' => $works]);
     }
 
+    public function all_ir(Request $request)
+    {
+        $works = Work::where('engineer_id', $request->session()->get('ir')->id)->get();
+
+        return view('users.ir.project', ['works' => $works]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -54,6 +54,11 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         return $this->hasMany(Reservation::class);
     }
 
+    public function paiements()
+    {
+        return $this->hasMany(Paiement::class);
+    }
+
     // public function image()
     // {
     //     return $this->morphOne(Image::class,'imageable');

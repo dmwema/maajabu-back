@@ -1,6 +1,6 @@
 @php
 
-$active = 'ir';
+$active = 'paiement';
 $i = 0;
 
 //dd($temps['forecast'][0]['forecast']);
@@ -15,12 +15,12 @@ $i = 0;
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
-                <h4 class="page-title">Toutes les reservations</h4>
+                <h4 class="page-title">Tous les paiements</h4>
             </div>
             <div class="col-7">
                 <div class="text-end upgrade-btn">
-                    <a href="{{ route('reservation.new') }}" class="btn btn-success text-white" class="mdi mdi-plus"></i>
-                        Enrégistrer une reservation</a>
+                    <a href="{{ route('paiement.new') }}" class="btn btn-success text-white" class="mdi mdi-plus"></i>
+                        Nouveau paiement</a>
                 </div>
             </div>
         </div>
@@ -52,55 +52,41 @@ $i = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Toutes les reservations enrégistrées</h4>
+                        <h4 class="card-title">Tous paiements enrégistrés</h4>
                         <hr>
-                        @if (count($reservations) > 0)
+                        @if (count($paiements) > 0)
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Date de reservation</th>
-                                            <th scope="col">Client</th>
-                                            <th scope="col">Service reservé</th>
-                                            <th scope="col">Quantité</th>
-                                            <th scope="col">Frais</th>
+                                            <th scope="col">Client (payeur)</th>
+                                            <th scope="col">Motif</th>
+                                            <th scope="col">Montant payé (en $)</th>
+                                            <th scope="col">Date de paiement</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($reservations as $reservation)
+                                        @foreach ($paiements as $paiement)
                                             @php
                                                 $i++;
                                             @endphp
                                             <tr>
                                                 <th scope="row">{{ $i }}</th>
-                                                <td>{{ $reservation->date_reservation }}</td>
-                                                <td>{{ $reservation->user->name }}</td>
-                                                <td>
-                                                    @if (isset($reservation->service))
-                                                        {{ $reservation->service->name }} ({{ $reservation->service->tarif->price }} $ US)
-                                                    @else
-                                                        Aucun service
-                                                    @endif
-                                                </td>
-                                                <td>{{ $reservation->quatity }}</td>
-                                                <td>
-                                                    @if (isset($reservation->service))
-                                                     {{ (($reservation->service->tarif->price)*1)*$reservation->quatity }} $ US
-                                                    @else
-                                                        -
-                                                    @endif
-                                                </td>
+                                                <td>{{ $paiement->user->name }}</td>
+                                                <td>{{ $paiement->desc }}</td>
+                                                <td>{{ $paiement->amount }}</td>
+                                                <td>{{ $paiement->date }}</td>
                                                 <td>
                                                     <form
-                                                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet enrégistrement ? ?')"
-                                                        action="{{ route('reservation.delete') }}" method="POST">
+                                                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet paiement ? ?')"
+                                                        action="{{ route('paiement.delete') }}" method="POST">
                                                         @csrf
-                                                        <input type="hidden" name="id" value="{{ $reservation->id }}">
+                                                        <input type="hidden" name="id" value="{{ $paiement->id }}">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <a title="Modifier" style="color: #fff"
-                                                            href="{{ route('reservation.edit', ['id' => $reservation->id]) }}"
+                                                            href="{{ route('paiement.edit', ['id' => $paiement->id]) }}"
                                                             class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
                                                         <button title="Supprimer" style="color: #fff"
                                                             class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
@@ -114,7 +100,7 @@ $i = 0;
                             </div>
                         @else
                             <div class="alert alert-danger">
-                                <p style="margin-bottom: 0;">Aucune reservation enrégistrée</p>
+                                <p style="margin-bottom: 0;">Aucun paiement enrégistré</p>
                             </div>
                         @endif
 
