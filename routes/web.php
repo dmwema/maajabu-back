@@ -6,6 +6,7 @@ use App\Http\Controllers\ArtistController;
 
 use App\Http\Controllers\GesWelcomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StudioController;
@@ -119,8 +120,13 @@ Route::middleware('FinanceAuth')->group(function () {
     Route::prefix('finance')->group(function () {
         Route::get('/home', [GesWelcomeController::class, 'finance'])->name('finance.home');
         Route::get('/logout', [LoginController::class, 'finance_logout'])->name('finance.logout');
-        Route::get('/finance/profile/{id}', [UserController::class, 'profile_fin'])->name('finance.profile');
-        Route::get('/finance/profile/{id}', [UserController::class, 'paiement'])->name('finance.paiement');
+        Route::get('/profile/{id}', [UserController::class, 'profile_fin'])->name('finance.profile');
+        Route::get('/paiement', [PaiementController::class, 'index'])->name('finance.paiement');
+        Route::get('/new', [PaiementController::class, 'new'])->name('paiement.new');
+        Route::post('/paiement', [PaiementController::class, 'store'])->name('paiements.store');
+        Route::delete('/paiement', [PaiementController::class, 'destroy'])->name('paiement.delete');
+        Route::get('/paiement/edit/{id}', [PaiementController::class, 'edit'])->name('paiement.edit');
+        Route::post('/user/pass', [UserController::class, 'edit_pass'])->name('user.editpass');
     });
 });
 

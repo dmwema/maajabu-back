@@ -15,8 +15,10 @@ class CreatePaiementsTable extends Migration
     {
         Schema::create('paiements', function (Blueprint $table) {
             $table->id();
-            $table->integer('user');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->double('amount');
+            $table->text('desc');
+            $table->date('date');
             $table->timestamps();
         });
     }
