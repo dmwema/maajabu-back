@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Engineer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -15,25 +16,36 @@ class LoginController extends Controller
         $email = $request->email;
         $pass = $request->password;
 
-
-
-        $user = User::where('email', $email)->where('identity', $type)->first();
         $route_prefix = '';
 
-        if ($user) {
-            if (Hash::check($pass, $user->password)) {
-                if ($type == ADMIN_ID) {
-                    $request->session()->put('admin', $user);
-                    $route_prefix = 'admin';
-                } else if ($type == IR_ID) {
-                    $request->session()->put('ir', $user);
-                    $route_prefix = 'ir';
-                } else if ($type == FINANCE_ID) {
-                    $request->session()->put('finance', $user);
-                    $route_prefix = 'finance';
-                }
 
-                return redirect()->route($route_prefix . '.home');
+        if ($type == ADMIN_ID) {
+            $user = User::where('email', $email)->where('identity', $type)->first();
+            //dd($user);
+            if ($user) {
+                if (Hash::check($pass, $user->password)) {
+                    $route_prefix = 'admin';
+                    $request->session()->put('admin', $user);
+                    return redirect()->route($route_prefix . '.home');
+                }
+            }
+        } else if ($type == IR_ID) {
+            $user = Engineer::where('email', $email)->first();
+            if ($user) {
+                if (Hash::check($pass, $user->password)) {
+                    $route_prefix = 'ir';
+                    $request->session()->put('ir', $user);
+                    return redirect()->route($route_prefix . '.home');
+                }
+            }
+        } else if ($type == FINANCE_ID) {
+            $user = User::where('email', $email)->where('identity', $type)->first();
+            if ($user) {
+                if (Hash::check($pass, $user->password)) {
+                    $route_prefix = 'finance';
+                    $request->session()->put('finance', $user);
+                    return redirect()->route($route_prefix . '.home');
+                }
             }
         }
 

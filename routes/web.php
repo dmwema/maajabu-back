@@ -46,10 +46,14 @@ Route::middleware('AdminAuth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/home', [GesWelcomeController::class, 'admin'])->name('admin.home');
         Route::get('/logout', [LoginController::class, 'admin_logout'])->name('admin.logout');
-        Route::get('/clients', [UserController::class, 'clients'])->name('admin.clients');
+        Route::get('/utilisateurs', [UserController::class, 'users'])->name('admin.users');
+
         Route::get('/studio', [StudioController::class, 'get_infos'])->name('admin.studio');
+        Route::put('/studio', [StudioController::class, 'update'])->name('studio.update');
+
+
         Route::get('/engineer', [EngineerController::class, 'get_infos'])->name('admin.engineer');
-        Route::post('/client/update', [UserController::class, 'update_client'])->name('client.update');
+        Route::post('/user/update', [UserController::class, 'update_client'])->name('user.update');
 
         Route::post('/engineer/update', [EngineerController::class, 'update'])->name('engineer.update');
         Route::post('/engineer', [EngineerController::class, 'store'])->name('engineer.store');
@@ -79,10 +83,17 @@ Route::middleware('AdminAuth')->group(function () {
         Route::get('/reservation', [ReservationController::class, 'index'])->name('reservations');
         Route::get('/reservation/edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
         Route::get('/reservation/new', [ReservationController::class, 'new'])->name('reservation.new');
+        Route::post('/reservation', [ReservationController::class, 'store'])->name('reservations.store');
+        Route::delete('/reservation', [ReservationController::class, 'destroy'])->name('reservation.delete');
 
         Route::delete('/user', [UserController::class, 'delete'])->name('user.delete');
 
         Route::delete('/work', [WorkController::class, 'destroy'])->name('work.delete');
+
+        Route::post('/phone', [StudioController::class, 'add_phone'])->name('phone.store');
+        Route::delete('/phone', [StudioController::class, 'delete_phone'])->name('phone.delete');
+
+        Route::get('/admin/profile/{id}', [UserController::class, 'profile'])->name('admin.profile');
     });
 });
 
@@ -104,7 +115,7 @@ Route::middleware('FinanceAuth')->group(function () {
     });
 });
 
-Route::post('/client', [UserController::class, 'store_client'])->name('clients.store');
-Route::get('/client/edit/{id}', [UserController::class, 'edit_client'])->name('client.edit');
+Route::post('/user', [UserController::class, 'store_client'])->name('users.store');
+Route::get('/user/edit/{id}', [UserController::class, 'edit_client'])->name('user.edit');
 
 Route::get('/engineer/edit/{id}', [EngineerController::class, 'edit_engineer'])->name('engineer.edit');

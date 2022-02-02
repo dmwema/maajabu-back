@@ -63,8 +63,6 @@ $i = 0;
                                             <th scope="col">Date de reservation</th>
                                             <th scope="col">Client</th>
                                             <th scope="col">Service reservé</th>
-                                            <th scope="col">Quantité</th>
-                                            <th scope="col">Coût total</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
@@ -78,8 +76,6 @@ $i = 0;
                                                 <td>{{ $reservation->date_reservation }}</td>
                                                 <td>{{ $reservation->user->name }}</td>
                                                 <td>{{ $reservation->service }}</td>
-                                                <td>{{ $reservation->qte }}</td>
-                                                <td>{{ $reservation->service->price * $reservation->qte }}</td>
                                                 <td>
                                                     <form
                                                         onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet enrégistrement ? ?')"

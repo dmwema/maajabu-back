@@ -96,11 +96,32 @@ class WorkController extends Controller
      */
     public function update(Request $request, Work $work)
     {
-        if ($work->update($request->all())) {
-            return redirect()->route('works')->with('success', 'Modifications éffectuées');
-        } else {
-            return redirect()->route('works')->with('fail', 'Veuillez réessayer, une erreur est survenue');
+        $work = Work::find($request->id);
+
+        if ($request->name) {
+            $work->name = $request->name;
         }
+
+        if ($request->description) {
+            $work->description = $request->description;
+        }
+
+        if ($request->engineer_id) {
+            $work->engineer_id = $request->engineer_id;
+        }
+
+        if ($request->artist_id) {
+            $work->artist_id = $request->artist_id;
+        }
+
+        if ($request->end) {
+            $work->end = $request->end;
+        }
+
+        if ($work->save()) {
+            return redirect()->back()->with('success', 'Modifications éffectuées');
+        }
+        return redirect()->back()->with('fail', 'Veuillez réessayer, une erreur est survenue');
     }
 
     /**

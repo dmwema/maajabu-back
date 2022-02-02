@@ -20,7 +20,7 @@
                     <!--End Logo icon -->
                     <!-- Logo text -->
                     <span class="logo-text" style="font-weight: bold;">
-                        Neema Maajabu
+                        {{ studio()->name ?? 'Neema Maajabu' }}
                         <!-- dark Logo text
                             <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" /> -->
                         <!-- Light Logo text 

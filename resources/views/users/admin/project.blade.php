@@ -41,7 +41,7 @@ $i = 0;
         @endif
 
         @if (session()->has('fail'))
-            <div class="alert alert-adnger alert-dismissible fade show" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Erreur ! </strong>{{ session()->get('fail') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -93,7 +93,7 @@ $i = 0;
                                                         <a title="Modifier" style="color: #fff"
                                                             href="{{ route('work.edit', ['id' => $work->id]) }}"
                                                             class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
-                                                        <button title="Supprimer" style="color: #azsazd"
+                                                        <button title="Supprimer" style="color: #fff"
                                                             class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                                     </form>
 

@@ -47,7 +47,7 @@ $i = 0;
                         <form class="form-horizontal form-material mx-2" method="POST"
                             action="{{ route('work.update') }}">
                             @csrf
-                            <input type="hidden" name="id" value="{{ old('name') }}">
+                            <input type="hidden" name="id" value="{{ $work->id }}">
                             <div class="form-group">
                                 <label class="col-md-12">Nom du projet</label>
                                 <div class="col-md-12">
@@ -67,15 +67,10 @@ $i = 0;
                                 <div class="col-md-12">
                                     <select name="engineer_id" id="engineer" class="form-select">
                                         @foreach ($engineers as $ir)
-                                            @if ($ir->id == $work->engineer->id)
-                                                <option selected value="{{ $ir->id }}">{{ $ir->name }}
-                                                    ({{ $ir->phone }})
-                                                </option>
-                                            @else
-                                                <option value="{{ $ir->id }}">{{ $ir->name }}
-                                                    ({{ $ir->phone }})
-                                                </option>
-                                            @endif
+                                            <option {{ $ir->id == $work->engineer->id ? 'selected' : '' }}
+                                                value="{{ $ir->id }}">{{ $ir->name }}
+                                                ({{ $ir->phone }})
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -85,15 +80,10 @@ $i = 0;
                                 <div class="col-md-12">
                                     <select name="artist_id" id="artits" class="form-select">
                                         @foreach ($artists as $art)
-                                            @if ($ir->id == $work->engineer->id)
-                                                <option selected value="{{ $art->id }}">{{ $art->name }}
-                                                    ({{ $art->phone }})
-                                                </option>
-                                            @else
-                                                <option selected value="{{ $art->id }}">{{ $art->name }}
-                                                    ({{ $art->phone }})
-                                                </option>
-                                            @endif
+                                            <option {{ $work->artist_id == $art->id ? 'selected' : '' }}
+                                                value="{{ $art->id }}">{{ $art->name }}
+                                                ({{ $art->phone }})
+                                            </option>
                                         @endforeach
                                     </select>
                                     <a href="#" class="btn btn-primary" data-bs-toggle="modal"
