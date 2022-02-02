@@ -54,6 +54,7 @@ Route::middleware('AdminAuth')->group(function () {
 
         Route::get('/engineer', [EngineerController::class, 'get_infos'])->name('admin.engineer');
         Route::post('/user/update', [UserController::class, 'update_client'])->name('user.update');
+        Route::post('/user/pass', [UserController::class, 'edit_pass'])->name('user.editpass');
 
         Route::post('/engineer/update', [EngineerController::class, 'update'])->name('engineer.update');
         Route::post('/engineer', [EngineerController::class, 'store'])->name('engineer.store');
@@ -103,6 +104,12 @@ Route::middleware('IRAuth')->group(function () {
     Route::prefix('ir')->group(function () {
         Route::get('/home', [GesWelcomeController::class, 'ir'])->name('ir.home');
         Route::get('/logout', [LoginController::class, 'ir_logout'])->name('ir.logout');
+
+        Route::get('/ir/profile/{id}', [EngineerController::class, 'profile'])->name('ir.profile');
+        Route::get('/artist', [ArtistController::class, 'get_infos_ir'])->name('ir.artist');
+        Route::get('/work', [WorkController::class, 'all_ir'])->name('works.ir');
+        Route::post('/engineer/pass', [EngineerController::class, 'edit_pass'])->name('ir.editpass');
+        Route::post('/engineer', [EngineerController::class, 'update'])->name('ir.update');
     });
 });
 

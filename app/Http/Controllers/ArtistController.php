@@ -95,14 +95,22 @@ class ArtistController extends Controller
         return redirect()->back()->with('fail', 'Une erreur est survénue');
     }
 
-    public function get_infos(){
+    public function get_infos()
+    {
         $infos = Artist::all();
         return view('users.admin.artist', ['artists' => $infos]);
     }
 
-    public function edit(Request $request){
+    public function get_infos_ir(Request $request)
+    {
+        $infos = Artist::all();
+        return view('users.ir.artist', ['artists' => $infos]);
+    }
+
+    public function edit(Request $request)
+    {
         $artist = Artist::find($request->id);
 
-        return view('users.admin.artist_edit', ['artist' => $artist ]);
+        return view('users.admin.artist_edit', ['artist' => $artist]);
     }
 }

@@ -53,10 +53,10 @@ $i = 0;
                     <div>
                         <hr>
                     </div>
-                    <div class="card-body"> <small class="text-muted">Email address </small>
-                        <form method="POST" action="{{ route('user.editpass') }}">
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('ir.editpass') }}">
                             @csrf
-                            <input type="hidden" name="id" value="{{ $user->id }}">
+                            <input type="hidden" name="id" value="{{ $ir->id }}">
                             <div class="form-group">
                                 <label class="col-md-12">Entrez le mot de passe actuel</label>
                                 <div class="col-md-12">
@@ -92,43 +92,35 @@ $i = 0;
             <div class="col-lg-8 col-xlg-9 col-md-7">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form-horizontal form-material mx-2" method="POST"
-                            action="{{ route('user.update') }}">
+                        <form class="form-horizontal form-material mx-2" method="POST" action="{{ route('ir.update') }}">
                             @csrf
-                            <input type="hidden" name="id" value="{{ $user->id }}">
+                            <input type="hidden" name="id" value="{{ $ir->id }}">
                             <div class="form-group">
-                                <label class="col-md-12">Nom</label>
+                                <label class="col-md-12">Noms</label>
                                 <div class="col-md-12">
-                                    <input type="text" value="{{ $user->name }}" required name="name"
+                                    <input type="text" value="{{ $ir->name }}" required name="name"
                                         class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-12">Prenom</label>
+                                <label class="col-md-12">Années d'expériance</label>
                                 <div class="col-md-12">
-                                    <input type="text" value="{{ $user->firstname }}" required name="firstname"
-                                        class="form-control form-control-line">
+                                    <input type="number" value="{{ $ir->year_experience }}" required
+                                        name="year_experience" class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12">Email</label>
                                 <div class="col-md-12">
-                                    <input type="text" value="{{ $user->email }}" required name="email"
+                                    <input type="text" value="{{ $ir->email }}" required name="email"
                                         class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12">Téléphone</label>
                                 <div class="col-md-12">
-                                    <input type="text" value="{{ $user->phone }}" required name="phone"
+                                    <input type="text" value="{{ $ir->phone }}" required name="phone"
                                         class="form-control form-control-line">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12">address</label>
-                                <div class="col-md-12">
-                                    <textarea name="address" class="form-control form-control-line"
-                                        required>{{ $user->address }}</textarea>
                                 </div>
                             </div>
 
