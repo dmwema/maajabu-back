@@ -52,7 +52,7 @@ $i = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Toutes les reservations enrégistrées</h4>
+                        <h4 class="card-title">Toutes les reservations enregistrées</h4>
                         <hr>
                         @if (count($reservations) > 0)
                             <div class="table-responsive">
@@ -114,7 +114,7 @@ $i = 0;
                             </div>
                         @else
                             <div class="alert alert-danger">
-                                <p style="margin-bottom: 0;">Aucune reservation enrégistrée</p>
+                                <p style="margin-bottom: 0;">Aucune reservation enregistrée</p>
                             </div>
                         @endif
 

@@ -53,7 +53,7 @@ $i = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tous les ingénieurs enrégistrés</h4>
+                        <h4 class="card-title">Tous les ingénieurs enregistrés</h4>
                         <hr>
                         @if (count($engineers) > 0)
                             <div class="table-responsive">
@@ -183,7 +183,7 @@ $i = 0;
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-primary">Enrégistrer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
                 </form>
             </div>
