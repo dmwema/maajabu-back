@@ -20,8 +20,7 @@ $i = 0;
             <div class="col-7">
                 <div class="text-end upgrade-btn">
                     <a href="#" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                            class="mdi mdi-plus"></i> Ajouter un
-                        nouveau ingénieur</a>
+                            class="mdi mdi-plus"></i> Nouvel ingénieur</a>
                 </div>
             </div>
         </div>

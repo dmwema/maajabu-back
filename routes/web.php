@@ -96,6 +96,9 @@ Route::middleware('AdminAuth')->group(function () {
         Route::post('/phone', [StudioController::class, 'add_phone'])->name('phone.store');
         Route::delete('/phone', [StudioController::class, 'delete_phone'])->name('phone.delete');
 
+        Route::post('/social', [StudioController::class, 'add_social'])->name('social.store');
+        Route::delete('/social', [StudioController::class, 'delete_social'])->name('social.delete');
+
         Route::get('/profile/{id}', [UserController::class, 'profile'])->name('admin.profile');
 
         Route::get('/logiciel', [LogicielController::class, 'index'])->name('admin.logiciels');
