@@ -16,10 +16,14 @@ class LogicielController extends Controller
     public function index()
     {
         $logiciels = Logiciel::all();
-        return [
-            'logiciels' => $logiciels
-        ];
 
+        return view('users.admin.logiciels', ['logiciels' => $logiciels]);
+    }
+
+    public function edit(Request $request)
+    {
+        $logiciel = Logiciel::find($request->id);
+        return view('users.admin.edit_logiciel', ['logiciel' => $logiciel]);
     }
 
     /**
@@ -30,21 +34,14 @@ class LogicielController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Gate::allows('access-admin')) {
-            return response([
-                'message' => 'pas autorisé'
-            ],403);
-        }
         $request->validate([
             'name' => 'required|string'
         ]);
+
         if (Logiciel::create($request->all())) {
-            return [
-                "success" => true,
-                "message" => "Enregistrement effectué",
-                "data" => $request->logiciel
-            ];
+            return redirect()->back()->with('success', 'Logiciel enrégistré avec succès');
         }
+        return redirect()->back()->with('fail', 'Une erreur est survénue');
     }
 
     /**
@@ -73,7 +70,7 @@ class LogicielController extends Controller
         if (!Gate::allows('access-admin')) {
             return response([
                 'message' => 'pas autorisé'
-            ],403);
+            ], 403);
         }
         if ($logiciel->update($request->all())) {
             return [
@@ -90,19 +87,12 @@ class LogicielController extends Controller
      * @param  \App\Models\Logiciel  $logiciel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Logiciel $logiciel)
+    public function destroy(Request $request)
     {
-        if (!Gate::allows('access-admin')) {
-            return response([
-                'message' => 'pas autorisé'
-            ],403);
-        }
+        $logiciel = Logiciel::find($request->id);
         if ($logiciel->delete()) {
-            return [
-                "success" => true,
-                "message" => "Enregistrement supprimé",
-                "data" => $logiciel
-            ];
+            return redirect()->back()->with('success', 'Logiciel supprimé avec succès');
         }
+        return redirect()->back()->with('fail', 'Une erreur est survénue');
     }
 }
