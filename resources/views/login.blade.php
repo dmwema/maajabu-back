@@ -161,7 +161,7 @@
                                 <option selected value="0">Qui êtes-vous ?</option>
                                 <option value="{{ ADMIN_ID }}">Un administrateur</option>
                                 <option value="{{ IR_ID }}">Un ingénieur</option>
-                                <option value="{{ FINANCE_ID }}">Une financier</option>
+                                <option value="{{ FINANCE_ID }}">Un financier</option>
                             </select>
 
                         </div>
