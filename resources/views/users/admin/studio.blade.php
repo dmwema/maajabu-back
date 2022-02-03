@@ -135,6 +135,47 @@ $i = 0;
                             <br>
                         </div>
                     @endif
+                    <hr style="opacity: .08;">
+
+                    @if ($studio)
+                        <div class="container">
+                            <h5>Liens réseaux sociaux</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nom du reseau social</th>
+                                        <th scope="col">Lien</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($studio->social_networks as $social)
+                                        <tr>
+                                            <td>{{ $social->name }}</td>
+                                            <td>{{ $social->link }}</td>
+
+                                            <td>
+                                                <form
+                                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce lien ?')"
+                                                    action="{{ route('social.delete') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $social->id }}">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button title="Supprimer" style="color: #fff" class="btn btn-danger"><i
+                                                            class="far fa-trash-alt"></i></button>
+                                                </form>
+
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSocial">Ajouter
+                                un lien</a>
+                            <br>
+                            <br>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -161,6 +202,38 @@ $i = 0;
                             <div class="mb-3 col-md-6 offset-md-3">
                                 <label for="number" class="form-label">Entre le numéro</label>
                                 <input type="text" class="form-control" required id="number" name="number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enrégistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="addSocial" tabindex="-1" aria-labelledby="addSocialLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un lien réseau social</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ route('social.store') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-6 offset-md-3">
+                                <label for="name" class="form-label">Entrez le nom du réseau social</label>
+                                <input type="text" class="form-control" required id="name" name="name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-md-6 offset-md-3">
+                                <label for="link" class="form-label">Entrez le lien</label>
+                                <input type="text" class="form-control" required id="link" name="link">
                             </div>
                         </div>
                     </div>

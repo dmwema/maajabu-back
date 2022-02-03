@@ -3,6 +3,11 @@
 $active = 'ir';
 $i = 0;
 
+$ir_logiciels = [];
+foreach ($engineer->logiciels as $value) {
+    $ir_logiciels[] = $value->id;
+}
+
 //dd($temps['forecast'][0]['forecast']);
 
 @endphp
@@ -15,7 +20,7 @@ $i = 0;
     <div class="page-breadcrumb">
         <div class="row align-items-center justify-content-center">
             <div class="col-5">
-                <h4 class="page-title" style="text-align: center">Modifier les informations de l'ingénieur <br/>
+                <h4 class="page-title" style="text-align: center">Modifier les informations de l'ingénieur <br />
                     {{ $engineer->name }}
                 </h4>
             </div>
@@ -28,6 +33,20 @@ $i = 0;
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
+
+        @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Succès ! </strong>{{ session()->get('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if (session()->has('fail'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Erreur ! </strong>{{ session()->get('fail') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="row">
             <div class="col-lg-8 col-xlg-9 col-md-7 offset-md-2">
                 <div class=" card">
@@ -67,22 +86,30 @@ $i = 0;
                             <div class="form-group">
                                 <label class="col-md-12">Photo</label>
                                 <div class="col-md-12">
-                                    <img style = "width: 200px; height:200px " src="{{ Storage::url($engineer->img_url) }}" alt=""><br>
-                                    <input type="file"
-                                        class="form-control form-control-line" name="img_url">
+                                    <img style="width: 200px; height:200px " src="{{ Storage::url($engineer->img_url) }}"
+                                        alt=""><br>
+                                    <input type="file" class="form-control form-control-line" name="img_url">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-12">Logiciels</label>
                                 <div class="col-md-12">
-                                    <ul id="" class="">
-                                        @foreach ($engineer->logiciels as $logiciel )
-                                        <li value="{{ $logiciel->name }}"
-                                            class="" required>{{ $logiciel->name }}</li>
-                                        @endforeach
-                                    </ul>
-                                    <a href="#" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                                        class="mdi mdi-plus"></i>Ajouter un logiciel</a>
+                                    <label class="col-md-12" for="logiciel">Logiciel <br>
+                                        <small style="color: red">*Maintenez la touche CTRL pour séléctionner plusieurs
+                                            valeurs</small></label>
+                                    <div class="form-group col-md-6">
+                                        <div class="col-md-12">
+                                            <select name="logiciel[]" id="logiciel" class="form-select" multiple>
+                                                @foreach ($logiciels as $logiciel)
+                                                    <option
+                                                        {{ in_array($logiciel->id, $ir_logiciels) ? 'selected' : '' }}
+                                                        value="{{ $logiciel->id }}">{{ $logiciel->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#addLogiciel"><i class="mdi mdi-plus"></i> Nouveau
+                                                logiciel</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <hr>
@@ -90,15 +117,13 @@ $i = 0;
                             <div class="form-group">
                                 <label class="col-md-12">Entrez le mot passe</label>
                                 <div class="col-md-12">
-                                    <input type="password"
-                                        class="form-control form-control-line" name="password">
+                                    <input type="password" class="form-control form-control-line" name="password">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12">Tapez à nouveau le mot de passe</label>
                                 <div class="col-md-12">
-                                    <input type="password"
-                                        class="form-control form-control-line" name="password_confirm">
+                                    <input type="password" class="form-control form-control-line" name="password_confirm">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -116,32 +141,27 @@ $i = 0;
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
 
-
-    <!--Modal-->
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+    <!-- Modal -->
+    <div class="modal fade" id="addLogiciel" tabindex="-1" aria-labelledby="addLogicielLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un logiciel</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un nouveau logiciel</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('logiciel.store') }}">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label for="name" class="form-label">Logiciels</label><br/>
-                                @foreach ($logiciels as $logiciel )
-                                <input type="checkbox" name="logiciel" value="{{ $logiciel->name }}">
-                                <label for="logiciel"> {{ $logiciel->name }}</label><br/>
-                                @endforeach
+                            <div class="mb-3 coclientl-md-12">
+                                <label for="name" class="form-label">Nom du logiciel</label>
+                                <input type="text" class="form-control" required id="name" name="name">
                             </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-primary">Enrégistrer</button>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-primary">Enrégistrer</button>
+                        </div>
                 </form>
             </div>
         </div>

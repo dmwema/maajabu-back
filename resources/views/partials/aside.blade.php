@@ -42,13 +42,12 @@ if (session()->has('admin')) {
                                 <span class="op-5 user-email">{{ $user->email }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="Userdd">
-                                <a class="dropdown-item" href="javascript:void(0)"><i fa
-                                        fa-plus-squareclass="ti-user m-r-5 m-l-5"></i> Mon profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i>
-                                    Messages</a>
+                                <!--<a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i>
+                                    Messages</a>-->
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i
-                                        class="ti-settings m-r-5 m-l-5"></i> Paramètres</a>
+                                <a class="dropdown-item"
+                                    href="{{ route($type . '.profile', ['id' => session()->get($type)->id]) }}"><i
+                                        class="ti-settings m-r-5 m-l-5"></i> Compte</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route($logout_link) }}"><i
                                         class="fa fa-power-off m-r-5 m-l-5"></i> Déconnexion</a>
@@ -83,6 +82,11 @@ if (session()->has('admin')) {
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                             href="{{ route($type . '.engineer') }}" aria-expanded="false"><i
                                 class="fas fa-headphones-alt"></i><span class="hide-menu">Ingénieurs</span></a>
+                    </li>
+
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route($type . '.logiciels') }}" aria-expanded="false"><i
+                                class="fas fa-keyboard"></i><span class="hide-menu">Logiciels</span></a>
                     </li>
 
                     <li class="sidebar-item {{ $active == 'artist' ? 'selected' : '' }}"> <a

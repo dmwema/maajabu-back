@@ -61,6 +61,7 @@ class EngineerController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->logiciel);
         //
         $filename = time() . '.' . $request->img_url->extension();
         $pathImage = $request->file('img_url')->storeAs(
@@ -76,11 +77,8 @@ class EngineerController extends Controller
             'password' => Hash::make($request->password),
             'phone' => $request->phone
         ])) {
-            $logiciel = new Logiciel();
-            $logiciel->name = $request->logiciel;
-
-            $engineer->logiciels()->save($logiciel);
-            return redirect()->back()->with('success', 'Client enregistré avec succès');
+            $engineer->logiciels()->sync($request->logiciel);
+            return redirect()->back()->with('success', 'Ingénieur enregistré avec succès');
         } else {
             Storage::delete($pathImage);
             return redirect()->back()->with('fail', 'Une erreur est survenue lors de l\'enrégistrement');
@@ -145,12 +143,7 @@ class EngineerController extends Controller
             Storage::delete($pathImage);
         }
         $engineer->img_url = $pathImage;
-
-        // if () {
-        //     $logiciel = new Logiciel();
-        //     $logiciel->name = $request->logiciel;
-        //     $engineer->logiciels()->save($logiciel);
-        // }
+        $engineer->logiciels()->sync($request->logiciel);
 
         if ($engineer->save()) {
             return redirect()->back()->with('success', 'Ingénieur modifié avec succès');
@@ -184,6 +177,7 @@ class EngineerController extends Controller
     public function get_infos()
     {
         $infos = Engineer::all();
-        return view('users.admin.engineer', ['engineers' => $infos]);
+        $logiciels = Logiciel::all();
+        return view('users.admin.engineer', ['engineers' => $infos, 'logiciels' => $logiciels]);
     }
 }

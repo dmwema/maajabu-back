@@ -5,6 +5,7 @@ use App\Http\Controllers\EngineerController;
 use App\Http\Controllers\ArtistController;
 
 use App\Http\Controllers\GesWelcomeController;
+use App\Http\Controllers\LogicielController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ReservationController;
@@ -96,7 +97,15 @@ Route::middleware('AdminAuth')->group(function () {
         Route::post('/phone', [StudioController::class, 'add_phone'])->name('phone.store');
         Route::delete('/phone', [StudioController::class, 'delete_phone'])->name('phone.delete');
 
-        Route::get('/admin/profile/{id}', [UserController::class, 'profile'])->name('admin.profile');
+        Route::post('/social', [StudioController::class, 'add_social'])->name('social.store');
+        Route::delete('/social', [StudioController::class, 'delete_social'])->name('social.delete');
+
+        Route::get('/profile/{id}', [UserController::class, 'profile'])->name('admin.profile');
+
+        Route::get('/logiciel', [LogicielController::class, 'index'])->name('admin.logiciels');
+        Route::delete('/logiciel', [LogicielController::class, 'destroy'])->name('logiciel.delete');
+        Route::get('/logiciel/{id}', [LogicielController::class, 'edit'])->name('logiciel.edit');
+        Route::post('/logiciel', [LogicielController::class, 'store'])->name('logiciel.store');
     });
 });
 

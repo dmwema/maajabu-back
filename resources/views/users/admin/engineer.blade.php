@@ -20,8 +20,7 @@ $i = 0;
             <div class="col-7">
                 <div class="text-end upgrade-btn">
                     <a href="#" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                            class="mdi mdi-plus"></i> Ajouter un
-                        nouveau ingénieur</a>
+                            class="mdi mdi-plus"></i> Nouvel ingénieur</a>
                 </div>
             </div>
         </div>
@@ -80,19 +79,19 @@ $i = 0;
                                                 <td>{{ $engineer->name }}</td>
                                                 <td>{{ $engineer->year_experience }}</td>
 
-                                                <td><img style="width: 100px; height: 100px;" src="{{ Storage::url($engineer->img_url) }}" alt=""></td>
+                                                <td><img style="width: 100px; height: 100px;"
+                                                        src="{{ Storage::url($engineer->img_url) }}" alt=""></td>
                                                 <td>
                                                     @foreach ($engineer->logiciels as $key => $logiciel)
-                                                    {{
-                                                        $logiciel->name
-                                                    }}
-                                                    <br/>
+                                                        {{ $logiciel->name }}
+                                                        <br />
                                                     @endforeach
                                                 </td>
                                                 <td>{{ $engineer->phone }}</td>
                                                 <td>
 
-                                                    <form onsubmit="return confirm('Voulez-vous vraiment supprimer cet enregistrement ?')"
+                                                    <form
+                                                        onsubmit="return confirm('Voulez-vous vraiment supprimer cet enregistrement ?')"
                                                         action="{{ route('engineer.delete') }}" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{ $engineer->id }}">
@@ -154,21 +153,39 @@ $i = 0;
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label for="img_url" class="form-label">Photo</label>
-                                <input type="file" class="form-control" required id="img_url" name="img_url" accept="image/png, image/jpeg">
+                                <input type="file" class="form-control" required id="img_url" name="img_url"
+                                    accept="image/png, image/jpeg">
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label for="logiciel" class="form-label">Logiciel</label>
-                                <input type="text" class="form-control" required id="logiciel" name="logiciel">
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="phone" class="form-label">Téléphone</label>
-                                <input type="text" class="form-control" required id="phone" name="phone">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-12" for="logiciel">Logiciel <br>
+                                            <small style="color: red">*Maintenez la touche CTRL pour séléctionner plusieurs
+                                                valeurs</small></label>
+                                        <div class="col-md-12">
+                                            <select name="logiciel[]" id="logiciel" class="form-select" multiple>
+                                                @foreach ($logiciels as $logiciel)
+                                                    <option value="{{ $logiciel->id }}">{{ $logiciel->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#addLogiciel"><i class="mdi mdi-plus"></i> Nouveau
+                                                logiciel</a>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
                         <div class="row">
+
+
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label for="phone" class="form-label">Téléphone</label>
+                                <input type="text" class="form-control" required id="phone" name="phone">
+                            </div>
                             <div class="mb-3 col-md-6">
                                 <label for="email" class="form-label">Adresse mail</label>
                                 <input type="text" class="form-control" required id="email" name="email">
@@ -184,6 +201,33 @@ $i = 0;
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                         <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addLogiciel" tabindex="-1" aria-labelledby="addLogicielLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un logiciel</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ route('logiciel.store') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-12">
+                                <label for="name" class="form-label">Nom du logiciel</label>
+                                <input type="text" class="form-control" required id="name" name="name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enrégistrer</button>
                     </div>
                 </form>
             </div>

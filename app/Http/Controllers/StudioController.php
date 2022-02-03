@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Resources\Studio as ResourcesStudio;
 use App\Models\Image;
 use App\Models\Phone;
+use App\Models\Social_network;
 
 class StudioController extends Controller
 {
@@ -42,6 +43,23 @@ class StudioController extends Controller
         }
     }
 
+    public function add_social(Request $request)
+    {
+        $social = new Social_network();
+        $social->name = $request->name;
+        $social->link = $request->link;
+        $social->studio_id = Studio::all()->first()->id;
+
+        if (Count(Social_network::where('name', $social->name)->get()) > 0) {
+            return redirect()->back()->with('fail', 'ce réseau social à déjà un lien, veuillez le supprimer puis réessayez');
+        }
+
+        if ($social->save()) {
+            return redirect()->back()->with('success', 'Lien social enrégistré avec succès');
+        }
+        return redirect()->back()->with('fail', 'une erreur est survénue');
+    }
+
     public function delete_phone(Request $request)
     {
         $phone = Phone::find($request->id);
@@ -49,6 +67,17 @@ class StudioController extends Controller
         if ($phone->delete()) {
             return redirect()->back()->with('success', 'Numéro de contact supprimé avec succès');
         }
+    }
+
+
+    public function delete_social(Request $request)
+    {
+        $social = Social_network::find($request->id);
+
+        if ($social->delete()) {
+            return redirect()->back()->with('success', 'Lien supprimé avec succès');
+        }
+        return redirect()->back()->with('fail', 'Une erreur est survenue');
     }
 
     /**

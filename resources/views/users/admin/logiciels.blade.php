@@ -1,10 +1,8 @@
 @php
 
-$active = 'reservations';
+$active = 'logiciels';
 $i = 0;
-
 //dd($temps['forecast'][0]['forecast']);
-
 @endphp
 @extends('layout.main')
 
@@ -15,12 +13,13 @@ $i = 0;
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
-                <h4 class="page-title">Toutes les reservations</h4>
+                <h4 class="page-title">Tous les logiciels</h4>
             </div>
             <div class="col-7">
                 <div class="text-end upgrade-btn">
-                    <a href="{{ route('reservation.new') }}" class="btn btn-success text-white" class="mdi mdi-plus"></i>
-                        Enrégistrer une reservation</a>
+                    <a href="#" class="btn btn-success text-white" class="mdi mdi-plus" data-bs-toggle="modal"
+                        data-bs-target="#addLogiciel"></i>
+                        Nouveau logiciel</a>
                 </div>
             </div>
         </div>
@@ -52,56 +51,34 @@ $i = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Toutes les reservations enregistrées</h4>
+                        <h4 class="card-title">Tous les logiciels enrégistrées</h4>
                         <hr>
-                        @if (count($reservations) > 0)
+                        @if (count($logiciels) > 0)
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Date de reservation</th>
-                                            <th scope="col">Client</th>
-                                            <th scope="col">Service reservé</th>
-                                            <th scope="col">Quantité</th>
-                                            <th scope="col">Frais</th>
-                                            <th scope="col">Actions</th>
+                                            <th scope="col">Nom du logiciel</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($reservations as $reservation)
+                                        @foreach ($logiciels as $logiciel)
                                             @php
                                                 $i++;
                                             @endphp
                                             <tr>
                                                 <th scope="row">{{ $i }}</th>
-                                                <td>{{ $reservation->date_reservation }}</td>
-                                                <td>{{ $reservation->user->name }}</td>
-                                                <td>
-                                                    @if (isset($reservation->service))
-                                                        {{ $reservation->service->name }} ({{ $reservation->service->tarif->price }} $ US)
-                                                    @else
-                                                        Aucun service
-                                                    @endif
-                                                </td>
-                                                <td>{{ $reservation->quatity }}</td>
-                                                <td>
-                                                    @if (isset($reservation->service))
-                                                     {{ (($reservation->service->tarif->price)*1)*$reservation->quatity }} $ US
-                                                    @else
-                                                        -
-                                                    @endif
-                                                </td>
+                                                <td>{{ $logiciel->name }}</td>
+
                                                 <td>
                                                     <form
                                                         onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet enrégistrement ? ?')"
-                                                        action="{{ route('reservation.delete') }}" method="POST">
+                                                        action="{{ route('logiciel.delete') }}" method="POST">
                                                         @csrf
-                                                        <input type="hidden" name="id" value="{{ $reservation->id }}">
+                                                        <input type="hidden" name="id" value="{{ $logiciel->id }}">
                                                         <input type="hidden" name="_method" value="DELETE">
-                                                        <a title="Modifier" style="color: #fff"
-                                                            href="{{ route('reservation.edit', ['id' => $reservation->id]) }}"
-                                                            class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+
                                                         <button title="Supprimer" style="color: #fff"
                                                             class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                                     </form>
@@ -114,7 +91,7 @@ $i = 0;
                             </div>
                         @else
                             <div class="alert alert-danger">
-                                <p style="margin-bottom: 0;">Aucune reservation enregistrée</p>
+                                <p style="margin-bottom: 0;">Aucun logiciel enrégistrée</p>
                             </div>
                         @endif
 
@@ -131,4 +108,30 @@ $i = 0;
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="addLogiciel" tabindex="-1" aria-labelledby="addLogicielLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un nouveau logiciel</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ route('logiciel.store') }}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="mb-3 coclientl-md-12">
+                                <label for="name" class="form-label">Nom du logiciel</label>
+                                <input type="text" class="form-control" required id="name" name="name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-primary">Enrégistrer</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
