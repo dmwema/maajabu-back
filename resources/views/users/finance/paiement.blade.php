@@ -52,7 +52,7 @@ $i = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tous paiements enrégistrés</h4>
+                        <h4 class="card-title">Tous paiements enregistrés</h4>
                         <hr>
                         @if (count($paiements) > 0)
                             <div class="table-responsive">
@@ -100,7 +100,7 @@ $i = 0;
                             </div>
                         @else
                             <div class="alert alert-danger">
-                                <p style="margin-bottom: 0;">Aucun paiement enrégistré</p>
+                                <p style="margin-bottom: 0;">Aucun paiement enregistré</p>
                             </div>
                         @endif
 

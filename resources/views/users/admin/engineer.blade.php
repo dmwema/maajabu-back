@@ -111,7 +111,7 @@ $i = 0;
                             </div>
                         @else
                             <div class="alert alert-danger">
-                                <p style="margin-bottom: 0;">Aucun engénieurs enrégistré</p>
+                                <p style="margin-bottom: 0;">Aucun engénieurs enregistré</p>
                             </div>
                         @endif
 
@@ -227,7 +227,7 @@ $i = 0;
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-primary">Enrégistrer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
                 </form>
             </div>

@@ -40,7 +40,7 @@ $active = 'clients';
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tous les clients enrégistrés</h4>
+                        <h4 class="card-title">Tous les clients enregistrés</h4>
                         <h6 class="card-subtitle">
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia quo fugit vel omnis nisi tenetur.
                             Beatae quidem aspernatur libero odio adipisci corrupti ipsa ea voluptatem omnis, ad veritatis?

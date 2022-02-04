@@ -91,7 +91,7 @@ $i = 0;
 
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-success text-white">Enrégister</button>
+                                    <button class="btn btn-success text-white">Enregister</button>
                                 </div>
                             </div>
                         </form>
