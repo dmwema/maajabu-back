@@ -2,10 +2,11 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
-class Service extends JsonResource
+class Image extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +18,8 @@ class Service extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'img_url' => Storage::url($this->img_url)
+            'img_url' => Storage::url($request->img_url),
+            'studio_id' => $this->year_experience,
         ];
     }
 }
