@@ -167,7 +167,7 @@ class UserController extends Controller
 
         $reservations = $user->reservations;
         $profile = $user->image;
-        $user->avatar = Storage::url($user->avatar);
+        $user->avatar = env('APP_URL')."/public".Storage::url($user->avatar);
         return [
             'user' => $user,
         ];
