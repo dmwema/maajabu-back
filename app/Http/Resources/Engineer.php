@@ -18,7 +18,9 @@ class Engineer extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'email' => $this->email,
             'year_experience' => $this->year_experience,
+            'phone' => $this->phone,
             'img_url' => env('APP_URL')."/public".Storage::url($this->img_url)
         ];
     }
