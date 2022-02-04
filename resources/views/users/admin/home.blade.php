@@ -53,7 +53,7 @@ $active = 'home';
                                     <div class="p-2"><img src="../../assets/images/users/1.jpg" alt="user" width="50"
                                             class="rounded-circle"></div>
                                     <div class="comment-text w-100">
-                                        <h6 class="font-medium">{{ $message->name }} </h6>
+                                        <h6 class="font-medium"> {{ $message->name }} ({{ $message->email }}) {{ ($message->user_id==null)?'':': Abonné' }}</h6>
                                         <span class="m-b-15 d-block">{{ $message->message }}</span>
                                         <div class="comment-footer">
                                             <span
