@@ -192,7 +192,7 @@ class UserController extends Controller
         // }
         if (empty($request->avatar)) {
             if ($user->avatar == "") {
-                $pathImage = "/default.png";
+                $pathImage = "default.png";
             }else {
                 $pathImage = $user->avatar;
             }

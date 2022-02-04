@@ -208,11 +208,4 @@ class StudioController extends Controller
 
         return view('users.admin.studio', ['studio' => $studio, 'services' => $services]);
     }
-
-    public function show()
-    {
-        return [
-            'studio' => Studio::all()->first()
-        ];
-    }
 }
