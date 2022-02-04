@@ -95,7 +95,7 @@ class ServiceController extends Controller
                 $filename,
                 'public'
             );
-            Storage::delete($pathImage);
+            Storage::disk('public')->delete($service->img_url);
         }
         $service->img_url = $pathImage;
 

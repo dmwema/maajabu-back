@@ -42,7 +42,7 @@ $i = 0;
             <div class="col-lg-8 col-xlg-9 col-md-7 offset-md-2">
                 <div class=" card">
                     <div class="card-body">
-                        <form class="form-horizontal form-material mx-2" method="POST"
+                        <form class="form-horizontal form-material mx-2" method="POST" enctype="multipart/form-data"
                             action="{{ route('studio.update') }}">
                             @csrf
                             <input type="hidden" name="_method" value="PUT">
@@ -78,7 +78,7 @@ $i = 0;
                                 <label class="col-md-12">Logo du studio</label>
                                 <div class="col-md-12">
                                     <input type="file" value="{{ $studio->logo ?? '' }}"
-                                        class="form-control form-control-line" name="logo">
+                                        class="form-control form-control-line" name="logo" >
                                 </div>
                             </div>
                             <div class="form-group">
