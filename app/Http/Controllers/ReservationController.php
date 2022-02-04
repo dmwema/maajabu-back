@@ -34,9 +34,16 @@ class ReservationController extends Controller
         $request->validate([
             'date_reservation' => 'required',
             'user_id' => 'required',
+            'service_id' => 'required',
+            'qte' => 'required'
         ]);
 
-        if (Reservation::create($request->all())) {
+        if ($reservation = Reservation::create([
+            'date_reservation' => $request->date_reservation,
+            'user_id' => $request->user_id,
+            'service_id' => $request->service_id,
+            'quatity' => $request->qte
+        ])) {
             return redirect()->back()->with('success', 'Réservation enrégistrée avec succès');
         }
         return redirect()->back()->with('fail', 'Veuillez réessayer, une erreur est survenue');
@@ -88,11 +95,35 @@ class ReservationController extends Controller
      * @param  \App\Models\Reservation  $reservation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reservation $reservation)
+    public function destroy(Request $request)
     {
+        $reservation = Reservation::find($request->id);
         if ($reservation->delete()) {
             return redirect()->back()->with('success', 'Réservation supprimé avec succès');
         }
         return redirect()->back()->with('fail', 'Veuillez réessayer, une erreur est survenue');
+    }
+
+    public function edit(Request $request)
+    {
+        $reservation = Reservation::find($request->id);
+        $users = User::all();
+        $services = Service::all();
+        return view('users.admin.reservation_edit', ['reservation' => $reservation, 'users' => $users, 'services' => $services]);
+    }
+
+    public function update_reservation(Request $request)
+    {
+        $reservation = Reservation::find($request->id);
+
+        $reservation->date_reservation = $request->date_reservation;
+        $reservation->user_id = $request->user_id;
+        $reservation->service_id = $request->service_id;
+        $reservation->quatity = $request->qte;
+
+        if ($reservation->save()) {
+            return redirect()->route('reservations')->with('success', 'Reservation modifié avec succès');
+        }
+        return redirect()->route('reservations')->with('fail', 'Une erreur est survenue lors de la modification');
     }
 }

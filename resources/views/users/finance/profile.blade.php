@@ -80,7 +80,7 @@ $i = 0;
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-success text-white" type="submit">Enrégistrer</button>
+                                    <button class="btn btn-success text-white" type="submit">Enregistrer</button>
                                 </div>
                             </div>
                         </form>
@@ -134,7 +134,7 @@ $i = 0;
 
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-success text-white" type="submit">Enrégistrer</button>
+                                    <button class="btn btn-success text-white" type="submit">Enregistrer</button>
                                 </div>
                             </div>
                         </form>

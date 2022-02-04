@@ -20,7 +20,7 @@ class Service extends Model
     }
 
     public function reservations(){
-        return $this->belongsToMany(Reservation::class);
+        return $this->hasMany(Reservation::class);
     }
     // public function image(){
     //     return $this->morphOne(Image::class,'imageable');

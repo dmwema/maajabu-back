@@ -11,17 +11,17 @@ class Reservation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date_reservation','user_id'];
+    protected $fillable = ['date_reservation','user_id','service_id','quatity'];
 
-    protected $hidden = [
-        'pivot'
-    ];
+    // protected $hidden = [
+    //     'pivot'
+    // ];
 
     public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function services(){
-        return $this->belongsToMany(Service::class);
+    public function service(){
+        return $this->belongsTo(Service::class);
     }
 }

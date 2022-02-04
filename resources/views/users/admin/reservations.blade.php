@@ -52,7 +52,7 @@ $i = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Toutes les reservations enrégistrées</h4>
+                        <h4 class="card-title">Toutes les reservations enregistrées</h4>
                         <hr>
                         @if (count($reservations) > 0)
                             <div class="table-responsive">
@@ -63,6 +63,8 @@ $i = 0;
                                             <th scope="col">Date de reservation</th>
                                             <th scope="col">Client</th>
                                             <th scope="col">Service reservé</th>
+                                            <th scope="col">Quantité</th>
+                                            <th scope="col">Frais</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
@@ -75,7 +77,21 @@ $i = 0;
                                                 <th scope="row">{{ $i }}</th>
                                                 <td>{{ $reservation->date_reservation }}</td>
                                                 <td>{{ $reservation->user->name }}</td>
-                                                <td>{{ $reservation->service }}</td>
+                                                <td>
+                                                    @if (isset($reservation->service))
+                                                        {{ $reservation->service->name }} ({{ $reservation->service->tarif->price }} $ US)
+                                                    @else
+                                                        Aucun service
+                                                    @endif
+                                                </td>
+                                                <td>{{ $reservation->quatity }}</td>
+                                                <td>
+                                                    @if (isset($reservation->service))
+                                                     {{ (($reservation->service->tarif->price)*1)*$reservation->quatity }} $ US
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <form
                                                         onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet enrégistrement ? ?')"
@@ -98,7 +114,7 @@ $i = 0;
                             </div>
                         @else
                             <div class="alert alert-danger">
-                                <p style="margin-bottom: 0;">Aucune reservation enrégistrée</p>
+                                <p style="margin-bottom: 0;">Aucune reservation enregistrée</p>
                             </div>
                         @endif
 
