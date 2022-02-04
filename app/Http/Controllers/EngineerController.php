@@ -93,7 +93,7 @@ class EngineerController extends Controller
      */
     public function show(Engineer $engineer)
     {
-        $engineer->img_url = env('APP_URL')."//public//". Storage::url($engineer->img_url);
+        $engineer->img_url = env('APP_URL')."/public". Storage::url($engineer->img_url);
         $works = $engineer->works;
         $logiciels = $engineer->logiciels;
         return [
