@@ -18,7 +18,7 @@ class Image extends JsonResource
     {
         return [
             'id' => $this->id,
-            'img_url' => Storage::url($request->img_url),
+            'img_url' => env('APP_URL')."//public//".Storage::url($request->img_url),
             'studio_id' => $this->year_experience,
         ];
     }
