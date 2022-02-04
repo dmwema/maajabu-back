@@ -47,7 +47,7 @@ $i = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tous les artistes enrégistrés</h4>
+                        <h4 class="card-title">Tous les artistes enregistrés</h4>
                         <hr>
                         @if (count($artists) > 0)
                             <div class="table-responsive">

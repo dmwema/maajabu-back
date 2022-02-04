@@ -128,7 +128,7 @@ foreach ($engineer->logiciels as $value) {
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-success text-white">Enrégistrer</button>
+                                    <button class="btn btn-success text-white">Enregistrer</button>
                                 </div>
                             </div>
                         </form>
@@ -160,7 +160,7 @@ foreach ($engineer->logiciels as $value) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-primary">Enrégistrer</button>
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </div>
                 </form>
             </div>

@@ -52,7 +52,7 @@ $i = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tous les projets enrégistrés</h4>
+                        <h4 class="card-title">Tous les projets enregistrés</h4>
                         <hr>
                         @if (count($works) > 0)
                             <div class="table-responsive">
@@ -105,7 +105,7 @@ $i = 0;
                             </div>
                         @else
                             <div class="alert alert-danger">
-                                <p style="margin-bottom: 0;">Aucun projet enrégistré</p>
+                                <p style="margin-bottom: 0;">Aucun projet enregistré</p>
                             </div>
                         @endif
 

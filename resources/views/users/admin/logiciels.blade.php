@@ -51,7 +51,7 @@ $i = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tous les logiciels enrégistrées</h4>
+                        <h4 class="card-title">Tous les logiciels enregistrées</h4>
                         <hr>
                         @if (count($logiciels) > 0)
                             <div class="table-responsive">
@@ -91,7 +91,7 @@ $i = 0;
                             </div>
                         @else
                             <div class="alert alert-danger">
-                                <p style="margin-bottom: 0;">Aucun logiciel enrégistrée</p>
+                                <p style="margin-bottom: 0;">Aucun logiciel enregistrée</p>
                             </div>
                         @endif
 
@@ -128,7 +128,7 @@ $i = 0;
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-primary">Enrégistrer</button>
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </div>
                 </form>
             </div>

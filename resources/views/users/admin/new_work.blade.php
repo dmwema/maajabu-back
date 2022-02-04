@@ -15,7 +15,7 @@ $i = 0;
     <div class="page-breadcrumb">
         <div class="row align-items-center justify-content-center">
             <div class="col-5">
-                <h4 class="page-title" style="text-align: center">Enrégistrer un nouveau projet</h4>
+                <h4 class="page-title" style="text-align: center">Enregistrer un nouveau projet</h4>
             </div>
         </div>
     </div>
@@ -95,7 +95,7 @@ $i = 0;
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-success text-white">Enrégistrer</button>
+                                    <button class="btn btn-success text-white">Enregistrer</button>
                                 </div>
                             </div>
                         </form>
@@ -143,7 +143,7 @@ $i = 0;
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-primary">Enrégistrer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
                 </form>
             </div>

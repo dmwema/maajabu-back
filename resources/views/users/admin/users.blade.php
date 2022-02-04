@@ -55,7 +55,7 @@ $color = '#000';
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tous les utilisateurs enrégistrés</h4>
+                        <h4 class="card-title">Tous les utilisateurs enregistrés</h4>
                         <hr>
                         @if (count($users) > 0)
                             <div class="table-responsive">
@@ -76,13 +76,13 @@ $color = '#000';
                                         @foreach ($users as $user)
                                             @php
                                                 $i++;
-                                                
+
                                                 if ($user->identity == ADMIN_ID) {
                                                     $color = 'green';
                                                 } elseif ($user->identity == FINANCE_ID) {
                                                     $color = 'rgb(184, 136, 16)';
                                                 }
-                                                
+
                                             @endphp
 
                                             <tr style="color:{{ $color }}">
@@ -122,7 +122,7 @@ $color = '#000';
                             </div>
                         @else
                             <div class="alert alert-danger">
-                                <p style="margin-bottom: 0;">Aucun utilisateur enrégistré</p>
+                                <p style="margin-bottom: 0;">Aucun utilisateur enregistré</p>
                             </div>
                         @endif
 
@@ -195,7 +195,7 @@ $color = '#000';
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-primary">Enrégistrer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
 
                 </form>
