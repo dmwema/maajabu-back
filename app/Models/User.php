@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Image;
+use App\Models\Contact;
 use App\Models\Service;
 use App\Models\Reservation;
 use Laravel\Sanctum\HasApiTokens;
@@ -59,10 +60,10 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         return $this->hasMany(Paiement::class);
     }
 
-    // public function image()
-    // {
-    //     return $this->morphOne(Image::class,'imageable');
-    // }
+    public function messages()
+    {
+        return $this->hasMany(Contact::class);
+    }
 
     public function sendPasswordResetNotification($token)
     {
