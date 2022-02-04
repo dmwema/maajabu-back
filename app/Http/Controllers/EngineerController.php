@@ -130,7 +130,7 @@ class EngineerController extends Controller
         if (empty($request->img_url)) {
             if ($engineer->img_url == "") {
                 $pathImage = "/default.png";
-            }else {
+            } else {
                 $pathImage = $engineer->img_url;
             }
         } else {

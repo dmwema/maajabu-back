@@ -155,7 +155,7 @@ class StudioController extends Controller
         }
 
         if ($request->logo) {
-            if ($studio->logo!=null) {
+            if ($studio->logo != null) {
                 Storage::disk('public')->delete($studio->logo);
             }
             $filename = time() . '.' . $request->logo->extension();
@@ -206,5 +206,12 @@ class StudioController extends Controller
         $services = Service::all();
 
         return view('users.admin.studio', ['studio' => $studio, 'services' => $services]);
+    }
+
+    public function show()
+    {
+        return [
+            'studio' => Studio::all()->first()
+        ];
     }
 }
