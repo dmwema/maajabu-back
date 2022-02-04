@@ -140,7 +140,7 @@ class EngineerController extends Controller
                 $filename,
                 'public'
             );
-            Storage::delete($pathImage);
+            Storage::disk('public')->delete($engineer->img_url);
         }
         $engineer->img_url = $pathImage;
         $engineer->logiciels()->sync($request->logiciel);

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Image;
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -102,19 +103,23 @@ class UserController extends Controller
         }
         $request->validate([
             'name' => 'required|string|min:2|max:45',
+            'firstname' => 'required|string|min:2|max:45',
             'email' => 'required|email|unique:users,email',
             'phone' => 'nullable',
             'avatar' => 'nullable|image',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed',
+            'address' => 'required'
         ]);
 
         $pathImage = $request->avatar->store('users', 'public');
         if ($user = User::create([
             'name' => $request->name,
+            'firstname' => $request->firstname,
             'email' => $request->email,
             'avatar' => $pathImage,
             'phone' => $request->phone,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'address' => $request->address
         ])) {
 
             return response()->json([
@@ -177,19 +182,35 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //
-        if ($request->admin) {
-            if (!Gate::allows('access-admin')) {
-                return response([
-                    'message' => 'pas autorisé'
-                ], 403);
+        // if ($request->admin) {
+        //     if (!Gate::allows('access-admin')) {
+        //         return response([
+        //             'message' => 'pas autorisé'
+        //         ], 403);
+        //     }
+        // }
+        if (empty($request->avatar)) {
+            if ($user->avatar == "") {
+                $pathImage = "/default.png";
+            }else {
+                $pathImage = $user->avatar;
             }
-        }
-        if ($user->update($request->all())) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Utilisateur modifié',
-                'data' => $request->user
-            ]);
+        }else{
+            $filename = time(). '.' .$request->img_url->extension();
+            $pathImage = $request->file('avatar')->storeAs(
+                'users',
+                $filename,
+                'public'
+            );
+            Storage::disk('public')->delete($user->avatar);
+            $request->avatar = $pathImage;
+            if ($user->update($request->all())) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Utilisateur modifié',
+                    'data' => $request->user
+                ]);
+            }
         }
     }
 

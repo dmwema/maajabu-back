@@ -10,6 +10,7 @@ use App\Http\Resources\Studio as ResourcesStudio;
 use App\Models\Image;
 use App\Models\Phone;
 use App\Models\Social_network;
+use Illuminate\Support\Facades\Storage;
 
 class StudioController extends Controller
 {
@@ -154,7 +155,16 @@ class StudioController extends Controller
         }
 
         if ($request->logo) {
-            $studio->logo = $request->logo;
+            if ($studio->logo!=null) {
+                Storage::disk('public')->delete($studio->logo);
+            }
+            $filename = time() . '.' . $request->logo->extension();
+            $pathImage = $request->file('logo')->storeAs(
+                'studios',
+                $filename,
+                'public'
+            );
+            $studio->logo = $pathImage;
         }
 
         if ($request->url_maps) {
