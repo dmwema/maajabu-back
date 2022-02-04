@@ -20,10 +20,9 @@ class EngineerController extends Controller
      */
     public function index()
     {
+        //
         $engineers = Engineer::all();
-        return [
-            'engineers' => $engineers
-        ];
+        return ResourcesEngineer::collection($engineers);
     }
 
     public function edit_pass(Request $request)
@@ -130,7 +129,6 @@ class EngineerController extends Controller
         }
         if (empty($request->img_url)) {
             if ($engineer->img_url == "") {
-
                 $pathImage = "default.png";
             } else {
                 $pathImage = $engineer->img_url;
