@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class Engineer extends JsonResource
 {
@@ -18,7 +19,7 @@ class Engineer extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'year_experience' => $this->year_experience,
-            'img_url' => $this->img_url
+            'img_url' => Storage::url($this->img_url)
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Image as ResourcesImage;
 use App\Models\Studio;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -99,7 +100,7 @@ class StudioController extends Controller
         if ($studio = Studio::create($request->all())) {
             $pathImage = $request->img_url->store('galeries', 'public');
             $image = new Image(['img_url' => $pathImage]);
-            $studio->image()->save($image);
+            $studio->images()->save($image);
             return [
                 'success' => true,
                 'message' => 'Enregistrement effectué',
@@ -114,18 +115,18 @@ class StudioController extends Controller
      * @param  \App\Models\Studio  $studio
      * @return \Illuminate\Http\Response
      */
-    // public function show(Studio $studio)
-    // {
-    //     //
-    //     $phones = $studio->phones;
-    //     $social_networks = $studio->social_networks;
-    //     $images = $studio->images;
-    //     $services = Service::all();
-    //     return [
-    //         'studio' => $studio,
-    //         'services' => $services,
-    //     ];
-    // }
+    public function show(Studio $studio)
+    {
+        //
+        $phones = $studio->phones;
+        $social_networks = $studio->social_networks;
+        $images = ResourcesImage::collection($studio->images);
+        $services = Service::all();
+        return [
+            'studio' => $studio,
+            'services' => $services,
+        ];
+    }
 
     /**
      * Update the specified resource in storage.
