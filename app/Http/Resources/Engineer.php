@@ -21,7 +21,7 @@ class Engineer extends JsonResource
             'email' => $this->email,
             'year_experience' => $this->year_experience,
             'phone' => $this->phone,
-            'img_url' => env('APP_URL')."/public".Storage::url($this->img_url)
+            'img_url' => env('APP_URL').Storage::url($this->img_url)
         ];
     }
 }

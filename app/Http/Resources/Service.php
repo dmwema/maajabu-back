@@ -19,7 +19,7 @@ class Service extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'img_url' => env('APP_URL')."/public".Storage::url($this->img_url)
+            'img_url' => env('APP_URL').Storage::url($this->img_url)
         ];
     }
 }

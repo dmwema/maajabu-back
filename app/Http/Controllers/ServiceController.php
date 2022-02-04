@@ -60,7 +60,7 @@ class ServiceController extends Controller
     public function show(Service $service)
     {
         //
-        $service->img_url = env('APP_URL')."/public".Storage::url($service->img_url);
+        $service->img_url = env('APP_URL').Storage::url($service->img_url);
         $tarif = $service->tarifs;
         $reservations = $service->reservations;
         return [
