@@ -53,13 +53,12 @@ $active = 'home';
                                     <div class="p-2"><img src="../../assets/images/users/1.jpg" alt="user" width="50"
                                             class="rounded-circle"></div>
                                     <div class="comment-text w-100">
-                                        <h6 class="font-medium">James Anderson</h6>
-                                        <span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing
-                                            and type setting industry. </span>
+                                        <h6 class="font-medium">{{ $message->name }} ({{ $message->user->name }})</h6>
+                                        <span class="m-b-15 d-block">{{ $message->message }}</span>
                                         <div class="comment-footer">
-                                            <span class="text-muted float-end">April 14, 2021</span> <span
-                                                class="label label-rounded label-primary">Pending</span> <span
-                                                class="action-icons">
+                                            <span
+                                                class="label label-rounded label-primary">{{ $message->created_at }}</span>
+                                            <span class="action-icons">
                                                 <a href="javascript:void(0)"><i class="ti-pencil-alt"></i></a>
                                                 <a href="javascript:void(0)"><i class="ti-check"></i></a>
                                                 <a href="javascript:void(0)"><i class="ti-heart"></i></a>
