@@ -117,7 +117,7 @@ class StudioController extends Controller
      */
     public function show(Studio $studio)
     {
-        //
+
         $phones = $studio->phones;
         $social_networks = $studio->social_networks;
         $images = ResourcesImage::collection($studio->images);

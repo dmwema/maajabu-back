@@ -1,0 +1,196 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>README.md</title>
+      </head>
+      <body>
+        <h1 id="paroller-js">paroller.js</h1>
+<p><a href="https://www.npmjs.com/package/paroller.js"><img src="https://img.shields.io/npm/v/paroller.js.svg" alt="npm"></a><br>A lightweight jQuery plugin that enables parallax scrolling effect  </p>
+<ul>
+<li>You can use it on elements with background property or on any other element  </li>
+<li>While scrolling elements can move: vertical, horizontal  </li>
+<li>Manipulated through html data-* attributes or jQuery options  </li>
+<li>Mobile ready  </li>
+<li>Easy to use  </li>
+</ul>
+<p><strong>DEMO:</strong> <a href="https://tgomilar.github.io/paroller.js/">Demo</a>, <a href="https://alveus.si/en">Example page</a>, <a href="https://whitetailgin.com/">Example page</a></p>
+<h2 id="install">Install</h2>
+<p>Before closing <code>&lt;/body&gt;</code> element include:  </p>
+<ol>
+<li><a href="http://jquery.com/download/">jQuery</a>  </li>
+<li><a href="https://github.com/tgomilar/paroller.js/tree/master/dist">jquery.paroller.js</a>  </li>
+</ol>
+<h4 id="npm">npm</h4>
+<pre><code class="lang-sh">$ npm install paroller.js  
+</code></pre>
+<h4 id="yarn">Yarn</h4>
+<pre><code class="lang-sh">$ yarn add paroller.js  
+</code></pre>
+<h4 id="bower">Bower</h4>
+<pre><code class="lang-sh">$ bower install paroller.js  
+</code></pre>
+<h4 id="cdn">CDN</h4>
+<p><a href="https://www.jsdelivr.com/package/npm/paroller.js">jsDelivr</a>,     <a href="https://unpkg.com/paroller.js@1.3.1/">unpkg</a>, <a href="https://bundle.run/paroller.js">bundle.run</a></p>
+<h2 id="use">Use</h2>
+<pre><code class="lang-javascript">//a) initialize paroller.js 
+$(&#39;.my-paroller&#39;).paroller();  
+
+//b) initialize paroller.js and set attributes 
+$(&quot;.my-element&quot;).paroller({ factor: 0.5, factorXs: 0.2, factorSm: 0.3, type: &#39;foreground&#39;, direction: &#39;horizontal&#39; });  
+</code></pre>
+<pre><code class="lang-html">&lt;!-- a) select element and set attributes --&gt; 
+&lt;div class=&quot;my-paroller&quot; 
+    data-paroller-factor=&quot;0.4&quot; 
+    data-paroller-factor-xs=&quot;0.2&quot; 
+    data-paroller-factor-sm=&quot;0.3&quot; 
+    data-paroller-type=&quot;foreground&quot; 
+    data-paroller-direction=&quot;horizontal&quot;
+&gt;
+
+&lt;!-- b) select element --&gt;  
+&lt;div class=&quot;my-element&quot;&gt;&lt;/div&gt;  
+</code></pre>
+<p><strong>npm and browserify</strong>  </p>
+<pre><code class="lang-sh">require(&#39;paroller.js&#39;);  
+</code></pre>
+<h2 id="options">Options</h2>
+<h3 id="data-attributes">data attributes</h3>
+<p>You can control parallax effect by data-paroller-* or jQuery values.  </p>
+<table>
+<thead>
+<tr>
+<th>data-paroller-*</th>
+<th>jQuery</th>
+<th>value</th>
+<th>default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data-paroller-factor</td>
+<td>factor</td>
+<td>number (+/-)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>data-paroller-factor-xs</td>
+<td>factorXs</td>
+<td>number (+/-)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>data-paroller-factor-sm</td>
+<td>factorSm</td>
+<td>number (+/-)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>data-paroller-factor-md</td>
+<td>factorMd</td>
+<td>number (+/-)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>data-paroller-factor-lg</td>
+<td>factorLg</td>
+<td>number (+/-)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>data-paroller-type</td>
+<td>type</td>
+<td>background, foreground</td>
+<td>background</td>
+</tr>
+<tr>
+<td>data-paroller-direction</td>
+<td>direction</td>
+<td>vertical, horizontal</td>
+<td>vertical</td>
+</tr>
+<tr>
+<td>data-paroller-transition</td>
+<td>transition</td>
+<td>CSS transition</td>
+<td>transform 0.1s ease</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-paroller-factor">data-paroller-factor</h3>
+<p>Sets speed and distance of element&#39;s parallax effect on scroll. Value can be positive (0.3) or negative (-0.3). Less means slower. Different sign (+/-) means different direction (up/down, left/right).  </p>
+<p>:warning: Since <strong>factor</strong> is multiplier <strong>it must be set for paroller.js to have parallax effect</strong>.   </p>
+<h3 id="data-paroller-factor-">data-paroller-factor-*</h3>
+<p>Sets paroller factor for selected breakpoint.   </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>data-paroller-factor-*</th>
+<th>jQuery option</th>
+<th>window width breakpoint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Extra small</td>
+<td>data-paroller-factor-xs</td>
+<td>factorXs</td>
+<td>&lt;576px</td>
+</tr>
+<tr>
+<td>Small</td>
+<td>data-paroller-factor-sm</td>
+<td>factorSm</td>
+<td>&lt;=768px</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>data-paroller-factor-md</td>
+<td>factorMd</td>
+<td>&lt;=1024px</td>
+</tr>
+<tr>
+<td>Large</td>
+<td>data-paroller-factor-lg</td>
+<td>factorLg</td>
+<td>&lt;=1200px</td>
+</tr>
+<tr>
+<td>Extra Large</td>
+<td>data-paroller-factor-xl</td>
+<td>factorxl</td>
+<td>&lt;=1920px</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-paroller-transition">data-paroller-transition</h3>
+<p>Only effects elements with paroller.js type set to foreground! </p>
+<h3 id="javascript">JavaScript</h3>
+<pre><code class="lang-javascript">// initialize paroller.js and set attributes for selected elements  
+$(&quot;.paroller, [data-paroller-factor]&quot;).paroller({  
+  factor: 0.2,            // multiplier for scrolling speed and offset, +- values for direction control  
+  factorLg: 0.4,          // multiplier for scrolling speed and offset if window width is less than 1200px, +- values for direction control  
+  type: &#39;foreground&#39;,     // background, foreground  
+  direction: &#39;horizontal&#39;, // vertical, horizontal  
+  transition: &#39;translate 0.1s ease&#39; // CSS transition, added on elements where type:&#39;foreground&#39; 
+});  
+</code></pre>
+<h5 id="set-factor-breakpoints">Set factor breakpoints</h5>
+<pre><code class="lang-javascript">// initialize paroller.js and set attributes for selected elements  
+$(&quot;.paroller, [data-paroller-factor]&quot;).paroller({  
+    factor: 0.3,        // +/-, if no other breakpoint factor is set this value is selected  
+    factorXs: 0.1,      // factorXs, factorSm, factorMd, factorLg, factorXl      
+    factorSm: 0.2,      // factorXs, factorSm, factorMd, factorLg, factorXl      
+    factorMd: 0.3,      // factorXs, factorSm, factorMd, factorLg, factorXl      
+    factorLg: 0.4,      // factorXs, factorSm, factorMd, factorLg, factorXl
+    factorXl: 0.5       // factorXs, factorSm, factorMd, factorLg, factorXl
+    type: &#39;foreground&#39;,     // background, foreground  
+    direction: &#39;horizontal&#39;,// vertical, horizontal 
+    transition: &#39;translate 0.1s ease&#39; // CSS transition, added on elements where type:&#39;foreground&#39; 
+});  
+</code></pre>
+<h2 id="license-">License  </h2>
+<p>MIT</p>
+
+      </body>
+    </html>

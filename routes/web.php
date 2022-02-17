@@ -8,6 +8,7 @@ use App\Http\Controllers\GesWelcomeController;
 use App\Http\Controllers\LogicielController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaiementController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StudioController;
@@ -33,13 +34,15 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/connexion', [LoginController::class, 'connexion'])->name('login');
+Route::prefix('admin')->group(function () {
+    Route::get('/connexion', [LoginController::class, 'connexion'])->name('login');
 
-Route::get('/', function () {
-    return redirect()->route('login');
+    Route::get('/', function () {
+        return redirect()->route('login');
+    });
+
+    Route::post('login/post', [LoginController::class, 'login'])->name('login.post');
 });
-
-Route::post('login/post', [LoginController::class, 'login'])->name('login.post');
 
 
 
@@ -144,3 +147,23 @@ Route::post('/user', [UserController::class, 'store_client'])->name('users.store
 Route::get('/user/edit/{id}', [UserController::class, 'edit_client'])->name('user.edit');
 
 Route::get('/engineer/edit/{id}', [EngineerController::class, 'edit_engineer'])->name('engineer.edit');
+
+
+// users routes
+
+
+Route::get('/', [PublicController::class, 'home'])->name('public.home');
+
+Route::get('/apropos', [PublicController::class, 'about'])->name('public.about');
+
+Route::get('/projets', [PublicController::class, 'projects'])->name('public.project');
+
+Route::get('/services', [PublicController::class, 'services'])->name('public.services');
+
+Route::get('/tarifs', [PublicController::class, 'rates'])->name('public.rates');
+
+Route::get('/gallerie', [PublicController::class, 'galery'])->name('public.galery');
+
+Route::get('/contacts', [PublicController::class, 'contact'])->name('public.contact');
+
+Route::get('/equipements', [PublicController::class, 'equipment'])->name('public.equipment');

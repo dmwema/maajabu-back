@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use App\Http\Resources\Reservation as ResourcesReservation;
 use App\Models\Service;
 use App\Models\User;
 
