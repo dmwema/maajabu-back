@@ -5,6 +5,7 @@ use App\Http\Controllers\EngineerController;
 use App\Http\Controllers\ArtistController;
 
 use App\Http\Controllers\GesWelcomeController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LogicielController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaiementController;
@@ -85,6 +86,13 @@ Route::middleware('AdminAuth')->group(function () {
         Route::get('/service/edit/{id}', [ServiceController::class, 'edit_service'])->name('service.edit');
         Route::post('/service/update', [ServiceController::class, 'update'])->name('service.update');
 
+        //
+        Route::get('/image', [ImageController::class, 'get_infos'])->name('admin.image');
+        Route::delete('/image', [ImageController::class, 'delete'])->name('image.delete');
+        Route::post('/image/store', [ImageController::class, 'store'])->name('image.store');
+        Route::get('/image/edit/{id}', [ImageController::class, 'edit_image'])->name('image.edit');
+        Route::post('/image/update', [ImageController::class, 'update'])->name('image.update');
+        //
 
         Route::get('/reservation', [ReservationController::class, 'index'])->name('reservations');
         Route::get('/reservation/edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');

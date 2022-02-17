@@ -12,7 +12,4 @@ class Image extends Model
 
     protected $fillable = ['img_url'];
 
-    public function studio(){
-        return $this->belongsTo(Studio::class);
-    }
 }

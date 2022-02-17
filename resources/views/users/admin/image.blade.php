@@ -1,6 +1,6 @@
 @php
 
-$active = 'project';
+$active = 'gallery';
 $i = 0;
 
 //dd($temps['forecast'][0]['forecast']);
@@ -15,12 +15,12 @@ $i = 0;
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
-                <h4 class="page-title">Tous les projets</h4>
+                <h4 class="page-title">Tous les photos</h4>
             </div>
             <div class="col-7">
                 <div class="text-end upgrade-btn">
-                    <a href="{{ route('works.new') }}" class="btn btn-success text-white"><i
-                            class="mdi mdi-plus"></i>Nouveau projet</a>
+                    <a href="#" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                            class="mdi mdi-plus"></i> Ajouter une nouvelle image</a>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@ $i = 0;
         @endif
 
         @if (session()->has('fail'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="alert alert-adnger alert-dismissible fade show" role="alert">
                 <strong>Erreur ! </strong>{{ session()->get('fail') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -52,49 +52,35 @@ $i = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tous les projets enregistrés</h4>
+                        <h4 class="card-title">Toutes les images enregistrées</h4>
                         <hr>
-                        @if (count($works) > 0)
+                        @if (count($images) > 0)
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Nom du projet</th>
-                                            <th scope="col">Description</th>
                                             <th scope="col">Photo</th>
-                                            <th scope="col">Ingénieur</th>
-                                            <th scope="col">Artiste</th>
-                                            <th scope="col">Date de création</th>
-                                            <th scope="col">Date de fin</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($works as $work)
+                                        @foreach ($images as $image)
                                             @php
                                                 $i++;
                                             @endphp
                                             <tr>
                                                 <th scope="row">{{ $i }}</th>
-                                                <td>{{ $work->name }}</td>
-                                                <td>{{ $work->description }}</td>
-                                                <td><img style="width: 100px; height: 100px;"
-                                                    src="{{ Storage::url($work->img_url) }}" alt=""></td>
-                                                <td>{{ $work->engineer->name }}</td>
-                                                <td>{{ $work->artist->name }}</td>
-                                                <td>{{ $work->created_at }}</td>
-                                                <td>{{ $work->end }}</td>
+                                                <td><img style="width: 180px; height: 180px;" src="{{ Storage::url($image->img_url) }}" alt=""/> </td>
                                                 <td>
 
-                                                    <form
-                                                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet enrégistrement ?')"
-                                                        action="{{ route('work.delete') }}" method="POST">
+                                                    <form onsubmit="return confirm('Voulez-vous vraiment supprimer cet enregistrement ?')"
+                                                        action="{{ route('image.delete') }}" method="POST">
                                                         @csrf
-                                                        <input type="hidden" name="id" value="{{ $work->id }}">
+                                                        <input type="hidden" name="id" value="{{ $image->id }}">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <a title="Modifier" style="color: #fff"
-                                                            href="{{ route('work.edit', ['id' => $work->id]) }}"
+                                                            href="{{ route('image.edit', ['id' => $image->id]) }}"
                                                             class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
                                                         <button title="Supprimer" style="color: #fff"
                                                             class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
@@ -108,7 +94,7 @@ $i = 0;
                             </div>
                         @else
                             <div class="alert alert-danger">
-                                <p style="margin-bottom: 0;">Aucun projet enregistré</p>
+                                <p style="margin-bottom: 0;">Aucune image dans la galerie</p>
                             </div>
                         @endif
 
@@ -125,4 +111,30 @@ $i = 0;
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter une image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ route('image.store') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label for="img_url" class="form-label">Photo</label>
+                                <input type="file" class="form-control" id="img_url" name="img_url" accept="image/png, image/jpeg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection

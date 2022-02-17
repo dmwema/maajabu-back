@@ -45,7 +45,7 @@ $i = 0;
                 <div class=" card">
                     <div class="card-body">
                         <form class="form-horizontal form-material mx-2" method="POST"
-                            action="{{ route('work.update') }}">
+                            action="{{ route('work.update') }}" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="id" value="{{ $work->id }}">
                             <div class="form-group">
@@ -60,6 +60,14 @@ $i = 0;
                                 <div class="col-md-12">
                                     <textarea name="description" id="" cols="30" rows="3" required
                                         class="form-control">{{ $work->description }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Photo</label>
+                                <div class="col-md-12">
+                                    <img style="width: 200px; height:200px " src="{{ Storage::url($work->img_url) }}"
+                                        alt=""><br>
+                                    <input type="file" class="form-control form-control-line" name="img_url">
                                 </div>
                             </div>
                             <div class="form-group">

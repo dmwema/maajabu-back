@@ -115,6 +115,9 @@ class ServiceController extends Controller
     public function delete(Request $request)
     {
         $service = Service::find($request->id);
+        if(Storage::disk('public')->exists($service->img_url)){
+            Storage::disk('public')->delete($service->img_url);
+        }
         if ($service->delete()) {
             return redirect()->back()->with('success', 'Service supprimé avec succès');
         }

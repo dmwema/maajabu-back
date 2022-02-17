@@ -160,6 +160,9 @@ class EngineerController extends Controller
     public function delete(Request $request)
     {
         $engineer = Engineer::find($request->id);
+        if(Storage::disk('public')->exists($engineer->img_url)){
+            Storage::disk('public')->delete($engineer->img_url);
+        }
         if ($engineer->delete()) {
             return redirect()->back()->with('success', 'Ingénieur supprimé avec succès');
         }

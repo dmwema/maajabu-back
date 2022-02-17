@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Image as ResourcesImage;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -19,7 +20,7 @@ class ImageController extends Controller
         //
         $images = Image::all();
         return [
-            'images' => $images
+            'images' => ResourcesImage::collection($images)
         ];
     }
 
@@ -29,22 +30,25 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     //
-    //     $pathImage = $request->img_url->store('galeries', 'public');
-    //     if (Image::create([
-    //         'img_url' => $pathImage
-    //     ])) {
-    //         return response()->json([
-    //             'success' => true,
-    //             'message' => 'Image ajoutée',
-    //             'data' => [
-    //                 'img_url' => $request->img_url,
-    //             ]
-    //         ]);
-    //     }
-    // }
+    public function store(Request $request)
+    {
+        //
+        $filename = time() . '.' . $request->img_url->extension();
+        $pathImage = $request->file('img_url')->storeAs(
+            'gallery',
+            $filename,
+            'public'
+        );
+
+        if ($image = Image::create([
+            'img_url' => $pathImage
+        ])) {
+            return redirect()->back()->with('success', 'Image enregistrée avec succès');
+        } else {
+            Storage::delete($pathImage);
+            return redirect()->back()->with('fail', 'Une erreur est survenue lors de l\'enrégistrement');
+        }
+    }
 
     /**
      * Display the specified resource.
@@ -55,10 +59,8 @@ class ImageController extends Controller
     public function show(Image $image)
     {
         //
-        dd($image);
-        $struct = $image->imageable;;
         return [
-            'image' => $image
+            'image' => env('APP_URL').$image
         ];
     }
 
@@ -69,32 +71,32 @@ class ImageController extends Controller
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update_image(Request $request)
+    public function update(Request $request)
     {
-        //
-        if (!Gate::allows('access-admin')) {
-            return response([
-                'message' => 'pas autorisé'
-            ], 403);
-        }
-        $request->validate([
-            'img_url' => 'required|image',
-        ]);
         $image = Image::find($request->id);
-        $file = explode('/',$image->img_url)[0];
-        if (isset($request->img_url)) {
-            if (Storage::exists('public/' . $image->img_url)) {
-                Storage::delete('public/' . $image->img_url);
+
+        if ($request->img_url) {
+            $filename = time() . '.' . $request->img_url->extension();
+            $pathImage = $request->file('img_url')->storeAs(
+                'gallery',
+                $filename,
+                'public'
+            );
+            Storage::disk('public')->delete($image->img_url);
+        } else {
+            if ($image->img_url == "") {
+                $pathImage = "default.png";
+            }else {
+                $pathImage = $image->img_url;
             }
-            $path = $request->img_url->store($file, 'public');
-            $image->img_url = $path;
         }
-        $image->update();
-        return [
-            "success" => true,
-            "message" => "La modification a reussie",
-            "data" => $image
-        ];
+        $image->img_url = $pathImage;
+
+        if ($image->save()) {
+            return redirect()->back()->with('success', 'Image modifiée avec succès');
+        }
+        return redirect()->back()->with('fail', 'Une erreur est survenue lors de la modification');
+
     }
 
     /**
@@ -103,20 +105,25 @@ class ImageController extends Controller
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Image $image)
+    public function delete(Request $request)
     {
-        //
-        if (!Gate::allows('access-admin')) {
-            return response([
-                'message' => 'pas autorisé'
-            ], 403);
+        $image = Image::find($request->id);
+        if(Storage::disk('public')->exists($image->img_url)){
+            Storage::disk('public')->delete($image->img_url);
         }
         if ($image->delete()) {
-            return [
-                "success" => true,
-                "message" => "Enregistrement supprimé",
-                "data" => $image
-            ];
+            return redirect()->back()->with('success', 'Service supprimé avec succès');
         }
+        return redirect()->back()->with('fail', 'Une erreur est survénue');
+    }
+
+    public function get_infos(){
+        $infos = Image::all();
+        return view('users.admin.image', ['images' => $infos]);
+    }
+
+    public function edit_image(Request $request){
+        $image = Image::find($request->id);
+        return view('users.admin.image_edit', ['image' => $image]);
     }
 }
