@@ -11,7 +11,7 @@ class Work extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'engineer_id', 'artist_id', 'end'];
+    protected $fillable = ['name', 'description', 'engineer_id', 'artist_id', 'end','img_url'];
 
     protected $hidden = [
         'pivot'

@@ -62,6 +62,7 @@ $i = 0;
                                             <th scope="col">#</th>
                                             <th scope="col">Nom du projet</th>
                                             <th scope="col">Description</th>
+                                            <th scope="col">Photo</th>
                                             <th scope="col">Ingénieur</th>
                                             <th scope="col">Artiste</th>
                                             <th scope="col">Date de création</th>
@@ -78,6 +79,8 @@ $i = 0;
                                                 <th scope="row">{{ $i }}</th>
                                                 <td>{{ $work->name }}</td>
                                                 <td>{{ $work->description }}</td>
+                                                <td><img style="width: 100px; height: 100px;"
+                                                    src="{{ Storage::url($work->img_url) }}" alt=""></td>
                                                 <td>{{ $work->engineer->name }}</td>
                                                 <td>{{ $work->artist->name }}</td>
                                                 <td>{{ $work->created_at }}</td>

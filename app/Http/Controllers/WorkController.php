@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Work;
+use App\Models\Artist;
+use App\Models\Service;
+use App\Models\Engineer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\Work as ResourcesWork;
-use App\Models\Artist;
-use App\Models\Engineer;
-use App\Models\Service;
 
 class WorkController extends Controller
 {
@@ -52,11 +53,31 @@ class WorkController extends Controller
             'description' => 'required',
             'engineer_id' => 'required',
             'artist_id' => 'required',
+            'img_url' => 'nullable',
+            'end' => 'required'
         ]);
 
-        if (Work::create($request->all())) {
+        //
+        $filename = time() . '.' . $request->img_url->extension();
+        $pathImage = $request->file('img_url')->storeAs(
+            'works',
+            $filename,
+            'public'
+        );
+        if ($works = Work::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'engineer_id' => $request->engineer_id,
+            'artist_id' => $request->artist_id,
+            'img_url' => $pathImage,
+            'end' => $request->end
+        ])) {
             return redirect()->route('works')->with('success', 'Projet enrégistré avec succès');
+        } else {
+            Storage::delete($pathImage);
+            return redirect()->back()->with('fail', 'Une erreur est survenue lors de l\'enrégistrement');
         }
+        //
     }
 
     public function new(Request $request)
@@ -125,6 +146,18 @@ class WorkController extends Controller
             $work->end = $request->end;
         }
 
+        if ($request->img_url) {
+            $filename = time(). '.' .$request->img_url->extension();
+            $pathImage = $request->file('img_url')->storeAs(
+                'works',
+                $filename,
+                'public'
+            );
+            if ($work->img_url) {
+                Storage::disk('public')->delete($work->img_url);
+            }
+            $work->img_url = $pathImage;
+        }
         if ($work->save()) {
             return redirect()->back()->with('success', 'Modifications éffectuées');
         }

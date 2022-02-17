@@ -62,6 +62,13 @@ $i = 0;
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-md-12">Image</label>
+                                <div class="col-md-12">
+                                    <input type="file" value="" name="img_url" id="img_url" required
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-md-12" for="engineer">Ingénieur</label>
                                 <div class="col-md-12">
                                     <select name="engineer_id" id="engineer" class="form-select">

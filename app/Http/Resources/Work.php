@@ -18,6 +18,8 @@ class Work extends JsonResource
             'id'=>$this->id,
             'name'=> $this->name,
             'description'=> $this->description,
+            'img_url'=>$this->img_url,
+            'end' => $this->end
         ];
     }
 }
