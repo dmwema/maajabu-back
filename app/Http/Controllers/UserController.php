@@ -242,6 +242,9 @@ class UserController extends Controller
     public function delete(Request $request)
     {
         $user = User::find($request->id);
+        if(Storage::disk('public')->exists($user->avatar)){
+            Storage::disk('public')->delete($user->avatar);
+        }
         if ($user->delete()) {
             return redirect()->back()->with('success', 'Utilisateur supprimé avec succès');
         }

@@ -173,6 +173,9 @@ class WorkController extends Controller
     public function destroy(Request $request)
     {
         $work = Work::find($request->id);
+        if(Storage::disk('public')->exists($work->img_url)){
+            Storage::disk('public')->delete($work->img_url);
+        }
         if ($work->delete()) {
             return redirect()->back()->with('success', 'Projet supprimé avec succès');
         }

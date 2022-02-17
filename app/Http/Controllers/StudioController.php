@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Image as ResourcesImage;
 use App\Models\Studio;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -98,9 +97,6 @@ class StudioController extends Controller
         }
 
         if ($studio = Studio::create($request->all())) {
-            $pathImage = $request->img_url->store('galeries', 'public');
-            $image = new Image(['img_url' => $pathImage]);
-            $studio->images()->save($image);
             return [
                 'success' => true,
                 'message' => 'Enregistrement effectué',
@@ -120,7 +116,6 @@ class StudioController extends Controller
         //
         $phones = $studio->phones;
         $social_networks = $studio->social_networks;
-        $images = ResourcesImage::collection($studio->images);
         $services = Service::all();
         return [
             'studio' => $studio,
