@@ -1,17 +1,17 @@
 @extends('public.layout.main')
 
 @php
-    $page = 'home'
+$page = 'home';
 @endphp
 
 @section('content')
     <!-- Begin main-slider -->
     <div class="main-slider-wrap">
         <div class="main-slider" data-slick='{
-                 "arrows": false,
-                 "fade": true,
-                 "speed": 500
-             }'>
+                                                                         "arrows": false,
+                                                                         "fade": true,
+                                                                         "speed": 500
+                                                                     }'>
             <div class="tt-slide">
                 <div class="slide-bg" data-src="./img/main-slider-1.jpg">
                     <img src="img/main-slider-1.jpg" alt="bg">
@@ -22,7 +22,7 @@
                             <p class="tt-slide_description">Créez la musique de vos rêves</p>
                             <p class="tt-slide_header"><span class="font-gradient">Nous pouvons
                                     enregistrer</span><br>N'importe quoi</p>
-                            <a href="#" class="button">En savoir plus</a>
+                            <a href="#" class="button">{{ route('public.about') }}</a>
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                             <p class="tt-slide_description">Donnez vie à la musique</p>
                             <p class="tt-slide_header"><span class="font-gradient">PAS ENCORE DE STUDIO ?</span><br>Aucun
                                 problème.</p>
-                            <a href="#" class="button">En savoir plus</a>
+                            <a href="#" class="button">{{ route('public.about') }}</a>
                         </div>
                     </div>
                 </div>
@@ -204,27 +204,27 @@
                 </div>
             </div>
             <div class="studio-slider white-arrow" data-slick='{
-                     "centerMode": true,
-                     "centerPadding": "29.5%",
-                     "responsive": [
-                         {
-                             "breakpoint": 1400,
-                             "settings": {
-                               "centerPadding": "22%"
-                             }
-                         },
-                         {
-                             "breakpoint": 768,
-                             "settings": {
-                               "centerPadding": "0%",
-                               "arrows": false,
-                               "dots": true,
-                               "autoplay": true,
-                               "autoplaySpeed": 3500
-                             }
-                         }
-                     ]
-                 }'>
+                                                                             "centerMode": true,
+                                                                             "centerPadding": "29.5%",
+                                                                             "responsive": [
+                                                                                 {
+                                                                                     "breakpoint": 1400,
+                                                                                     "settings": {
+                                                                                       "centerPadding": "22%"
+                                                                                     }
+                                                                                 },
+                                                                                 {
+                                                                                     "breakpoint": 768,
+                                                                                     "settings": {
+                                                                                       "centerPadding": "0%",
+                                                                                       "arrows": false,
+                                                                                       "dots": true,
+                                                                                       "autoplay": true,
+                                                                                       "autoplaySpeed": 3500
+                                                                                     }
+                                                                                 }
+                                                                             ]
+                                                                         }'>
                 <div class="tt-slide">
                     <div class="studio-info">
                         <div class="studio-info_text">
@@ -292,115 +292,52 @@
                                     forgées au fil des années</p>
                             </div>
                             <div class="project-slider arrow-outside" data-slick='{
-                                     "slidesToShow": 3,
-                                     "swipeToSlide": true,
-                                     "responsive": [
-                                         {
-                                             "breakpoint": 1200,
-                                             "settings": {
-                                                 "slidesToShow": 3,
-                                                 "arrows": false,
-                                                 "dots": true
-                                             }
-                                         },
-                                         {
-                                             "breakpoint": 768,
-                                             "settings": {
-                                                 "slidesToShow": 2,
-                                                 "arrows": false,
-                                                 "dots": true
-                                             }
-                                         },
-                                         {
-                                             "breakpoint": 481,
-                                             "settings": {
-                                                 "slidesToShow": 1,
-                                                 "arrows": false,
-                                                 "dots": true
-                                             }
-                                         }
-                                     ]
-                                 }'>
-                                <div class="tt-slide">
-                                    <div class="project-card">
-                                        <a href="#" class="project-cart_logo">
-                                            <picture>
-                                                <source type="image/webp" srcset="img/project-1.webp">
-                                                <source type="image/jpeg" srcset="img/project-1.jpg">
-                                                <img src="img/project-1.jpg" alt="img">
-                                            </picture>
-                                        </a>
-                                        <a href="#" class="project-cart_name">American Girl</a>
-                                        <p class="theme-color">Bonnie McKee</p>
+                                                                                             "slidesToShow": 3,
+                                                                                             "swipeToSlide": true,
+                                                                                             "responsive": [
+                                                                                                 {
+                                                                                                     "breakpoint": 1200,
+                                                                                                     "settings": {
+                                                                                                         "slidesToShow": 3,
+                                                                                                         "arrows": false,
+                                                                                                         "dots": true
+                                                                                                     }
+                                                                                                 },
+                                                                                                 {
+                                                                                                     "breakpoint": 768,
+                                                                                                     "settings": {
+                                                                                                         "slidesToShow": 2,
+                                                                                                         "arrows": false,
+                                                                                                         "dots": true
+                                                                                                     }
+                                                                                                 },
+                                                                                                 {
+                                                                                                     "breakpoint": 481,
+                                                                                                     "settings": {
+                                                                                                         "slidesToShow": 1,
+                                                                                                         "arrows": false,
+                                                                                                         "dots": true
+                                                                                                     }
+                                                                                                 }
+                                                                                             ]
+                                                                                         }'>
+                                @foreach ($works as $work)
+                                    <div class="tt-slide">
+                                        <div class="project-card">
+                                            <a href="#" class="project-cart_logo">
+                                                <picture>
+                                                    <source type="image/jpeg" srcset="{{ $work->img_url }}">
+                                                    <img src="img/project-1.jpg" alt="img">
+                                                </picture>
+                                            </a>
+                                            <a href="#" class="project-cart_name">{{ $work->name }}</a>
+                                            <p class="theme-color">{{ $work->artist->name }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="tt-slide">
-                                    <div class="project-card">
-                                        <a href="#" class="project-cart_logo">
-                                            <picture>
-                                                <source type="image/webp" srcset="img/project-2.webp">
-                                                <source type="image/jpeg" srcset="img/project-2.jpg">
-                                                <img src="img/project-2.jpg" alt="img">
-                                            </picture>
-                                        </a>
-                                        <a href="#" class="project-cart_name">American Girl</a>
-                                        <p class="theme-color">Bonnie McKee</p>
-                                    </div>
-                                </div>
-                                <div class="tt-slide">
-                                    <div class="project-card">
-                                        <a href="#" class="project-cart_logo">
-                                            <picture>
-                                                <source type="image/webp" srcset="img/project-3.webp">
-                                                <source type="image/jpeg" srcset="img/project-3.jpg">
-                                                <img src="img/project-3.jpg" alt="img">
-                                            </picture>
-                                        </a>
-                                        <a href="#" class="project-cart_name">American Girl</a>
-                                        <p class="theme-color">Bonnie McKee</p>
-                                    </div>
-                                </div>
-                                <div class="tt-slide">
-                                    <div class="project-card">
-                                        <a href="#" class="project-cart_logo">
-                                            <picture>
-                                                <source type="image/webp" srcset="img/project-4.webp">
-                                                <source type="image/jpeg" srcset="img/project-4.jpg">
-                                                <img src="img/project-4.jpg" alt="img">
-                                            </picture>
-                                        </a>
-                                        <a href="#" class="project-cart_name">American Girl</a>
-                                        <p class="theme-color">Bonnie McKee</p>
-                                    </div>
-                                </div>
-                                <div class="tt-slide">
-                                    <div class="project-card">
-                                        <a href="#" class="project-cart_logo">
-                                            <picture>
-                                                <source type="image/webp" srcset="img/project-5.webp">
-                                                <source type="image/jpeg" srcset="img/project-5.jpg">
-                                                <img src="img/project-5.jpg" alt="img">
-                                            </picture>
-                                        </a>
-                                        <a href="#" class="project-cart_name">American Girl</a>
-                                        <p class="theme-color">Bonnie McKee</p>
-                                    </div>
-                                </div>
-                                <div class="tt-slide">
-                                    <div class="project-card">
-                                        <a href="#" class="project-cart_logo">
-                                            <picture>
-                                                <source type="image/webp" srcset="img/project-6.webp">
-                                                <source type="image/jpeg" srcset="img/project-6.jpg">
-                                                <img src="img/project-6.jpg" alt="img">
-                                            </picture>
-                                        </a>
-                                        <a href="#" class="project-cart_name">American Girl</a>
-                                        <p class="theme-color">Bonnie McKee</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
-                            <a href="projects.html" class="button white btn-border center-btn sm-text mt-xs-30 mt-sm-40">
+                            <a href="{{ route('public.project') }}"
+                                class="button white btn-border center-btn sm-text mt-xs-30 mt-sm-40">
                                 <svg width="14" height="13" viewBox="0 0 14 13" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -526,21 +463,21 @@
                 <div class="row align-items-center">
                     <div class="col-12 col-sm-6">
                         <div class="testimonials-slider white-arrow" data-slick='{
-                                 "slidesToShow": 1,
-                                 "swipeToSlide": true,
-                                 "adaptiveHeight": true,
-                                 "responsive": [
-                                     {
-                                         "breakpoint": 992,
-                                         "settings": {
-                                             "slidesToShow": 1,
-                                             "arrows": false,
-                                             "adaptiveHeight": true,
-                                             "dots": true
-                                         }
-                                     }
-                                 ]
-                            }'>
+                                                                                         "slidesToShow": 1,
+                                                                                         "swipeToSlide": true,
+                                                                                         "adaptiveHeight": true,
+                                                                                         "responsive": [
+                                                                                             {
+                                                                                                 "breakpoint": 992,
+                                                                                                 "settings": {
+                                                                                                     "slidesToShow": 1,
+                                                                                                     "arrows": false,
+                                                                                                     "adaptiveHeight": true,
+                                                                                                     "dots": true
+                                                                                                 }
+                                                                                             }
+                                                                                         ]
+                                                                                    }'>
                             <div class="tt-slide">
                                 <div class="text-block white">
                                     <h2>Ce que disent les clients de NEEMA</h2>
@@ -608,9 +545,9 @@
                 </div>
             </div>
             <!-- <button class="slick-prev slick-arrow" id="testimonial-prev" aria-label="Previous" type="button" style=""><svg width="22" height="41" viewBox="0 0 22 41" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.5312 40.5L0.53125 20.5L20.5312 0.5L21.4688 1.4375L2.44531 20.5L21.4688 39.5625L20.5312 40.5Z" fill="#3D3B42"></path></svg></button>
-            <button class="slick-next slick-arrow" id="testimonial-next" aria-label="Next" type="button" style=""><svg width="22" height="41" viewBox="0 0 22 41" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.66875 40.5L21.6688 20.5L1.66875 0.5L0.731251 1.4375L19.7547 20.5L0.731251 39.5625L1.66875 40.5Z" fill="#3D3B42"></path></svg></button>
-            "prevArrow": "$(&apos;#testimonial-prev&apos;)",
-            "nextArrow": "$(&apos;#testimonial-next&apos;)", -->
+                                                                    <button class="slick-next slick-arrow" id="testimonial-next" aria-label="Next" type="button" style=""><svg width="22" height="41" viewBox="0 0 22 41" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.66875 40.5L21.6688 20.5L1.66875 0.5L0.731251 1.4375L19.7547 20.5L0.731251 39.5625L1.66875 40.5Z" fill="#3D3B42"></path></svg></button>
+                                                                    "prevArrow": "$(&apos;#testimonial-prev&apos;)",
+                                                                    "nextArrow": "$(&apos;#testimonial-next&apos;)", -->
         </section>
         <!-- Eng testimonials -->
         <!-- Begin engineers-section -->
@@ -624,41 +561,41 @@
                                 important que la qualité du studio dans lequel vous travaillez.</p>
                         </div>
                         <div class="engineer-slider" data-slick='{
-                                 "slidesToShow": 3,
-                                 "swipeToSlide": true,
-                                 "adaptiveHeight": true,
-                                 "arrows": false,
-                                 "dots": true,
-                                 "responsive": [
-                                     {
-                                         "breakpoint": 1200,
-                                         "settings": {
-                                             "slidesToShow": 2,
-                                             "arrows": false,
-                                             "adaptiveHeight": true,
-                                             "dots": true
-                                         }
-                                     },
-                                     {
-                                         "breakpoint": 992,
-                                         "settings": {
-                                             "slidesToShow": 2,
-                                             "arrows": false,
-                                             "adaptiveHeight": true,
-                                             "dots": true
-                                         }
-                                     },
-                                     {
-                                         "breakpoint": 768,
-                                         "settings": {
-                                             "slidesToShow": 1,
-                                             "arrows": false,
-                                             "adaptiveHeight": true,
-                                             "dots": true
-                                         }
-                                     }
-                                 ]
-                             }'>
+                                                                                         "slidesToShow": 3,
+                                                                                         "swipeToSlide": true,
+                                                                                         "adaptiveHeight": true,
+                                                                                         "arrows": false,
+                                                                                         "dots": true,
+                                                                                         "responsive": [
+                                                                                             {
+                                                                                                 "breakpoint": 1200,
+                                                                                                 "settings": {
+                                                                                                     "slidesToShow": 2,
+                                                                                                     "arrows": false,
+                                                                                                     "adaptiveHeight": true,
+                                                                                                     "dots": true
+                                                                                                 }
+                                                                                             },
+                                                                                             {
+                                                                                                 "breakpoint": 992,
+                                                                                                 "settings": {
+                                                                                                     "slidesToShow": 2,
+                                                                                                     "arrows": false,
+                                                                                                     "adaptiveHeight": true,
+                                                                                                     "dots": true
+                                                                                                 }
+                                                                                             },
+                                                                                             {
+                                                                                                 "breakpoint": 768,
+                                                                                                 "settings": {
+                                                                                                     "slidesToShow": 1,
+                                                                                                     "arrows": false,
+                                                                                                     "adaptiveHeight": true,
+                                                                                                     "dots": true
+                                                                                                 }
+                                                                                             }
+                                                                                         ]
+                                                                                     }'>
                             <div class="tt-slide">
                                 <div class="engineer-card">
                                     <div class="engineer-card_info">

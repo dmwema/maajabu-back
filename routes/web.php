@@ -175,3 +175,5 @@ Route::get('/gallerie', [PublicController::class, 'galery'])->name('public.galer
 Route::get('/contacts', [PublicController::class, 'contact'])->name('public.contact');
 
 Route::get('/equipements', [PublicController::class, 'equipment'])->name('public.equipment');
+
+Route::post('/reservation', [PublicController::class, 'reservation'])->name('public.reservation');

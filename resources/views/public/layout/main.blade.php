@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Neema - {{ $title ?? strtoupper('RECORDING STUDIO') }}</title>
+    <title>{{ $studio->name }} - {{ $title ?? strtoupper('BY MAAJABU') }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -52,7 +52,7 @@
                 <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" class="lazy"
                     data-src="img/logo-svg.svg" alt="logo">
                 <span class="logo-text">
-                    <span>Neema</span>
+                    <span>{{ $studio->name }}</span>
                     <span>RECORDING STUDIO</span>
                 </span>
             </a>
@@ -117,7 +117,9 @@
                     </svg>
                 </button>
                 <h3 class="text-center">Réservez votre séance</h3>
-                <form action="#" id="bookingPopup-form" class="book-form" novalidate="novalidate">
+                <form action="{{ route('public.reservation') }}" method="POST" id="form" class="book-form"
+                    novalidate="novalidate">
+                    @csrf
                     <div class="tt-form-row">
                         <span class="tt-form-control tt-form-control_33">
                             <input type="text" name="name" placeholder="Votre nom *" required>
@@ -131,25 +133,7 @@
                     </div>
                     <div class="tt-form-row">
                         <span class="tt-form-control tt-form-control_66">
-                            <input type="text" name="addres" placeholder="Adresse">
-                        </span>
-                        <span class="tt-form-control tt-form-control_33">
-                            <span class="selectWrapper">
-                                <select name="my-select-country" class="tt-custom-select form-control">
-                                    <option value="Alabama">Alabama</option>
-                                    <option value="Alaska">Alaska</option>
-                                    <option value="Arizona">Arizona</option>
-                                    <option value="Illinois">Illinois</option>
-                                    <option value="Indiana">Indiana</option>
-                                    <option value="Kentucky">Kentucky</option>
-                                    <option value="Louisiana">Louisiana</option>
-                                    <option value="New Jersey">New Jersey</option>
-                                    <option value="New Mexico">New Mexico</option>
-                                    <option value="New York">New York</option>
-                                    <option value="Ohio">Ohio</option>
-                                    <option value="Oklahoma">Oklahoma</option>
-                                </select>
-                            </span>
+                            <input type="text" name="addres" placeholder="Address" required>
                         </span>
                     </div>
                     <div class="tt-form-row">
@@ -159,12 +143,11 @@
                                 <div class="control-wrap">
                                     <label for="select-service">Studio Service:</label>
                                     <span class="selectWrapper">
-                                        <select name="my-select-service" class="tt-custom-select form-control"
+                                        <select name="service" class="tt-custom-select form-control"
                                             id="select-service">
-                                            <option value="Recording">Recording</option>
-                                            <option value="Production">Production</option>
-                                            <option value="Mixing">Mixing</option>
-                                            <option value="Engineering">Engineering</option>
+                                            @foreach ($services as $service)
+                                                <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                            @endforeach
                                         </select>
                                     </span>
                                 </div>
@@ -172,18 +155,6 @@
                         </div>
                         <div class="tt-form-control tt-form-control_33">
                             <div class="tt-form-row">
-                                <span class="tt-form-control tt-form-control_40">
-                                    <label for="select-time">Time:</label>
-                                    <span class="selectWrapper">
-                                        <select name="my-select-time" class="tt-custom-select form-control"
-                                            id="select-time">
-                                            <option value="1 Hour">1 Hour</option>
-                                            <option value="2 Hour">2 Hour</option>
-                                            <option value="4 Hour">4 Hour</option>
-                                            <option value="6 Hour">6 Hour</option>
-                                        </select>
-                                    </span>
-                                </span>
                                 <span class="tt-form-control tt-form-control_60">
                                     <label for="date">Date:</label>
                                     <span class="date-input">
@@ -245,9 +216,9 @@
                     </nav>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
-                    <a href="index.html" class="mb-xs-40 mb-lg-50 logo">
+                    <a href="{{ route('public.home') }}" class="mb-xs-40 mb-lg-50 logo">
                         <span class="logo-text">
-                            <span>NEEMA</span>
+                            <span>{{ $studio->name }}</span>
                             <span>BY MAAJABU</span>
                         </span>
                     </a>
@@ -263,7 +234,7 @@
                                 </svg>
                             </div>
                             <div class="contact-list_text">
-                                <h5>NEEMA Studio d'enrégistrement</h5>
+                                <h5>{{ $studio->name }} Studio d'enrégistrement</h5>
                                 <a href="https://goo.gl/maps/jKr6EyJPUmnzJMNU8" target="_blank">1035 N
                                     Sycamore<br>Avenue Hollywood, CA 90040</a>
                             </div>
@@ -334,7 +305,7 @@
                 </div>
                 <div class="col-12">
                     <div class="footer-bottom text-center">
-                        <p class="mb-0">&copy; 2019 NEEMA Studio. Tous droits réservés.</p>
+                        <p class="mb-0">&copy; 2019 {{ $studio->name }} Studio. Tous droits réservés.</p>
                         <div class="footer-bottom_link text-center">
                             <a href="#">Politique de confidentialité</a> | <a href="#">Conditions d'utilisation</a>
                         </div>
@@ -429,6 +400,19 @@
 
         </script>
     @endif
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (session()->has('success'))
+        <script>
+            Swal.fire(
+                'Réservation enrégistrée!',
+                'Votre réservation a été enrégistrée avec succès. nous vous contacterons pour la suite!',
+                'D\'accord'
+            )
+
+        </script>
+    @endif
+
 </body>
 
 </html>

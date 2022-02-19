@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnServiceIdInReservations extends Migration
+class AddDatasToReservations extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,10 @@ class AddColumnServiceIdInReservations extends Migration
     public function up()
     {
         Schema::table('reservations', function (Blueprint $table) {
-            //$table->foreignId('service_id')->constrained();
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
         });
     }
 
