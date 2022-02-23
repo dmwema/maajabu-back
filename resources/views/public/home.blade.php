@@ -22,7 +22,7 @@ $page = 'home';
                             <p class="tt-slide_description">Créez la musique de vos rêves</p>
                             <p class="tt-slide_header"><span class="font-gradient">Nous pouvons
                                     enregistrer</span><br>N'importe quoi</p>
-                            <a href="#" class="button">{{ route('public.about') }}</a>
+                            <a href="{{ route('public.about') }}" class="button">En savoir plus</a>
                         </div>
                     </div>
                 </div>
