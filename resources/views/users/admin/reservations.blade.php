@@ -62,6 +62,9 @@ $i = 0;
                                             <th scope="col">#</th>
                                             <th scope="col">Date de reservation</th>
                                             <th scope="col">Client</th>
+                                            <th scope="col">Email client</th>
+                                            <th scope="col">Tél. client</th>
+                                            <th scope="col">Adresse</th>
                                             <th scope="col">Service reservé</th>
                                             <th scope="col">Quantité</th>
                                             <th scope="col">Frais</th>
@@ -76,18 +79,39 @@ $i = 0;
                                             <tr>
                                                 <th scope="row">{{ $i }}</th>
                                                 <td>{{ $reservation->date_reservation }}</td>
-                                                <td>{{ $reservation->user->name }}</td>
+                                                @if ($reservation->user_id == 1)
+                                                    <td>{{ $reservation->name }}</td>
+                                                    <td>{{ $reservation->email }}</td>
+                                                    <td>{{ $reservation->phone }}</td>
+                                                    <td>{{ $reservation->adresse }}</td>
+                                                @else
+                                                    <td>{{ $reservation->user->name }}</td>
+                                                    <td>{{ $reservation->user->email }}</td>
+                                                    <td>{{ $reservation->user->phone }}</td>
+                                                    <td>{{ $reservation->user->adresse }}</td>
+                                                @endif
                                                 <td>
-                                                    @if (isset($reservation->service))
-                                                        {{ $reservation->service->name }} ({{ $reservation->service->tarif->price }} $ US)
+                                                    @if (isset($reservation->service) && $reservation->service != null)
+
+                                                        {{ $reservation->service->name }}
+                                                        @if ($reservation->service->tarif != null)
+                                                            ({{ $reservation->service->tarif->price }} $ US)
+                                                        @endif
+
                                                     @else
                                                         Aucun service
                                                     @endif
                                                 </td>
                                                 <td>{{ $reservation->quatity }}</td>
                                                 <td>
-                                                    @if (isset($reservation->service))
-                                                     {{ (($reservation->service->tarif->price)*1)*$reservation->quatity }} $ US
+                                                    @if ($reservation->service != null)
+                                                        @if ($reservation->service->tarif != null)
+
+                                                            @if ($reservation->service->tarif->price != null)
+                                                                {{ $reservation->service->tarif->price * 1 * $reservation->quatity }}
+                                                                $ US
+                                                            @endif
+                                                        @endif
                                                     @else
                                                         -
                                                     @endif

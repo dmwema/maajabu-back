@@ -15,8 +15,9 @@ $i = 0;
     <div class="page-breadcrumb">
         <div class="row align-items-center justify-content-center">
             <div class="col-5">
-                <h4 class="page-title" style="text-align: center">Modifier les informations de la reservation fait par <br/>
-                    {{ $reservation->user->firstname. ' ' .$reservation->user->name }}
+                <h4 class="page-title" style="text-align: center">Modifier les informations de la reservation fait par
+                    <br />
+                    {{ $reservation->user->firstname . ' ' . $reservation->user->name }}
                 </h4>
             </div>
         </div>
@@ -49,11 +50,14 @@ $i = 0;
                                     <select name="user_id" id="" class="form-select">
                                         @if (!isset($reservation->user))
                                             @foreach ($users as $user)
-                                            <option {{ ($reservation->user->id == $user->id)?'selected':''}} value="{{ $user->id }}">{{ $user->firstname .' '. $user->name }}</option>
+                                                <option {{ $reservation->user->id == $user->id ? 'selected' : '' }}
+                                                    value="{{ $user->id }}">{{ $user->firstname . ' ' . $user->name }}
+                                                </option>
                                             @endforeach
                                         @else
                                             @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->firstname .' '. $user->name }}</option>
+                                                <option value="{{ $user->id }}">
+                                                    {{ $user->firstname . ' ' . $user->name }}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -65,11 +69,13 @@ $i = 0;
                                     <select name="service_id" id="" class="form-select">
                                         @if ($reservation->service)
                                             @foreach ($services as $service)
-                                            <option {{ ($reservation->service->id == $service->id)?'selected':''}} value="{{ $service->id }}">{{ $service->name }} ({{ $service->tarif->price }} $ US)</option>
+                                                <option {{ $reservation->service->id == $service->id ? 'selected' : '' }}
+                                                    value="{{ $service->id }}">{{ $service->name }}</option>
                                             @endforeach
                                         @else
                                             @foreach ($services as $service)
-                                            <option value="{{ $service->id }}">{{ $service->name }} ({{ $service->tarif->price }} $ US)</option>
+                                                <option value="{{ $service->id }}">{{ $service->name }}
+                                                    ({{ $service->tarif->price }} $ US)</option>
                                             @endforeach
                                         @endif
                                     </select>

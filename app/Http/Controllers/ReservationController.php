@@ -36,12 +36,19 @@ class ReservationController extends Controller
             'qte' => 'required'
         ]);
 
-        if ($reservation = Reservation::create([
-            'date_reservation' => $request->date_reservation,
-            'user_id' => $request->user_id,
-            'service_id' => $request->service_id,
-            'quatity' => $request->qte
-        ])) {
+        $reservation = new Reservation();
+        $reservation->user_id = $request->user_id;
+        $reservation->date_reservation = $request->date_reservation;
+        $reservation->service_id = $request->service_id;
+        $reservation->quatity = $request->quatity == null ?? 1;
+        $reservation->date_reservation = $request->date_reservation;
+
+        $reservation->name = $reservation->user->name;
+        $reservation->email = $reservation->user->email;
+        $reservation->phone = $reservation->user->phone;
+        $reservation->address = $reservation->user->address;
+
+        if ($reservation->save()) {
             return redirect()->back()->with('success', 'Réservation enrégistrée avec succès');
         }
         return redirect()->back()->with('fail', 'Veuillez réessayer, une erreur est survenue');
