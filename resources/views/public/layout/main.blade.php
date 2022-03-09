@@ -48,12 +48,10 @@
 
     <div class="header-wrap">
         <header>
-            <a href="index.html" class="logo">
-                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" class="lazy"
-                    data-src="img/logo-svg.svg" alt="logo">
-                <span class="logo-text">
-                    <span>{{ $studio->name }}</span>
-                    <span>RECORDING STUDIO</span>
+            <a href="{{ route('public.home') }}" class="logo">
+                <span class="logo-text"><img style="width: 110px;"
+                        src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" class="lazy"
+                        data-src="img/logo.svg" alt="logo">
                 </span>
             </a>
             <div>
@@ -201,19 +199,8 @@
     <footer class="pt-xs-50 pt-md-60 pt-lg-95 pb-xs-50 pb-md-60 pb-lg-95 lazy" data-src="./img/footer_bg.jpg">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <nav class="mb-xs-40 footer-nav">
-                        <ul>
-                            <li><a href="index.html">Accueil</a></li>
-                            <li><a href="about.html">Apropos</a></li>
-                            <li><a href="projects.html">Projets</a></li>
-                            <li><a href="services.html">Services</a></li>
-                            <li><a href="testimonials.html">Témoignages</a></li>
-                            <li><a href="rates.html">Tarifs</a></li>
-                            <li><a href="gallery.html">Gallerie</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
+                <div class="col-12" style="text-align: center; margin-bottom: 20px">
+                    <h4 style="color: #fff">N°16, Basoko, Kinshasa / Gombe</h4>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
                     <a href="{{ route('public.home') }}" class="mb-xs-40 mb-lg-50 logo">
