@@ -244,21 +244,21 @@ $page = 'about';
             </div>
             <div class="tab-wrap" data-tab-container>
                 <div class="tab-links">
-                    <div class="tab-links__item active" data-show-tab="1">Studio A</div>
-                    <div class="tab-links__item" data-show-tab="2">Studio B</div>
-                    <div class="tab-links__item" data-show-tab="3">Studio C</div>
+                    <div class="tab-links__item active" data-show-tab="1">Salle de séances</div>
+                    <div class="tab-links__item" data-show-tab="2">Salle de réception</div>
+                    <div class="tab-links__item" data-show-tab="3">Salle d'instruments</div>
                 </div>
                 <div class="tab-blocks">
                     <div class="tab-blocks__item active" data-show-tab="1">
                         <div class="tab-slider white-arrow inner-dots studio-slider" data-slick='{
-                    "slidesToShow": 1,
-                    "swipeToSlide": true,
-                    "adaptiveHeight": true,
-                    "arrows": true,
-                    "dots": true,
-                    "responsive": [
-                    ]
-                    }'>
+                                            "slidesToShow": 1,
+                                            "swipeToSlide": true,
+                                            "adaptiveHeight": true,
+                                            "arrows": true,
+                                            "dots": true,
+                                            "responsive": [
+                                            ]
+                                            }'>
                             <div class="tt-slider">
                                 <div class="tab-slider__item">
                                     <div class="studio-slide lazy" data-src="img/studio-1.jpg"></div>
@@ -276,7 +276,7 @@ $page = 'about';
                             </div>
                         </div>
                         <div class="tab-text">
-                            <h4><span class="theme-color">Studio A</span>– Studio de mixage</h4>
+                            <h4><span class="theme-color">Salle de séances</span>– Studio de mixage</h4>
                             <p>Neema Studio A est un studio de musique et de post-production à la pointe de la technologie
                                 avec une grande salle de contrôle et une salle de suivi en direct. Équipé d'un D-Control
                                 ICON, de Pro Tools HDX, d'un secteur Tannoy System 215 DMT II, ​​d'une multitude
@@ -289,14 +289,14 @@ $page = 'about';
                     </div>
                     <div class="tab-blocks__item" data-show-tab="2">
                         <div class="tab-slider white-arrow inner-dots studio-slider" data-slick='{
-                    "slidesToShow": 1,
-                    "swipeToSlide": true,
-                    "adaptiveHeight": true,
-                    "arrows": true,
-                    "dots": true,
-                    "responsive": [
-                    ]
-                    }'>
+                                            "slidesToShow": 1,
+                                            "swipeToSlide": true,
+                                            "adaptiveHeight": true,
+                                            "arrows": true,
+                                            "dots": true,
+                                            "responsive": [
+                                            ]
+                                            }'>
                             <div class="tt-slider">
                                 <div class="tab-slider__item">
                                     <div class="studio-slide lazy" data-src="img/studio-2.jpg"></div>
@@ -314,7 +314,7 @@ $page = 'about';
                             </div>
                         </div>
                         <div class="tab-text">
-                            <h4><span class="theme-color">Studio A</span>– Studio de mixage</h4>
+                            <h4><span class="theme-color">Salle de réception</span>– Studio de mixage</h4>
                             <p>Neema Studio A est un studio de musique et de post-production à la pointe de la technologie
                                 avec une grande salle de contrôle et une salle de suivi en direct. Équipé d'un D-Control
                                 ICON, de Pro Tools HDX, d'un secteur Tannoy System 215 DMT II, ​​d'une multitude
@@ -327,14 +327,14 @@ $page = 'about';
                     </div>
                     <div class="tab-blocks__item" data-show-tab="3">
                         <div class="tab-slider white-arrow inner-dots studio-slider" data-slick='{
-                    "slidesToShow": 1,
-                    "swipeToSlide": true,
-                    "adaptiveHeight": true,
-                    "arrows": true,
-                    "dots": true,
-                    "responsive": [
-                    ]
-                    }'>
+                                            "slidesToShow": 1,
+                                            "swipeToSlide": true,
+                                            "adaptiveHeight": true,
+                                            "arrows": true,
+                                            "dots": true,
+                                            "responsive": [
+                                            ]
+                                            }'>
                             <div class="tt-slider">
                                 <div class="tab-slider__item">
                                     <div class="studio-slide lazy" data-src="img/studio-3.jpg"></div>
@@ -352,7 +352,7 @@ $page = 'about';
                             </div>
                         </div>
                         <div class="tab-text">
-                            <h4><span class="theme-color">Studio A</span>– Studio de mixage</h4>
+                            <h4><span class="theme-color">Salle d'instruments</span>– Studio de mixage</h4>
                             <p>Neema Studio A est un studio de musique et de post-production à la pointe de la technologie
                                 avec une grande salle de contrôle et une salle de suivi en direct. Équipé d'un D-Control
                                 ICON, de Pro Tools HDX, d'un secteur Tannoy System 215 DMT II, ​​d'une multitude
@@ -369,79 +369,79 @@ $page = 'about';
         <!-- End recording tab -->
         <!-- Begin history -->
         <!--<section class="pt-xs-25 pt-md-25 pt-lg-60 pb-xs-25 pb-md-25 pb-lg-60">
-                <div class="container">
-                 <div class="section-header">
-                  <h2>Notre histoire</h2>
-                  <p></p>
-                 </div>
-                 <div class="history-list">
-                  <div class="load-history js-add-history"></div>
-                  <div class="left-column">
-                   <div class="history-block">
-                    <div class="dot"><span></span><span></span></div>
-                    <p class="data">October 2015</p>
-                    <h4>Ten years of recording, producing, mixing and mastering</h4>
-                    <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists from around the globe. Sadly, Hurricane Hugo devastated the island in 1989, and the studio was forced to close.</p>
-                   </div>
-                   <div class="history-block">
-                    <div class="dot"><span></span><span></span></div>
-                    <p class="data">May 2016</p>
-                    <h4>Ten years of recording, producing, mixing and mastering</h4>
-                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" class="page-name__bg lazy" data-src="./img/history-2.jpg" alt="bg">
-                    <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists from around the globe. Sadly, Hurricane Hugo devastated the island in 1989, and the studio was forced to close.</p>
-                   </div>
-                  </div>
-                  <div class="right-column">
-                   <div class="history-block">
-                    <div class="dot"><span></span><span></span></div>
-                    <p class="data">December 2015</p>
-                    <h4>Neema Recording Studio</h4>
-                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" class="page-name__bg lazy" data-src="./img/history-1.jpg" alt="bg">
-                    <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists.</p>
-                   </div>
-                   <div class="history-block">
-                    <div class="dot"><span></span><span></span></div>
-                    <p class="data">October 2015</p>
-                    <h4>Ten years of recording, producing, mixing and mastering</h4>
-                    <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists from around the globe. Sadly, Hurricane Hugo devastated the island in 1989, and the studio was forced to close.</p>
-                   </div>
-                  </div>
-                 </div>
-                 <div class="history-list history-list-add">
-                  <div class="load-history js-add-history"></div>
-                  <div class="left-column">
-                   <div class="history-block">
-                    <div class="dot"><span></span><span></span></div>
-                    <p class="data">October 2015</p>
-                    <h4>Ten years of recording, producing, mixing and mastering</h4>
-                    <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists from around the globe. Sadly, Hurricane Hugo devastated the island in 1989, and the studio was forced to close.</p>
-                   </div>
-                   <div class="history-block">
-                    <div class="dot"><span></span><span></span></div>
-                    <p class="data">May 2016</p>
-                    <h4>Ten years of recording, producing, mixing and mastering</h4>
-                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" class="page-name__bg lazy" data-src="./img/history-2.jpg" alt="bg">
-                    <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists from around the globe. Sadly, Hurricane Hugo devastated the island in 1989, and the studio was forced to close.</p>
-                   </div>
-                  </div>
-                  <div class="right-column">
-                   <div class="history-block">
-                    <div class="dot"><span></span><span></span></div>
-                    <p class="data">December 2015</p>
-                    <h4>Neema Recording Studio</h4>
-                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" class="page-name__bg lazy" data-src="./img/history-1.jpg" alt="bg">
-                    <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists.</p>
-                   </div>
-                   <div class="history-block">
-                    <div class="dot"><span></span><span></span></div>
-                    <p class="data">October 2015</p>
-                    <h4>Ten years of recording, producing, mixing and mastering</h4>
-                    <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists from around the globe. Sadly, Hurricane Hugo devastated the island in 1989, and the studio was forced to close.</p>
-                   </div>
-                  </div>
-                 </div>
-                </div>
-               </section>-->
+                                        <div class="container">
+                                         <div class="section-header">
+                                          <h2>Notre histoire</h2>
+                                          <p></p>
+                                         </div>
+                                         <div class="history-list">
+                                          <div class="load-history js-add-history"></div>
+                                          <div class="left-column">
+                                           <div class="history-block">
+                                            <div class="dot"><span></span><span></span></div>
+                                            <p class="data">October 2015</p>
+                                            <h4>Ten years of recording, producing, mixing and mastering</h4>
+                                            <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists from around the globe. Sadly, Hurricane Hugo devastated the island in 1989, and the studio was forced to close.</p>
+                                           </div>
+                                           <div class="history-block">
+                                            <div class="dot"><span></span><span></span></div>
+                                            <p class="data">May 2016</p>
+                                            <h4>Ten years of recording, producing, mixing and mastering</h4>
+                                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" class="page-name__bg lazy" data-src="./img/history-2.jpg" alt="bg">
+                                            <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists from around the globe. Sadly, Hurricane Hugo devastated the island in 1989, and the studio was forced to close.</p>
+                                           </div>
+                                          </div>
+                                          <div class="right-column">
+                                           <div class="history-block">
+                                            <div class="dot"><span></span><span></span></div>
+                                            <p class="data">December 2015</p>
+                                            <h4>Neema Recording Studio</h4>
+                                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" class="page-name__bg lazy" data-src="./img/history-1.jpg" alt="bg">
+                                            <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists.</p>
+                                           </div>
+                                           <div class="history-block">
+                                            <div class="dot"><span></span><span></span></div>
+                                            <p class="data">October 2015</p>
+                                            <h4>Ten years of recording, producing, mixing and mastering</h4>
+                                            <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists from around the globe. Sadly, Hurricane Hugo devastated the island in 1989, and the studio was forced to close.</p>
+                                           </div>
+                                          </div>
+                                         </div>
+                                         <div class="history-list history-list-add">
+                                          <div class="load-history js-add-history"></div>
+                                          <div class="left-column">
+                                           <div class="history-block">
+                                            <div class="dot"><span></span><span></span></div>
+                                            <p class="data">October 2015</p>
+                                            <h4>Ten years of recording, producing, mixing and mastering</h4>
+                                            <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists from around the globe. Sadly, Hurricane Hugo devastated the island in 1989, and the studio was forced to close.</p>
+                                           </div>
+                                           <div class="history-block">
+                                            <div class="dot"><span></span><span></span></div>
+                                            <p class="data">May 2016</p>
+                                            <h4>Ten years of recording, producing, mixing and mastering</h4>
+                                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" class="page-name__bg lazy" data-src="./img/history-2.jpg" alt="bg">
+                                            <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists from around the globe. Sadly, Hurricane Hugo devastated the island in 1989, and the studio was forced to close.</p>
+                                           </div>
+                                          </div>
+                                          <div class="right-column">
+                                           <div class="history-block">
+                                            <div class="dot"><span></span><span></span></div>
+                                            <p class="data">December 2015</p>
+                                            <h4>Neema Recording Studio</h4>
+                                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" class="page-name__bg lazy" data-src="./img/history-1.jpg" alt="bg">
+                                            <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists.</p>
+                                           </div>
+                                           <div class="history-block">
+                                            <div class="dot"><span></span><span></span></div>
+                                            <p class="data">October 2015</p>
+                                            <h4>Ten years of recording, producing, mixing and mastering</h4>
+                                            <p>Construction of a sister studio, on the Neema Recording Studio, began in the mid 1990’s attracting major artists from around the globe. Sadly, Hurricane Hugo devastated the island in 1989, and the studio was forced to close.</p>
+                                           </div>
+                                          </div>
+                                         </div>
+                                        </div>
+                                       </section>-->
         <!-- End history -->
         <!-- Begin call-banner -->
         <section

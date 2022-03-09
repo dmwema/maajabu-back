@@ -20,7 +20,7 @@
                     <!--End Logo icon -->
                     <!-- Logo text -->
                     <span class="logo-text" style="font-weight: bold;">
-                        {{ studio()->name ?? 'Neema Maajabu' }}
+                        <img src="{{ asset('img/logo.svg') }}" alt="logo" style="width: 100px">
                         <!-- dark Logo text
                             <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" /> -->
                         <!-- Light Logo text 
