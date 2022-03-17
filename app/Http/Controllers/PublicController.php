@@ -82,6 +82,7 @@ class PublicController extends Controller
     {
         $services = Service::all();
         $studio = Studio::all()->first();
+        $images = Image::all();
         return view('public.equipment',  ['studio' => $studio, 'images' => $images, 'services' => $services]);
     }
 
