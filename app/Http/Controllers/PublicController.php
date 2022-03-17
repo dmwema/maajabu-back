@@ -81,6 +81,7 @@ class PublicController extends Controller
     public function equipment(Request $request)
     {
         $services = Service::all();
+        $studio = Studio::all()->first();
         return view('public.equipment',  ['studio' => $studio, 'images' => $images, 'services' => $services]);
     }
 
