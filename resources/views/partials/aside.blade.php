@@ -79,11 +79,12 @@ if (session()->has('admin')) {
                                 class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a>
                     </li>
                     <li class="sidebar-item {{ $active == 'gallery' ? 'selected' : '' }} "> <a
-                        class="sidebar-link waves-effect waves-effect sidebar-link"
-                        href="{{ route($type . '.image') }}" aria-expanded="false"><i
-                            class="mdi mdi-account-multiple"></i><span class="hide-menu">Galeries</span></a>
+                            class="sidebar-link waves-effect waves-effect sidebar-link"
+                            href="{{ route($type . '.image') }}" aria-expanded="false"><i
+                                class="mdi mdi-account-multiple"></i><span class="hide-menu">Galeries</span></a>
                     </li>
-                    <li class="sidebar-item" {{ $active == 'ir' ? 'selected' : '' }}> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                    <li class="sidebar-item" {{ $active == 'ir' ? 'selected' : '' }}> <a
+                            class="sidebar-link waves-effect waves-dark sidebar-link"
                             href="{{ route($type . '.engineer') }}" aria-expanded="false"><i
                                 class="fas fa-headphones-alt"></i><span class="hide-menu">Ingénieurs</span></a>
                     </li>
@@ -142,6 +143,13 @@ if (session()->has('admin')) {
                         href="{{ route($type . '.profile', ['id' => session()->get($type)->id]) }}"
                         aria-expanded="false">
                         <i class="fas fa-user-cog"></i><span class="hide-menu"> Compte</span>
+                    </a>
+                </li>
+
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                        <i class="fas fa-file"></i><span class="hide-menu">Fiches technique</span>
                     </a>
                 </li>
             </ul>

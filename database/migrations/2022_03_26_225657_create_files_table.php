@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDatasToReservations extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class AddDatasToReservations extends Migration
      */
     public function up()
     {
-        Schema::table('reservations', function (Blueprint $table) {
-            $table->string('name');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('address');
+        Schema::create('files', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('engineer_id')->constrained()->onDelete('cascade');
+            $table->foreignId('work_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -28,8 +28,6 @@ class AddDatasToReservations extends Migration
      */
     public function down()
     {
-        Schema::table('reservations', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('files');
     }
 }
