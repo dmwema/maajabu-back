@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FTitle extends Model
 {
     use HasFactory;
+    protected $table = "ftitles";
 
     function elements()
     {

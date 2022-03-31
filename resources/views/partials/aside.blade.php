@@ -147,8 +147,9 @@ if (session()->has('admin')) {
                 </li>
 
 
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                <li class="sidebar-item {{ $active == 'files' ? 'selected' : '' }}">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route($type . '.files') }}"
+                        aria-expanded="false">
                         <i class="fas fa-file"></i><span class="hide-menu">Fiches technique</span>
                     </a>
                 </li>

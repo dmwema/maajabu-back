@@ -3,7 +3,7 @@
 use App\Http\Controllers\EngineerController;
 
 use App\Http\Controllers\ArtistController;
-
+use App\Http\Controllers\FileConotroller;
 use App\Http\Controllers\GesWelcomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LogicielController;
@@ -132,6 +132,12 @@ Route::middleware('IRAuth')->group(function () {
         Route::get('/work', [WorkController::class, 'all_ir'])->name('works.ir');
         Route::post('/engineer/pass', [EngineerController::class, 'edit_pass'])->name('ir.editpass');
         Route::post('/engineer', [EngineerController::class, 'update'])->name('ir.update');
+
+        Route::get('/fichier', [FileConotroller::class, 'index'])->name('ir.files');
+        Route::get('/fichier/new', [FileConotroller::class, 'new'])->name('file.new');
+        Route::delete('/fichier', [FileConotroller::class, 'destroy'])->name('files.delete');
+        Route::get('/fichier/{id}', [FileConotroller::class, 'edit'])->name('files.edit');
+        Route::post('/fichier', [FileConotroller::class, 'store'])->name('files.store');
     });
 });
 

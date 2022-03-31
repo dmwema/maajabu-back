@@ -581,6 +581,7 @@ class ComposerStaticInitb2d5ef09583742242b17fab8b9856fe3
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\EmailVerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmailVerificationController.php',
         'App\\Http\\Controllers\\EngineerController' => __DIR__ . '/../..' . '/app/Http/Controllers/EngineerController.php',
+        'App\\Http\\Controllers\\FileConotroller' => __DIR__ . '/../..' . '/app/Http/Controllers/FileConotroller.php',
         'App\\Http\\Controllers\\GesWelcomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/GesWelcomeController.php',
         'App\\Http\\Controllers\\GetionWelcomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/GetionWelcomeController.php',
         'App\\Http\\Controllers\\HoraireController' => __DIR__ . '/../..' . '/app/Http/Controllers/HoraireController.php',
