@@ -208,6 +208,7 @@ return array(
     'Database\\Factories\\CategoryFactory' => $baseDir . '/database/factories/CategoryFactory.php',
     'Database\\Factories\\ContactFactory' => $baseDir . '/database/factories/ContactFactory.php',
     'Database\\Factories\\EngineerFactory' => $baseDir . '/database/factories/EngineerFactory.php',
+    'Database\\Factories\\FTitleFactory' => $baseDir . '/database/factories/FTitleFactory.php',
     'Database\\Factories\\HoraireFactory' => $baseDir . '/database/factories/HoraireFactory.php',
     'Database\\Factories\\LogicielFactory' => $baseDir . '/database/factories/LogicielFactory.php',
     'Database\\Factories\\PhoneFactory' => $baseDir . '/database/factories/PhoneFactory.php',

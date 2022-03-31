@@ -774,6 +774,7 @@ class ComposerStaticInitb2d5ef09583742242b17fab8b9856fe3
         'Database\\Factories\\CategoryFactory' => __DIR__ . '/../..' . '/database/factories/CategoryFactory.php',
         'Database\\Factories\\ContactFactory' => __DIR__ . '/../..' . '/database/factories/ContactFactory.php',
         'Database\\Factories\\EngineerFactory' => __DIR__ . '/../..' . '/database/factories/EngineerFactory.php',
+        'Database\\Factories\\FTitleFactory' => __DIR__ . '/../..' . '/database/factories/FTitleFactory.php',
         'Database\\Factories\\HoraireFactory' => __DIR__ . '/../..' . '/database/factories/HoraireFactory.php',
         'Database\\Factories\\LogicielFactory' => __DIR__ . '/../..' . '/database/factories/LogicielFactory.php',
         'Database\\Factories\\PhoneFactory' => __DIR__ . '/../..' . '/database/factories/PhoneFactory.php',

@@ -17,8 +17,9 @@ $i = 0;
             </div>
             <div class="col-7">
                 <div class="text-end upgrade-btn">
-                    <a href="{{ route('file.new') }}" class="btn btn-success text-white" class="mdi mdi-plus"></i>
-                        Nouvelle fiche technique</a>
+                    <a href="#" class="btn btn-success text-white" class="mdi mdi-plus" data-bs-toggle="modal"
+                        data-bs-target="#addFile"></i>
+                        Nouvelle Fiche technique</a>
                 </div>
             </div>
         </div>
@@ -90,4 +91,35 @@ $i = 0;
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="addFile" tabindex="-1" aria-labelledby="addFileLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter une nouvelle fiche technique</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ route('file.store') }}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Projet concerné</label>
+                                <select name="work_id" id="" class="form-select">
+                                    @foreach ($works as $work)
+                                        <option value="{{ $work->id }}">{{ $work->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection

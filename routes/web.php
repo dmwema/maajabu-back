@@ -134,10 +134,9 @@ Route::middleware('IRAuth')->group(function () {
         Route::post('/engineer', [EngineerController::class, 'update'])->name('ir.update');
 
         Route::get('/fichier', [FileConotroller::class, 'index'])->name('ir.files');
-        Route::get('/fichier/new', [FileConotroller::class, 'new'])->name('file.new');
         Route::delete('/fichier', [FileConotroller::class, 'destroy'])->name('files.delete');
         Route::get('/fichier/{id}', [FileConotroller::class, 'edit'])->name('files.edit');
-        Route::post('/fichier', [FileConotroller::class, 'store'])->name('files.store');
+        Route::post('/fichier', [FileConotroller::class, 'store'])->name('file.store');
     });
 });
 

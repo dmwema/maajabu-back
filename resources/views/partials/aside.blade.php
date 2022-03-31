@@ -131,6 +131,13 @@ if (session()->has('admin')) {
                     </li>
                     </li>
 
+                    <li class="sidebar-item {{ $active == 'files' ? 'selected' : '' }}">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route($type . '.files') }}" aria-expanded="false">
+                            <i class="fas fa-file"></i><span class="hide-menu">Fiches technique</span>
+                        </a>
+                    </li>
+
                 @else
                     <li class="sidebar-item {{ $active == 'paiement' ? 'selected' : '' }}"> <a
                             class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -146,13 +153,6 @@ if (session()->has('admin')) {
                     </a>
                 </li>
 
-
-                <li class="sidebar-item {{ $active == 'files' ? 'selected' : '' }}">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route($type . '.files') }}"
-                        aria-expanded="false">
-                        <i class="fas fa-file"></i><span class="hide-menu">Fiches technique</span>
-                    </a>
-                </li>
             </ul>
             <!--fa-thin fa-timeline-->
         </nav>
