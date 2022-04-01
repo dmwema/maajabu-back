@@ -12,6 +12,6 @@ class FTitle extends Model
 
     function elements()
     {
-        return $this->hasMany(FElement::class);
+        return $this->hasMany(FElement::class, 'ftitle_id');
     }
 }

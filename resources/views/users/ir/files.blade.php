@@ -59,6 +59,9 @@ $i = 0;
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">Projet</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,7 +70,26 @@ $i = 0;
                                                 $i++;
                                             @endphp
                                             <tr>
-                                                <th scope="row">{{ $i }}</th>
+                                                <td scope="row">{{ $i }}</td>
+                                                <td scope="row">{{ $file->work->name }}</td>
+                                                <td scope="row">{{ $file->created_at }}</td>
+                                                <td>
+                                                    <form
+                                                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette fiche ?')"
+                                                        action="{{ route('file.delete') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $file->id }}">
+                                                        <input type="hidden" name="_method" value="DELETE">
+
+                                                        <button title="Supprimer" style="color: #fff"
+                                                            class="btn btn-danger"><i class="far fa-trash-alt"></i>
+                                                            Supprimer</button>
+                                                        <a href="{{ route('show_file', ['id' => $file->id]) }}"
+                                                            class="btn btn-primary" style=""><i class="fa fa-eye"></i>
+                                                            Voir</a>
+                                                    </form>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>

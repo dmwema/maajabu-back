@@ -44,7 +44,8 @@ $i = 0;
             <div class="col-lg-8 col-xlg-9 col-md-7 offset-md-2">
                 <div class=" card">
                     <div class="card-body">
-                        <form class="form-horizontal form-material mx-2" method="POST" action="{{ route('work.store') }}">
+                        <form enctype="multipart/form-data" class="form-horizontal form-material mx-2" method="POST"
+                            action="{{ route('work.store') }}">
                             @csrf
                             <input type="hidden" name="id" value="{{ old('name') }}">
                             <div class="form-group">
@@ -64,8 +65,7 @@ $i = 0;
                             <div class="form-group">
                                 <label class="col-md-12">Image</label>
                                 <div class="col-md-12">
-                                    <input type="file" value="" name="img_url" id="img_url" required
-                                        class="form-control">
+                                    <input type="file" value="" name="img_url" id="img_url" required class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">

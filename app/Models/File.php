@@ -14,4 +14,14 @@ class File extends Model
     {
         return $this->hasMany(FTitle::class);
     }
+
+    public function work()
+    {
+        return $this->belongsTo(Work::class, "work_id");
+    }
+
+    public function engineer()
+    {
+        return $this->belongsTo(Engineer::class);
+    }
 }

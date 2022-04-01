@@ -137,9 +137,16 @@ Route::middleware('IRAuth')->group(function () {
         Route::delete('/fichier', [FileConotroller::class, 'destroy'])->name('files.delete');
         Route::get('/fichier/{id}', [FileConotroller::class, 'edit'])->name('files.edit');
         Route::post('/fichier', [FileConotroller::class, 'store'])->name('file.store');
+
+        Route::get('/fichier/details/{id}', [FileConotroller::class, 'show_file'])->name('show_file');
+
+        Route::post('/element', [FileConotroller::class, 'store_element'])->name('element.store');
+
+        Route::delete('/element', [FileConotroller::class, 'delete_element'])->name('element.delete');
+
+        Route::delete('/file', [FileConotroller::class, 'delete'])->name('file.delete');
     });
 });
-
 
 // FINACES ROUTES
 Route::middleware('FinanceAuth')->group(function () {

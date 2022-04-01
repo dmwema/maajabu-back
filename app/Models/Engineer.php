@@ -12,7 +12,7 @@ class Engineer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','year_experience','img_url','phone','email','password'];
+    protected $fillable = ['name', 'year_experience', 'img_url', 'phone', 'email', 'password'];
 
     protected $hidden = [
         'pivot'
