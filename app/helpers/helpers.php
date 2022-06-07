@@ -13,6 +13,9 @@ const CLIENTS_ID = 4;
 const ONLINE_PAIEMENT = 11;
 const PHYSICAL_PAIEMENT = 12;
 
+const CLIENT__GROUP = 1;
+const CLIENT__USER = 2;
+
 
 if (!function_exists('is_connected')) {
 

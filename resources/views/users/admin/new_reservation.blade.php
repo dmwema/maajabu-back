@@ -52,6 +52,29 @@ $i = 0;
                                             name="date_reservation">
                                     </div>
                                     <div class="form-group col-md-6">
+                                        <label class="col-md-12" for="client_type">Type de client</label>
+                                        <div class="col-md-12">
+                                            <select name="client_type" id="client_type" class="form-select">
+                                                <option value="{{ CLIENT__GROUP }}">Un groupe</option>
+                                                <option value="{{ CLIENT__USER }}">Individuel</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12" id="client_group">
+                                        <label class="col-md-12" for="users">Groupe</label>
+                                        <div class="col-md-12">
+                                            <select name="user_id" id="users" class="form-select">
+                                                @foreach ($users as $user)
+                                                    <option value="{{ $user->id }}">{{ $user->name }}
+                                                        ({{ $user->phone }})
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#addClient">Nouvau client</a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12" id="client_user" style="display: none">
                                         <label class="col-md-12" for="users">Client</label>
                                         <div class="col-md-12">
                                             <select name="user_id" id="users" class="form-select">

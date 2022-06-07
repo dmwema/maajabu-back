@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SetNullableWorkToFiles extends Migration
+class AddGroupIdToReservations extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class SetNullableWorkToFiles extends Migration
      */
     public function up()
     {
-        Schema::table('files', function (Blueprint $table) {
-            $table->integer('work_id')->nullable()->change();
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->integer('group_id')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class SetNullableWorkToFiles extends Migration
      */
     public function down()
     {
-        Schema::table('files', function (Blueprint $table) {
-            $table->integer('work_id')->change();
+        Schema::table('reservations', function (Blueprint $table) {
+            //
         });
     }
 }
