@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\group;
+use App\Models\MasteringPack;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\Service;
@@ -58,7 +60,10 @@ class ReservationController extends Controller
     {
         $users = User::where('identity', '!=', '1')->where('identity', '!=', '2')->where('identity', '!=', '3')->get();
         $services = Service::all();
-        return view('users.admin.new_reservation', ['users' => $users, 'services' => $services]);
+        $groups = group::all();
+        $mastering_pack = MasteringPack::all();
+
+        return view('users.admin.new_reservation', ['mastering_packs' => $mastering_pack, 'users' => $users, 'services' => $services, 'groups' => $groups]);
     }
 
     /**

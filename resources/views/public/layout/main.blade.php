@@ -19,12 +19,17 @@
 
     <link href="vendor/fancybox/dist/jquery.fancybox.min.css" type="text/css" rel="stylesheet" />
     <!--====>> Index CSS <<====-->
-    <link href="css/index.css" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('css/index.css') }}" type="text/css" rel="stylesheet" />
 
     @if ($page == 'galery')
         <link rel="stylesheet" href="{{ asset('galery/fluid-gallery.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
     @endif
+
+    @if ($page == 'services')
+        <link href="{{ asset('css/services.css') }}" rel="stylesheet">
+    @endif
+
 
 </head>
 
@@ -44,7 +49,6 @@
             <div class="rectangle-1">&nbsp;</div>
         </div>
     </div>
-
 
     <div class="header-wrap">
         <header>
@@ -323,60 +327,60 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!-- ===> Bootstrap 4 JS <==== -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 
     <!-- ===> Lazy loader JS <==== -->
-    <script src="vendor/lazy-load/jquery.lazy.min.js"></script>
+    <script src="{{ asset('vendor/lazy-load/jquery.lazy.min.js') }}"></script>
 
     <!-- ===> Slick slider JS <==== -->
-    <script src="vendor/slick/slick/slick.min.js"></script>
+    <script src="{{ asset('vendor/slick/slick/slick.min.js') }}"></script>
 
     <!-- ===> Paroller JS <==== -->
-    <script src="vendor/paroller/dist/jquery.paroller.min.js"></script>
+    <script src="{{ asset('vendor/paroller/dist/jquery.paroller.min.js') }}"></script>
 
     <!-- ===> scrollbar JS <==== -->
-    <script src="vendor/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="{{ asset('vendor/scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 
     <!-- ===> Tilt JS <==== -->
-    <script src="vendor/tilt/tilt.jquery.js"></script>
+    <script src="{{ asset('vendor/tilt/tilt.jquery.js') }}"></script>
 
     <!-- ===> Fancybox JS <==== -->
-    <script src="vendor/fancybox/dist/jquery.fancybox.min.js"></script>
+    <script src="{{ asset('vendor/fancybox/dist/jquery.fancybox.min.js') }}"></script>
 
     <!-- ===> Input mask JS <==== -->
-    <script src="vendor/input-mask/jquery.mask.min.js"></script>
+    <script src="{{ asset('vendor/input-mask/jquery.mask.min.js') }}"></script>
 
     <!-- Data picker -->
-    <script src="vendor/bootstrap-datetimepicker/moment.js"></script>
-    <script src="vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="{{ asset('vendor/bootstrap-datetimepicker/moment.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
 
     <!-- Masonry JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
 
     <!-- Images loader -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.min.js"></script>
-    <script src="vendor/shuffle/isotope.js"></script>
+    <script src="{{ asset('vendor/shuffle/isotope.js') }}"></script>
 
     <!-- ===> noUiSlider JS <==== -->
     <!-- <script src="vendor/touchpunch/touchpunch.js"></script> -->
-    <script src="vendor/noUiSlider/nouislider.min.js"></script>
-    <script src="vendor/wnumb/wNumb.js"></script>
+    <script src="{{ asset('vendor/noUiSlider/nouislider.min.js') }}"></script>
+    <script src="{{ asset('vendor/wnumb/wNumb.js') }}"></script>
 
     <!-- ===> Player JS <==== -->
-    <script src="vendor/awp-player/wavesurfer.min.js"></script>
-    <script src="vendor/awp-player/jsmediatags.min.js"></script>
-    <script src="vendor/awp-player/new_cb.js"></script>
-    <script src="vendor/awp-player/new.js"></script>
-    <script src="vendor/instafeed/instafeed.min.js"></script>
+    <script src="{{ asset('vendor/awp-player/wavesurfer.min.js') }}"></script>
+    <script src="{{ asset('vendor/awp-player/jsmediatags.min.js') }}"></script>
+    <script src="{{ asset('vendor/awp-player/new_cb.js') }}"></script>
+    <script src="{{ asset('vendor/awp-player/new.js') }}"></script>
+    <script src="{{ asset('vendor/instafeed/instafeed.min.js') }}"></script>
 
 
     <!-- ===> Common JS <==== -->
-    <script src="js/common.js"></script>
+    <script src="{{ asset('js/common.js') }}"></script>
 
     <!-- form -->
-    <script src="form/jquery.form.js"></script>
-    <script src="form/jquery.validate.min.js"></script>
-    <script src="form/jquery.form-init.js"></script>
+    <script src="{{ asset('form/jquery.form.js') }}"></script>
+    <script src="{{ asset('form/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('form/jquery.form-init.js') }}"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuHS2And3EtzpWBoMSqCIIiJzAEynp5ms&callback=initMap"
         async defer></script>

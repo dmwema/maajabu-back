@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Artist;
 use App\Models\Engineer;
 use App\Models\Image;
+use App\Models\Pack;
 use App\Models\Reservation;
 use App\Models\Service;
 use App\Models\Studio;
@@ -51,6 +52,15 @@ class PublicController extends Controller
         $services = Service::all();
 
         return view('public.services', ['studio' => $studio, 'services' => $services]);
+    }
+
+    public function packs(Request $request)
+    {
+        $service = Service::find($request->service_id);
+        $packs = Pack::all();
+        $studio = Studio::all()->first();
+        $services = Service::all();
+        return view('public.packs', ['studio' => $studio, 'packs' => $packs, 'service' => $service, 'services' => $services]);
     }
 
     public function rates(Request $request)

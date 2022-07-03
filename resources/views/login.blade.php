@@ -170,15 +170,15 @@
 
                         <div class="form-group">
 
-                            <input type="email" class="form-control" placeholder="Votre email" required="required"
-                                name="email">
+                            <input type="email" class="form-control" autocomplete="false" placeholder="Votre email"
+                                required="required" name="email">
 
                         </div>
 
                         <div class="form-group">
 
-                            <input type="password" name="password" class="form-control" placeholder="Votre mot de passe"
-                                required="required">
+                            <input type="password" name="password" autocomplete="false" class="form-control"
+                                placeholder="Votre mot de passe" required="required">
 
                         </div>
 

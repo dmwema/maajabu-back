@@ -5,9 +5,11 @@ use App\Http\Controllers\EngineerController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\FileConotroller;
 use App\Http\Controllers\GesWelcomeController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LogicielController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PackController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ReservationController;
@@ -57,6 +59,10 @@ Route::middleware('AdminAuth')->group(function () {
         Route::get('/studio', [StudioController::class, 'get_infos'])->name('admin.studio');
         Route::put('/studio', [StudioController::class, 'update'])->name('studio.update');
 
+        Route::get('/groupes', [GroupController::class, 'index'])->name('admin.group');
+        Route::delete('/group', [GroupController::class, 'destroy'])->name('group.delete');
+        Route::post('/group', [GroupController::class, 'store'])->name('group.store');
+
 
         Route::get('/engineer', [EngineerController::class, 'get_infos'])->name('admin.engineer');
         Route::post('/user/update', [UserController::class, 'update_client'])->name('user.update');
@@ -85,6 +91,12 @@ Route::middleware('AdminAuth')->group(function () {
         Route::post('/service/store', [ServiceController::class, 'store'])->name('service.store');
         Route::get('/service/edit/{id}', [ServiceController::class, 'edit_service'])->name('service.edit');
         Route::post('/service/update', [ServiceController::class, 'update'])->name('service.update');
+
+        Route::get('/service/pack/{service_id}', [PackController::class, 'index'])->name('admin.pack');
+        Route::delete('/service/pack', [PackController::class, 'delete'])->name('pack.delete');
+        Route::post('/service/pack/store', [PackController::class, 'store'])->name('pack.store');
+        Route::get('/service/pack/edit/{id}', [PackController::class, 'edit'])->name('pack.edit');
+        Route::post('/service/pack/update', [PackController::class, 'update'])->name('pack.update');
 
         //
         Route::get('/image', [ImageController::class, 'get_infos'])->name('admin.image');
@@ -179,6 +191,8 @@ Route::get('/apropos', [PublicController::class, 'about'])->name('public.about')
 Route::get('/projets', [PublicController::class, 'projects'])->name('public.project');
 
 Route::get('/services', [PublicController::class, 'services'])->name('public.services');
+
+Route::get('/packs/{service_id}', [PublicController::class, 'packs'])->name('public.packs');
 
 Route::get('/tarifs', [PublicController::class, 'rates'])->name('public.rates');
 

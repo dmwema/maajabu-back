@@ -1,6 +1,6 @@
 @php
 
-$active = 'service';
+$active = 'pack';
 $i = 0;
 
 //dd($temps['forecast'][0]['forecast']);
@@ -16,7 +16,7 @@ $i = 0;
         <div class="row align-items-center justify-content-center">
             <div class="col-5">
                 <h4 class="page-title" style="text-align: center">Modifier les informations du <br />
-                    {{ $service->name }}
+                    {{ $pack->title }}
                 </h4>
             </div>
         </div>
@@ -28,47 +28,56 @@ $i = 0;
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
+        @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Succès ! </strong>{{ session()->get('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if (session()->has('fail'))
+            <div class="alert alert-adnger alert-dismissible fade show" role="alert">
+                <strong>Erreur ! </strong>{{ session()->get('fail') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="row">
             <div class="col-lg-8 col-xlg-9 col-md-7 offset-md-2">
                 <div class=" card">
                     <div class="card-body">
-                        <form class="form-horizontal form-material mx-2" method="POST"
-                            action="{{ route('service.update') }}" enctype="multipart/form-data">
+                        <form class="form-horizontal form-material mx-2" method="POST" action="{{ route('pack.update') }}"
+                            enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" name="id" value="{{ $service->id }}">
+                            <input type="hidden" name="id" value="{{ $pack->id }}">
                             <div class="form-group">
                                 <label class="col-md-12">Nom</label>
                                 <div class="col-md-12">
-                                    <input type="text" value="{{ $service->name }}" required
-                                        class="form-control form-control-line" name="name">
+                                    <input type="text" value="{{ $pack->title }}" required
+                                        class="form-control form-control-line" name="title">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12">Description</label>
                                 <div class="col-md-12">
-                                    <input type="text" value="{{ $service->description }}" required
-                                        class="form-control form-control-line" name="description">
+                                    <textarea name="description" class="form-control form-control-line" required
+                                        id="description" cols="30" rows="10">{{ $pack->description }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12">Image</label>
                                 <div class="col-md-12">
-                                    <img style="width: 200px ; height: 200px" src="{{ Storage::url($service->img_url) }}"
-                                        alt="">
-                                    <input type="file" class="form-control form-control-line" name="img_url">
+                                    @if ($pack->image !== null)
+                                        <img style="width: 200px ; height: 200px"
+                                            src="{{ Storage::url('services/' . $pack->image) }}" alt="">
+                                    @endif
+                                    <input type="file" class="form-control form-control-line" name="image">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-12">Tarif</label>
+                                <label class="col-md-12">Prix ($)</label>
                                 <div class="col-md-12">
-                                    <select id="tarif" name="tarif" class="form-select">
-                                        @foreach ($tarifs as $option_tarif)
-                                            <option value="{{ $option_tarif->id }}"
-                                                {{ isset($service->tarif) && $service->tarif->id == $option_tarif->id ? 'selected' : '' }}
-                                                required>{{ $option_tarif->name }} ({{ $option_tarif->price }} $ US)
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" value="{{ $pack->price }}" required
+                                        class="form-control form-control-line" name="price">
                                 </div>
                             </div>
                             <div class="form-group">

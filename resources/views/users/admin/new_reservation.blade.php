@@ -39,58 +39,48 @@ $i = 0;
         @endif
 
         <div class="row">
-            <div class="col-lg-8 col-xlg-9 col-md-7 offset-md-2">
+            <div class="col-md-4">
                 <div class=" card">
                     <div class="card-body">
+                        <h5>Informations de base</h5>
                         <form method="POST" action="{{ route('reservations.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
-                                <div class="row">
-                                    <div class="mb-3 col-md-6">
-                                        <label for="date_reservation" class="form-label">Date de reservation</label>
-                                        <input type="date" class="form-control" required id="date_reservation"
-                                            name="date_reservation">
+                                <div class="form-group">
+                                    <label class="col-md-12" for="client_type">Type de client</label>
+                                    <div class="col-md-12">
+                                        <select name="client_type" id="client_type" class="form-select">
+                                            <option value="{{ CLIENT__GROUP }}">Un groupe</option>
+                                            <option value="{{ CLIENT__USER }}">Individuel</option>
+                                        </select>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="col-md-12" for="client_type">Type de client</label>
-                                        <div class="col-md-12">
-                                            <select name="client_type" id="client_type" class="form-select">
-                                                <option value="{{ CLIENT__GROUP }}">Un groupe</option>
-                                                <option value="{{ CLIENT__USER }}">Individuel</option>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="form-group col-md-12" id="client_group">
+                                    <label class="col-md-12" for="users">Groupe</label>
+                                    <div class="col-md-12">
+                                        <select name="user_id" id="users" class="form-select">
+                                            @foreach ($groups as $group)
+                                                <option value="{{ $group->id }}">{{ $group->name }}
+                                                    ({{ $group->phone }})
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <div class="form-group col-md-12" id="client_group">
-                                        <label class="col-md-12" for="users">Groupe</label>
-                                        <div class="col-md-12">
-                                            <select name="user_id" id="users" class="form-select">
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->name }}
-                                                        ({{ $user->phone }})
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <a href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#addClient">Nouvau client</a>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-12" id="client_user" style="display: none">
-                                        <label class="col-md-12" for="users">Client</label>
-                                        <div class="col-md-12">
-                                            <select name="user_id" id="users" class="form-select">
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->name }}
-                                                        ({{ $user->phone }})
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <a href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#addClient">Nouvau client</a>
-                                        </div>
+                                </div>
+                                <div class="form-group col-md-12" id="client_user" style="display: none">
+                                    <label class="col-md-12" for="users">Client</label>
+                                    <div class="col-md-12">
+                                        <select name="user_id" id="users" class="form-select">
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->name }}
+                                                    ({{ $user->phone }})
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group">
                                         <label class="col-md-12" for="services">Service</label>
                                         <div class="col-md-12">
                                             <select name="service_id" id="sevices" class="form-select">
@@ -101,14 +91,118 @@ $i = 0;
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class=" card">
+                    <div class="card-body">
+                        <h5>Détail du service (Mastering)</h5>
+                        <form method="POST" action="{{ route('reservations.store') }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-12" for="services">Pack</label>
+                                        <div class="col-md-12">
+                                            <select name="service_id" id="sevices" class="form-select">
+                                                @foreach ($mastering_packs as $mastering_pack)
+                                                    <option value="{{ $mastering_pack->id }}">
+                                                        {{ $mastering_pack->title }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-12" for="services">Option</label>
+                                        <div class="col-md-12">
+                                            <select name="service_id" id="sevices" class="form-select">
+                                                <option value="1">HD-WAV</option>
+                                                <option value="2">WAV</option>
+                                                <option value="3">MP3</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="mb-3 col-md-6">
-                                        <label for="qte" class="form-label">Quantité</label>
+                                        <label for="qte" class="form-label">Nombre de séances</label>
                                         <input type="number" class="form-control" required id="qte" name="qte">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-12" for="services">Types de séances</label>
+                                        <div class="col-md-12">
+                                            <select name="service_id" id="sevices" class="form-select">
+                                                <option value="1">Normal (9h du temps)</option>
+                                                <option value="2">Lockout (33 heures payement double)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="qte" class="form-label">Date</label>
+                                        <input type="date" class="form-control" required id="qte" name="qte">
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class=" card">
+                    <div class="card-body">
+                        <h5>Détail du service (Duplication)</h5>
+                        <form method="POST" action="{{ route('reservations.store') }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-12" for="services">Pack</label>
+                                        <div class="col-md-12">
+                                            <select name="service_id" id="sevices" class="form-select">
+                                                @foreach ($mastering_packs as $mastering_pack)
+                                                    <option value="{{ $mastering_pack->id }}">
+                                                        {{ $mastering_pack->title }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-12" for="services">Option</label>
+                                        <div class="col-md-12">
+                                            <select name="service_id" id="sevices" class="form-select">
+                                                <option value="1">HD-WAV</option>
+                                                <option value="2">WAV</option>
+                                                <option value="3">MP3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="qte" class="form-label">Nombre de séances</label>
+                                        <input type="number" class="form-control" required id="qte" name="qte">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-12" for="services">Types de séances</label>
+                                        <div class="col-md-12">
+                                            <select name="service_id" id="sevices" class="form-select">
+                                                <option value="1">Normal (9h du temps)</option>
+                                                <option value="2">Lockout (33 heures payement double)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="qte" class="form-label">Date</label>
+                                        <input type="date" class="form-control" required id="qte" name="qte">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Enregistrer</button>
                             </div>
                         </form>

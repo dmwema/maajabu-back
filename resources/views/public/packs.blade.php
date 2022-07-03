@@ -1,8 +1,8 @@
 @extends('public.layout.main')
 
 @php
-$page = 'services';
-$title = 'nos services';
+$page = 'packs';
+$title = $service->title;
 @endphp
 
 @section('content')
@@ -11,13 +11,13 @@ $title = 'nos services';
             <div class="row">
                 <div class="col-lg-6">
                     <div class="section-title">
-                        <h2>Nos services</h2>
-                        <p>Parcourez notre catalogue de services en fin de trouver ce qui repond à vos attentes</p>
+                        <h2>{{ $service->name }}</h2>
+                        <p>Tous les packs</p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                @foreach ($services as $service)
+                @foreach ($packs as $pack)
                     <!-- feaure box -->
                     <div class="col-sm-6 col-lg-4">
                         <div class="feature-box-1">
@@ -25,9 +25,8 @@ $title = 'nos services';
                                 <i class="fa fa-music"></i>
                             </div>
                             <div class="feature-content">
-                                <h5><a href="{{ route('public.packs', ['service_id' => $service->id]) }}"
-                                        style="color: inherit !important">{{ $service->name }}</a></h5>
-                                <p>{{ $service->description }}</p>
+                                <h5>{{ $pack->title }}</h5>
+                                <p>{{ $pack->description }}</p>
                             </div>
                         </div>
                     </div>

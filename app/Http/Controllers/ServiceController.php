@@ -42,7 +42,6 @@ class ServiceController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'img_url' => $pathImage,
-            'tarif_id' => $request->tarif
         ])) {
             return redirect()->back()->with('success', 'Service enregistré avec succès');
         } else {
@@ -60,7 +59,7 @@ class ServiceController extends Controller
     public function show(Service $service)
     {
         //
-        $service->img_url = env('APP_URL').Storage::url($service->img_url);
+        $service->img_url = env('APP_URL') . Storage::url($service->img_url);
         $tarif = $service->tarifs;
         $reservations = $service->reservations;
         return [
@@ -81,16 +80,15 @@ class ServiceController extends Controller
 
         $service->name = $request->name;
         $service->description = $request->description;
-        $service->tarif_id = $request->tarif;
 
         if (empty($request->img_url)) {
             if ($service->img_url == "") {
                 $pathImage = "default.png";
-            }else {
+            } else {
                 $pathImage = $service->img_url;
             }
-        }else{
-            $filename = time(). '.' .$request->img_url->extension();
+        } else {
+            $filename = time() . '.' . $request->img_url->extension();
             $pathImage = $request->file('img_url')->storeAs(
                 'services',
                 $filename,
@@ -115,7 +113,7 @@ class ServiceController extends Controller
     public function delete(Request $request)
     {
         $service = Service::find($request->id);
-        if(Storage::disk('public')->exists($service->img_url)){
+        if (Storage::disk('public')->exists($service->img_url)) {
             Storage::disk('public')->delete($service->img_url);
         }
         if ($service->delete()) {

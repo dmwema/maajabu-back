@@ -78,6 +78,11 @@ if (session()->has('admin')) {
                             href="{{ route($type . '.users') }}" aria-expanded="false"><i
                                 class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a>
                     </li>
+
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route($type . '.group') }}" aria-expanded="false"><i
+                                class="fas fa-network-wired"></i><span class="hide-menu">Groupes</span></a>
+                    </li>
                     <li class="sidebar-item {{ $active == 'gallery' ? 'selected' : '' }} "> <a
                             class="sidebar-link waves-effect waves-effect sidebar-link"
                             href="{{ route($type . '.image') }}" aria-expanded="false"><i
