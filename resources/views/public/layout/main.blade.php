@@ -30,7 +30,6 @@
         <link href="{{ asset('css/services.css') }}" rel="stylesheet">
     @endif
 
-
 </head>
 
 <body class="{{ $page == 'home' ? 'home-page' : '' }}">
@@ -55,7 +54,7 @@
             <a href="{{ route('public.home') }}" class="logo">
                 <span class="logo-text"><img style="width: 110px;"
                         src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" class="lazy"
-                        data-src="img/logo.svg" alt="logo">
+                        data-src="{{ asset('img/logo.svg') }}" alt="logo">
                 </span>
             </a>
             <div>
@@ -119,7 +118,7 @@
                     </svg>
                 </button>
                 <h3 class="text-center">Réservez votre séance</h3>
-                <form action="{{ route('public.reservation') }}" method="POST" id="form" class="book-form"
+                <form action="{{ route('public.services') }}" method="POST" id="form" class="book-form"
                     novalidate="novalidate">
                     @csrf
                     <div class="tt-form-row">
@@ -391,15 +390,67 @@
 
         </script>
     @endif
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @if (session()->has('success'))
         <script>
             Swal.fire(
                 'Réservation enrégistrée!',
                 'Votre réservation a été enrégistrée avec succès. nous vous contacterons pour la suite!',
-                'D\'accord'
+                'success'
             )
+            $('#radioBtn a').on('click', function() {
+                var sel = $(this).data('title');
+                var tog = $(this).data('toggle');
+                $('#' + tog).prop('value', sel);
+
+                $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active')
+                    .addClass('notActive');
+                $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass(
+                    'active');
+            })
+
+        </script>
+    @endif
+
+    @if (session()->has('groupe'))
+        <script>
+            Swal.fire(
+                'Erreur!',
+                'Vous avez spécifiez que vous êtes un groupe, veullez renseigner toutes les informations rélatives au groupe.',
+                'error'
+            )
+            $('#radioBtn a').on('click', function() {
+                var sel = $(this).data('title');
+                var tog = $(this).data('toggle');
+                $('#' + tog).prop('value', sel);
+
+                $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active')
+                    .addClass('notActive');
+                $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass(
+                    'active');
+            })
+
+        </script>
+    @endif
+
+    @if (session()->has('user'))
+        <script>
+            Swal.fire(
+                'Erreur!',
+                'Vous avez spécifiez que vous êtes un individu, veullez renseigner toutes les informations rélatives aux particuliers.',
+                'error'
+            )
+            $('#radioBtn a').on('click', function() {
+                var sel = $(this).data('title');
+                var tog = $(this).data('toggle');
+                $('#' + tog).prop('value', sel);
+
+                $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active')
+                    .addClass('notActive');
+                $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass(
+                    'active');
+            })
 
         </script>
     @endif

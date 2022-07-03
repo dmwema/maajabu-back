@@ -590,6 +590,7 @@ class ComposerStaticInitb2d5ef09583742242b17fab8b9856fe3
         'App\\Http\\Controllers\\LogicielController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogicielController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\MasteringPackController' => __DIR__ . '/../..' . '/app/Http/Controllers/MasteringPackController.php',
+        'App\\Http\\Controllers\\PackController' => __DIR__ . '/../..' . '/app/Http/Controllers/PackController.php',
         'App\\Http\\Controllers\\PaiementController' => __DIR__ . '/../..' . '/app/Http/Controllers/PaiementController.php',
         'App\\Http\\Controllers\\PublicController' => __DIR__ . '/../..' . '/app/Http/Controllers/PublicController.php',
         'App\\Http\\Controllers\\ReservationController' => __DIR__ . '/../..' . '/app/Http/Controllers/ReservationController.php',

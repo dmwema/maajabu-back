@@ -41,6 +41,7 @@ class ServiceController extends Controller
         if ($service = Service::create([
             'name' => $request->name,
             'description' => $request->description,
+            'type' => $request->type,
             'img_url' => $pathImage,
         ])) {
             return redirect()->back()->with('success', 'Service enregistré avec succès');
@@ -79,6 +80,7 @@ class ServiceController extends Controller
         $service = Service::find($request->id);
 
         $service->name = $request->name;
+        $service->type = $request->type;
         $service->description = $request->description;
 
         if (empty($request->img_url)) {

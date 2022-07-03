@@ -25,8 +25,8 @@ $title = 'nos services';
                                 <i class="fa fa-music"></i>
                             </div>
                             <div class="feature-content">
-                                <h5><a href="{{ route('public.packs', ['service_id' => $service->id]) }}"
-                                        style="color: inherit !important">{{ $service->name }}</a></h5>
+                                <h4><a href="{{ route('public.packs', ['service_id' => $service->id, 'service_name' => $service->name]) }}"
+                                        style="color: inherit !important">{{ $service->name }}</a></h4>
                                 <p>{{ $service->description }}</p>
                             </div>
                         </div>

@@ -25,12 +25,16 @@ class PackController extends Controller
      */
     public function store(Request $request)
     {
-        $filename = time() . '.' . $request->image->extension();
-        $pathImage = $request->file('image')->storeAs(
-            'services',
-            $filename,
-            'public'
-        );
+        $filename = null;
+        $pathImage = null;
+        if ($request->image !== null) {
+            $filename = time() . '.' . $request->image->extension();
+            $pathImage = $request->file('image')->storeAs(
+                'services',
+                $filename,
+                'public'
+            );
+        }
 
         if ($pack = Pack::create([
             'title' => $request->title,

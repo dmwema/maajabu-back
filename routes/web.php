@@ -192,7 +192,7 @@ Route::get('/projets', [PublicController::class, 'projects'])->name('public.proj
 
 Route::get('/services', [PublicController::class, 'services'])->name('public.services');
 
-Route::get('/packs/{service_id}', [PublicController::class, 'packs'])->name('public.packs');
+Route::get('/packs/{service_name}/{service_id}', [PublicController::class, 'packs'])->name('public.packs');
 
 Route::get('/tarifs', [PublicController::class, 'rates'])->name('public.rates');
 
@@ -202,4 +202,5 @@ Route::get('/contacts', [PublicController::class, 'contact'])->name('public.cont
 
 Route::get('/equipements', [PublicController::class, 'equipment'])->name('public.equipment');
 
-Route::post('/reservation', [PublicController::class, 'reservation'])->name('public.reservation');
+Route::post('/reservation/{pack_id}', [PublicController::class, 'reservation'])->name('public.reservation');
+Route::get('/reservation/{pack_id}', [PublicController::class, 'reservation_new'])->name('public.new_reservation');

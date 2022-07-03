@@ -46,8 +46,8 @@ $i = 0;
                             <div class="form-group">
                                 <label class="col-md-12">Description</label>
                                 <div class="col-md-12">
-                                    <input type="text" value="{{ $service->description }}" required
-                                        class="form-control form-control-line" name="description">
+                                    <textarea class="form-control form-control-line" name="description" id="description"
+                                        cols="30" rows="10" required>{{ $service->description }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -58,18 +58,12 @@ $i = 0;
                                     <input type="file" class="form-control form-control-line" name="img_url">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Tarif</label>
-                                <div class="col-md-12">
-                                    <select id="tarif" name="tarif" class="form-select">
-                                        @foreach ($tarifs as $option_tarif)
-                                            <option value="{{ $option_tarif->id }}"
-                                                {{ isset($service->tarif) && $service->tarif->id == $option_tarif->id ? 'selected' : '' }}
-                                                required>{{ $option_tarif->name }} ({{ $option_tarif->price }} $ US)
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                            <div class="mt-4">
+                                <select name="type" id="type" class="form-select">
+                                    <option value="1" {{ $service->type == 1 ? 'selected' : '' }}>Mastering</option>
+                                    <option value="2" {{ $service->type == 2 ? 'selected' : '' }}>Impression</option>
+                                    <option value="3" {{ $service->type == 3 ? 'selected' : '' }}>Duplication</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">

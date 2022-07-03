@@ -32,8 +32,8 @@
 .feature-box-1 .icon i {
     line-height: 70px;
 }
-.feature-box-1 h5 {
-    color: #20247b;
+.feature-box-1 h4 {
+    color: #1c1b1f;
     font-weight: 600;
 }
 .feature-box-1 p {
@@ -48,7 +48,7 @@
     right: 0;
     border-radius: 10px;
     width: 0;
-    background: #20247b;
+    background: #1c1b1f;
     z-index: -1;
     -moz-transition: ease all 0.35s;
     -o-transition: ease all 0.35s;
@@ -58,7 +58,7 @@
 .feature-box-1:hover {
     top: -5px;
 }
-.feature-box-1:hover h5 {
+.feature-box-1:hover h4 {
     color: #ffffff;
 }
 .feature-box-1:hover p {
@@ -72,9 +72,82 @@
     right: auto;
 }
 .section {
-    padding: 100px 0;
+    padding: 50px 0;
     position: relative;
 }
 .section-title {
     padding-bottom: 45px;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Lato", sans-serif;
+}
+
+.wrapper {
+    display: inline-flex;
+    background: #fff;
+    height: 100px;
+    width: 400px;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    padding: 20px 0;
+}
+.wrapper .option {
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid rgb(238, 238, 238);
+    transition: all 0.3s ease;
+}
+.wrapper .option i {
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+#option-1:checked:checked ~ .option-1,
+#option-2:checked:checked ~ .option-2 {
+    border-color: #0069d9;
+    background: #0069d9;
+}
+#option-1:checked:checked ~ .option-1 i,
+#option-2:checked:checked ~ .option-2 i {
+    color: #fff;
+}
+#option-1:checked:checked ~ .option-1 .dot::before,
+#option-2:checked:checked ~ .option-2 .dot::before {
+    opacity: 1;
+    transform: scale(1);
+}
+.wrapper .option span {
+    font-size: 17px;
+    color: #808080;
+}
+#option-1:checked:checked ~ .option-1 span,
+#option-2:checked:checked ~ .option-2 span {
+    color: #fff;
+}
+
+p.description {
+    margin: 0;
+}
+
+.description hr {
+    margin: 10px 0;
+}
+
+.feature-content .description hr {
+    margin: 5px 0;
 }

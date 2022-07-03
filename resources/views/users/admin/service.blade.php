@@ -124,7 +124,7 @@ $i = 0;
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ajouter un service</h5>
@@ -133,23 +133,26 @@ $i = 0;
                 <form method="POST" action="{{ route('service.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label for="name" class="form-label">Nom</label>
-                                <input type="text" class="form-control" required id="name" name="name">
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="description" class="form-label">Description</label>
-                                <textarea name="description" id="description" required cols="1" rows="3"
-                                    class="form-control"></textarea>
-                            </div>
+                        <div class="mt-4">
+                            <label for="name" class="form-label">Nom</label>
+                            <input type="text" class="form-control" required id="name" name="name">
                         </div>
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label for="img_url" class="form-label">Photo</label>
-                                <input type="file" class="form-control" id="img_url" name="img_url"
-                                    accept="image/png, image/jpeg">
-                            </div>
+                        <div class="mt-4">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea name="description" id="description" required cols="1" rows="3"
+                                class="form-control"></textarea>
+                        </div>
+                        <div class="mt-4">
+                            <select name="type" id="type" class="form-select">
+                                <option value="1">Mastering</option>
+                                <option value="2">Impression</option>
+                                <option value="3">Duplication</option>
+                            </select>
+                        </div>
+                        <div class="mt-4">
+                            <label for="img_url" class="form-label">Photo</label>
+                            <input type="file" class="form-control" id="img_url" name="img_url"
+                                accept="image/png, image/jpeg">
                         </div>
                     </div>
                     <div class="modal-footer">

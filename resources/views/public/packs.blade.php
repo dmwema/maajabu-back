@@ -1,7 +1,7 @@
 @extends('public.layout.main')
 
 @php
-$page = 'packs';
+$page = 'services';
 $title = $service->title;
 @endphp
 
@@ -12,7 +12,7 @@ $title = $service->title;
                 <div class="col-lg-6">
                     <div class="section-title">
                         <h2>{{ $service->name }}</h2>
-                        <p>Tous les packs</p>
+                        <p>{{ $service->description }}</p>
                     </div>
                 </div>
             </div>
@@ -21,12 +21,13 @@ $title = $service->title;
                     <!-- feaure box -->
                     <div class="col-sm-6 col-lg-4">
                         <div class="feature-box-1">
-                            <div class="icon">
-                                <i class="fa fa-music"></i>
-                            </div>
                             <div class="feature-content">
-                                <h5>{{ $pack->title }}</h5>
-                                <p>{{ $pack->description }}</p>
+                                <h4>{{ $pack->title }}</h4>
+                                <div class="description">{!! $pack->description !!}</div>
+                                <hr>
+                                <p style="font-weight: bold">{{ $pack->price }} $</p>
+                                <a href="{{ route('public.new_reservation', ['pack_id' => $pack->id]) }}"
+                                    class="btn btn-primary mt-4">Réserver</a>
                             </div>
                         </div>
                     </div>

@@ -12,17 +12,16 @@ class Service extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','description','tarif_id','img_url'];
+    protected $fillable = ['name', 'description', 'type', 'img_url'];
 
 
-    public function tarif(){
+    public function tarif()
+    {
         return $this->belongsTo(Tarif::class);
     }
 
-    public function reservations(){
+    public function reservations()
+    {
         return $this->hasMany(Reservation::class);
     }
-    // public function image(){
-    //     return $this->morphOne(Image::class,'imageable');
-    // }
 }
