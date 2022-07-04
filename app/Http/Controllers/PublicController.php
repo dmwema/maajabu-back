@@ -115,7 +115,10 @@ class PublicController extends Controller
 
         $pack = Pack::find($request->pack_id);
         $service = Service::find($pack->service_id);
+        $group = null;
+        $user = null;
 
+        // check client type
         if ($request->client_type == 1) {
             $group_name = $request->group_name;
             $group_owner = $request->group_user;
@@ -124,10 +127,9 @@ class PublicController extends Controller
             $group_members = $request->group_members;
 
             if ($group_name === null || $group_owner === null || $group_members === null || $group_address === null || $group_phone === null) {
-                return redirect()->back()->with('groupe', '');
+                return redirect('/reservation/' . $pack->id)->with('groupe', '')->withInput();
             } else {
                 $groups = group::where('name', $group_name)->where('phone', $group_phone)->get();
-                $group = null;
 
                 if (count($groups) == 0) {
                     $group = group::create([
@@ -140,7 +142,6 @@ class PublicController extends Controller
                 } else {
                     $group = group::where('name', $group_name)->where('phone', $group_name)->first();
                 }
-                return $group;
             }
         } elseif ($request->client_type == 2) {
             $user_lastname = $request->user_lastname;
@@ -150,10 +151,9 @@ class PublicController extends Controller
             $user_email = $request->user_email;
 
             if ($user_lastname === null || $user_email === null || $user_firstname === null || $user_phone === null || $user_address === null) {
-                return redirect()->back()->with('user', '');
+                return redirect('/reservation/' . $pack->id)->with('user', '');
             } else {
                 $users = User::where('email', $user_email)->get();
-                $user = null;
 
                 if (count($users) == 0) {
                     $user = User::create([
@@ -167,33 +167,67 @@ class PublicController extends Controller
                 } else {
                     $user = User::where('email', $user_email)->get();
                 }
-
-                dd($user);
             }
         }
 
-        dd($request->all());
-        $name = $request->name;
-        $email = $request->email;
-        $phone = $request->phone;
-        $address = $request->addres;
-        $date = explode('/', $request->date)[2] . "/" . explode('/', $request->date)[1] . "/" . explode('/', $request->date)[0];
+        // check service type
+        if ($service->type == 1) {
+            // store mastering
+            $seance_type = $request->seance_type;
+            //$seance_qte = $request->seance_qte;
+            $start_date = $request->start_date;
+            $enr_type = $request->enr_type;
+            $enr_type2 = $request->enr_type2;
+            $songs_nb = $request->songs_nb;
 
-        $service = $request->service;
+            if ($seance_type === null /*|| $seance_qte === null*/ || $start_date === null || $enr_type === null || $enr_type2 === null || $songs_nb === null) {
+                return redirect('/reservation/' . $pack->id)->with('service', '')->withInput();
+            } else {
+                //store
+                $data = [
+                    'client_type' => $request->client_type,
+                    'service_id' => $service->id,
+                    'seance_type' => $seance_type,
+                    //'seance_qte' => $seance_qte,
+                    'start_date' => $start_date,
+                    'enr_type' => $enr_type,
+                    'enr_type2' => $enr_type2,
+                    'songs_nb' => $songs_nb,
+                ];
+                if ($request->client_type == 1) {
+                    $data['group_id'] = $group->id;
+                } elseif ($request->client_type == 1) {
+                    $data['user_id'] = $user->id;
+                }
+                if (Reservation::create($data)) {
+                    return redirect()->back()->with('success', 'Réservation enrégistrée avec succès !');
+                }
+            }
+        } elseif ($service->type == 2) {
+            // impression
+            $copies = $request->copies;
+            $impression_proch = $request->impression_proch;
 
-        $reservation = new Reservation();
-        $reservation->name = $name;
-        $reservation->email = $email;
-        $reservation->phone = $phone;
-        $reservation->address = $address;
-        $reservation->date_reservation = $date;
-        $reservation->service_id = $service;
-        $reservation->user_id = 1;
-        $reservation->quatity = 1;
+            if ($copies === null || $impression_proch) {
+                return redirect('/reservation/' . $pack->id)->with('service', '')->withInput();
+            } else {
+                //store
+                dd('store');
+            }
+        } elseif ($service->type == 3) {
+            //duplication
+            $duplication_nb = $request->duplication_nb;
+            $duplication_type = $request->duplication_type;
 
-        if ($reservation->save()) {
-            return redirect()->back()->with('success', 'Réservation enrégistrée avec succès !');
+            if ($duplication_nb === null || $duplication_type) {
+                return redirect('/reservation/' . $pack->id)->with('service', '')->withInput();
+            } else {
+                //store
+                dd('store');
+            }
         }
+        dd($service->type == 1);
+        return redirect()->back();
     }
 
     public function reservation_new(Request $request)

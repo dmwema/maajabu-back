@@ -11,7 +11,7 @@ $title = $service->title;
             <div class="row">
                 <div class="col-lg-6">
                     <div class="section-title">
-                        <h2>{{ $service->name }}</h2>
+                        <h3>{{ $service->name }}</h3>
                         <p>{{ $service->description }}</p>
                     </div>
                 </div>
@@ -25,7 +25,10 @@ $title = $service->title;
                                 <h4>{{ $pack->title }}</h4>
                                 <div class="description">{!! $pack->description !!}</div>
                                 <hr>
-                                <p style="font-weight: bold">{{ $pack->price }} $</p>
+                                <p
+                                    style="font-weight: bold;color: #fff;background-color: red;  display: inline-block;padding: 5px 10px;border-radius: 4px;">
+                                    {{ $pack->price }} $
+                                </p><br>
                                 <a href="{{ route('public.new_reservation', ['pack_id' => $pack->id]) }}"
                                     class="btn btn-primary mt-4">Réserver</a>
                             </div>
