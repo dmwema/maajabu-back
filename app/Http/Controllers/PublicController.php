@@ -208,22 +208,49 @@ class PublicController extends Controller
             $copies = $request->copies;
             $impression_proch = $request->impression_proch;
 
-            if ($copies === null || $impression_proch) {
+            if ($copies === null || $impression_proch === null) {
                 return redirect('/reservation/' . $pack->id)->with('service', '')->withInput();
             } else {
-                //store
-                dd('store');
+
+                $data = [
+                    'client_type' => $request->client_type,
+                    'service_id' => $service->id,
+                    'copies' => $copies,
+                    //'seance_qte' => $seance_qte,
+                    'impression_proch' => $impression_proch
+                ];
+                if ($request->client_type == 1) {
+                    $data['group_id'] = $group->id;
+                } elseif ($request->client_type == 1) {
+                    $data['user_id'] = $user->id;
+                }
+                if (Reservation::create($data)) {
+                    return redirect()->back()->with('success', 'Réservation enrégistrée avec succès !');
+                }
             }
         } elseif ($service->type == 3) {
             //duplication
             $duplication_nb = $request->duplication_nb;
             $duplication_type = $request->duplication_type;
 
-            if ($duplication_nb === null || $duplication_type) {
+            if ($duplication_nb === null || $duplication_type === null) {
                 return redirect('/reservation/' . $pack->id)->with('service', '')->withInput();
             } else {
-                //store
-                dd('store');
+                $data = [
+                    'client_type' => $request->client_type,
+                    'service_id' => $service->id,
+                    'duplication_nb' => $duplication_nb,
+                    //'seance_qte' => $seance_qte,
+                    'duplication_type' => $duplication_type
+                ];
+                if ($request->client_type == 1) {
+                    $data['group_id'] = $group->id;
+                } elseif ($request->client_type == 1) {
+                    $data['user_id'] = $user->id;
+                }
+                if (Reservation::create($data)) {
+                    return redirect()->back()->with('success', 'Réservation enrégistrée avec succès !');
+                }
             }
         }
         dd($service->type == 1);

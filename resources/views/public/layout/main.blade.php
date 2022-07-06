@@ -82,8 +82,8 @@
                         <li class="{{ $page == 'services' ? 'active' : '' }}"><a
                                 href="{{ route('public.services') }}">SERVICES</a>
                         </li>
-                        <li class="{{ $page == 'rates' ? 'active' : '' }}"><a
-                                href="{{ route('public.rates') }}">TARIFS</a></li>
+                        <!--<li class="{{ $page == 'rates' ? 'active' : '' }}"><a
+                                href="{{ route('public.rates') }}">TARIFS</a></li>-->
 
                         <li class="{{ $page == 'galery' ? 'active' : '' }}"><a
                                 href="{{ route('public.galery') }}">GALLERIE</a></li>
