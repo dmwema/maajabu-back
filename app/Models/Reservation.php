@@ -23,6 +23,7 @@ class Reservation extends Model
         'songs_nb',
         'group_id',
         'user_id',
+        'date',
     ];
 
     // protected $hidden = [

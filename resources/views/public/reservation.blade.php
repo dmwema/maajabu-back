@@ -126,10 +126,10 @@ $title = 'nos services';
                                     </select>
                                 </div>
                                 <!--<div class="form-group col-md-4">
-                                        <label for="seance_qte" class="form-label">Nombre de séances</label>
-                                        <input type="number" value="{{ old('seance_qte') }}" class="form-control"
-                                            id="seance_qte" name="seance_qte">
-                                    </div>-->
+                                                                                                    <label for="seance_qte" class="form-label">Nombre de séances</label>
+                                                                                                    <input type="number" value="{{ old('seance_qte') }}" class="form-control"
+                                                                                                        id="seance_qte" name="seance_qte">
+                                                                                                </div>-->
                                 <div class="form-group col-md-4">
                                     <label for="start_date" class="form-label">Date du début</label>
                                     <input type="datetime-local" class="form-control" id="start_date" name="start_date">
@@ -156,8 +156,8 @@ $title = 'nos services';
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="songs_nb">Nombre de chansons</label>
-                                    <input type="number" value="{{ old('songs_nb') }}" class="form-control"
-                                        value="{{ old('songs_nb') }}" id="songs_nb" name="songs_nb" placeholder="">
+                                    <input type="number" class="form-control" value="{{ old('songs_nb') }}" id="songs_nb"
+                                        name="songs_nb" placeholder="">
                                 </div>
                             @elseif ($service->type == 2)
                                 <div class="form-group col-md-6">

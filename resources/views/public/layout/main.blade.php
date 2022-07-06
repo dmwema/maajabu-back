@@ -30,6 +30,9 @@
         <link href="{{ asset('css/services.css') }}" rel="stylesheet">
     @endif
 
+
+    @yield('style')
+
 </head>
 
 <body class="{{ $page == 'home' ? 'home-page' : '' }}">

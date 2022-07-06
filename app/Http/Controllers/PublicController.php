@@ -101,6 +101,9 @@ class PublicController extends Controller
 
     public function reservation(Request $request)
     {
+        $services = Service::all();
+        $studio = Studio::all()->first();
+
         $group_name = null;
         $group_owner = null;
         $group_address = null;
@@ -117,6 +120,9 @@ class PublicController extends Controller
         $service = Service::find($pack->service_id);
         $group = null;
         $user = null;
+
+        $date = $request->date;
+        $created_at = null;
 
         // check client type
         if ($request->client_type == 1) {
@@ -180,7 +186,7 @@ class PublicController extends Controller
             $enr_type2 = $request->enr_type2;
             $songs_nb = $request->songs_nb;
 
-            if ($seance_type === null /*|| $seance_qte === null*/ || $start_date === null || $enr_type === null || $enr_type2 === null || $songs_nb === null) {
+            if ($seance_type === null || $start_date === null || $enr_type === null || $enr_type2 === null || $songs_nb === null) {
                 return redirect('/reservation/' . $pack->id)->with('service', '')->withInput();
             } else {
                 //store
@@ -199,7 +205,8 @@ class PublicController extends Controller
                 } elseif ($request->client_type == 1) {
                     $data['user_id'] = $user->id;
                 }
-                if (Reservation::create($data)) {
+                if ($id = Reservation::create($data)) {
+                    return redirect()->route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack->id, 'service_id' => $service->id]);
                     return redirect()->back()->with('success', 'Réservation enrégistrée avec succès !');
                 }
             }
@@ -266,5 +273,27 @@ class PublicController extends Controller
         $groups = group::all();
 
         return view('public.reservation',  ['groups' => $groups, 'studio' => $studio, 'pack' => $pack, 'service' => $service, 'services' => $services]);
+    }
+
+    public function invoice(Request $request)
+    {
+        $services = Service::all();
+        $studio = Studio::all()->first();
+
+        $reservation = Reservation::find($request->reservation_id);
+        $user = null;
+        $group = null;
+
+        if ($reservation->user_id !== null) {
+            $user = User::find($reservation('user_id'));
+        }
+
+        if ($reservation->group_id !== null) {
+            $group = group::find($reservation->group_id);
+        }
+
+        $date = $reservation->type == 1 ? Carbon::parse($reservation->start_date)->format('D, d M Y à H:i') : Carbon::parse($reservation->created_at)->format('D, d M Y à H:i');
+
+        return view('public.invoice', ['date' => $date, 'studio' => $studio, 'user' => $user, 'group' => $group, 'services' => $services, 'service' => Service::find($request->service_id), 'pack' => Pack::find($request->pack_id), 'reservation' => $reservation]);
     }
 }
