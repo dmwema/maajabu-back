@@ -22,8 +22,9 @@ class Reservation extends Model
         'enr_type2',
         'songs_nb',
         'group_id',
-        'user_id',
         'date',
+        'copies',
+        'impression_proch',
     ];
 
     // protected $hidden = [

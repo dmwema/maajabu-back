@@ -395,27 +395,6 @@
     @endif
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @if (session()->has('success'))
-        <script>
-            Swal.fire(
-                'Réservation enrégistrée!',
-                'Votre réservation a été enrégistrée avec succès. nous vous contacterons pour la suite!',
-                'success'
-            )
-            $('#radioBtn a').on('click', function() {
-                var sel = $(this).data('title');
-                var tog = $(this).data('toggle');
-                $('#' + tog).prop('value', sel);
-
-                $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active')
-                    .addClass('notActive');
-                $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass(
-                    'active');
-            })
-
-        </script>
-    @endif
-
     @if (session()->has('groupe'))
         <script>
             Swal.fire(

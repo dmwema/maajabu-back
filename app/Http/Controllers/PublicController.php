@@ -203,11 +203,11 @@ class PublicController extends Controller
                 if ($request->client_type == 1) {
                     $data['group_id'] = $group->id;
                 } elseif ($request->client_type == 1) {
+                    return $user;
                     $data['user_id'] = $user->id;
                 }
                 if ($id = Reservation::create($data)) {
-                    return redirect()->route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack->id, 'service_id' => $service->id]);
-                    return redirect()->back()->with('success', 'Réservation enrégistrée avec succès !');
+                    return redirect()->route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack->id, 'service_id' => $service->id])->with('success', '');
                 }
             }
         } elseif ($service->type == 2) {
@@ -218,12 +218,10 @@ class PublicController extends Controller
             if ($copies === null || $impression_proch === null) {
                 return redirect('/reservation/' . $pack->id)->with('service', '')->withInput();
             } else {
-
                 $data = [
                     'client_type' => $request->client_type,
                     'service_id' => $service->id,
                     'copies' => $copies,
-                    //'seance_qte' => $seance_qte,
                     'impression_proch' => $impression_proch
                 ];
                 if ($request->client_type == 1) {
@@ -231,8 +229,8 @@ class PublicController extends Controller
                 } elseif ($request->client_type == 1) {
                     $data['user_id'] = $user->id;
                 }
-                if (Reservation::create($data)) {
-                    return redirect()->back()->with('success', 'Réservation enrégistrée avec succès !');
+                if ($id = Reservation::create($data)) {
+                    return redirect()->route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack->id, 'service_id' => $service->id])->with('success', '');
                 }
             }
         } elseif ($service->type == 3) {
@@ -255,8 +253,8 @@ class PublicController extends Controller
                 } elseif ($request->client_type == 1) {
                     $data['user_id'] = $user->id;
                 }
-                if (Reservation::create($data)) {
-                    return redirect()->back()->with('success', 'Réservation enrégistrée avec succès !');
+                if ($id = Reservation::create($data)) {
+                    return redirect()->route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack->id, 'service_id' => $service->id])->with('success', '');
                 }
             }
         }
@@ -285,7 +283,7 @@ class PublicController extends Controller
         $group = null;
 
         if ($reservation->user_id !== null) {
-            $user = User::find($reservation('user_id'));
+            $user = User::find($reservation->user_id);
         }
 
         if ($reservation->group_id !== null) {

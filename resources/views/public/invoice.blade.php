@@ -8,14 +8,19 @@ $title = 'Invoice';
 @section('content')
     <section class="back" style="margin: 20px 0; margin-bottom:80px">
         <div class="container">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <h4 class="alert-heading">Succès!</h4>
-                <p>Votre réservation a été enrégistrée avec succès. Copiez le lien de votre facture ou téléchargez-le pour
-                    le présenter au studio.</p>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+
+            @if (session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Succès!</h4>
+                    <p>Votre réservation a été enrégistrée avec succès. Copiez le lien de votre facture ou téléchargez-le
+                        pour
+                        le présenter au studio.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
             <div>
                 <div class="col-xs-12">
                     <div class="invoice-wrapper">
@@ -44,6 +49,7 @@ $title = 'Invoice';
                                             </h6>
                                         @endif
 
+                                        {{ $user === null }}
                                         @if ($user !== null)
                                             <h2 class="our-company-name" style="color: #fff">{{ $user->firstname }}
                                                 {{ $user->lastname }}</h2>
@@ -97,7 +103,7 @@ $title = 'Invoice';
                                                 </div>
                                             @elseif($service->type == 2)
                                                 <div class="col-md-6">
-                                                    <b style="color: rgb(70, 70, 70)">Nombre de scopies :</b>
+                                                    <b style="color: rgb(70, 70, 70)">Nombre des copies :</b>
                                                     {{ $reservation->copies }}
                                                 </div>
                                                 <div class="col-md-6">
@@ -216,8 +222,8 @@ $title = 'Invoice';
         }
 
         /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Invoice-bottom refers to the bottom part of invoice template
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Invoice-bottom refers to the bottom part of invoice template
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
         .invoice-bottom {
             background-color: #ffffff;
             padding: 40px 60px;
@@ -244,8 +250,8 @@ $title = 'Invoice';
         }
 
         /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Invoice-bottom-left
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Invoice-bottom-left
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
         .invoice-bottom-left h5,
         .invoice-bottom-left h4 {
             font-family: 'Montserrat', sans-serif;
