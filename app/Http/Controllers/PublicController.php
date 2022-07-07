@@ -171,7 +171,7 @@ class PublicController extends Controller
                         'address' => $user_address
                     ]);
                 } else {
-                    $user = User::where('email', $user_email)->get();
+                    $user = User::where('email', $user_email)->first();
                 }
             }
         }
@@ -202,8 +202,7 @@ class PublicController extends Controller
                 ];
                 if ($request->client_type == 1) {
                     $data['group_id'] = $group->id;
-                } elseif ($request->client_type == 1) {
-                    return $user;
+                } elseif ($request->client_type == 2) {
                     $data['user_id'] = $user->id;
                 }
                 if ($id = Reservation::create($data)) {
@@ -226,9 +225,10 @@ class PublicController extends Controller
                 ];
                 if ($request->client_type == 1) {
                     $data['group_id'] = $group->id;
-                } elseif ($request->client_type == 1) {
+                } elseif ($request->client_type == 2) {
                     $data['user_id'] = $user->id;
                 }
+
                 if ($id = Reservation::create($data)) {
                     return redirect()->route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack->id, 'service_id' => $service->id])->with('success', '');
                 }
@@ -250,7 +250,7 @@ class PublicController extends Controller
                 ];
                 if ($request->client_type == 1) {
                     $data['group_id'] = $group->id;
-                } elseif ($request->client_type == 1) {
+                } elseif ($request->client_type == 2) {
                     $data['user_id'] = $user->id;
                 }
                 if ($id = Reservation::create($data)) {

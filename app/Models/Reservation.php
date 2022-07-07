@@ -25,6 +25,8 @@ class Reservation extends Model
         'date',
         'copies',
         'impression_proch',
+        'duplication_type',
+        'duplication_nb'
     ];
 
     // protected $hidden = [
