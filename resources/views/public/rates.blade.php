@@ -148,44 +148,45 @@ $title = 'nos tarifs';
                         les projets la haute qualité
                         traitement d'un studio professionnel</p>
                 </div>
-                <div class="row skill-list skill-list-slider mb-xs-30 mb-xl-0" data-slick='{
-                                                                                                                        "slidesToShow": 3,
-                                                                                                                        "swipeToSlide": true,
-                                                                                                                        "adaptiveHeight": true,
-                                                                                                                        "autoplay": true,
-                                                                                                                        "autoplaySpeed": 3000,
-                                                                                                                        "arrows": false,
-                                                                                                                        "dots": true,
-                                                                                                                        "responsive": [
-                                                                                                                            {
-                                                                                                                                "breakpoint": 1200,
-                                                                                                                                "settings": {
-                                                                                                                                    "slidesToShow": 2,
-                                                                                                                                    "arrows": false,
-                                                                                                                                    "adaptiveHeight": true,
-                                                                                                                                    "dots": true
-                                                                                                                                }
-                                                                                                                            },
-                                                                                                                            {
-                                                                                                                                "breakpoint": 992,
-                                                                                                                                "settings": {
-                                                                                                                                    "slidesToShow": 2,
-                                                                                                                                    "arrows": false,
-                                                                                                                                    "adaptiveHeight": true,
-                                                                                                                                    "dots": true
-                                                                                                                                }
-                                                                                                                            },
-                                                                                                                            {
-                                                                                                                                "breakpoint": 768,
-                                                                                                                                "settings": {
-                                                                                                                                    "slidesToShow": 1,
-                                                                                                                                    "arrows": false,
-                                                                                                                                    "adaptiveHeight": true,
-                                                                                                                                    "dots": true
-                                                                                                                                }
-                                                                                                                            }
-                                                                                                                        ]
-                                                                                                                     }'>
+                <div class="row skill-list skill-list-slider mb-xs-30 mb-xl-0"
+                    data-slick='{
+                                                                                                                                "slidesToShow": 3,
+                                                                                                                                "swipeToSlide": true,
+                                                                                                                                "adaptiveHeight": true,
+                                                                                                                                "autoplay": true,
+                                                                                                                                "autoplaySpeed": 3000,
+                                                                                                                                "arrows": false,
+                                                                                                                                "dots": true,
+                                                                                                                                "responsive": [
+                                                                                                                                    {
+                                                                                                                                        "breakpoint": 1200,
+                                                                                                                                        "settings": {
+                                                                                                                                            "slidesToShow": 2,
+                                                                                                                                            "arrows": false,
+                                                                                                                                            "adaptiveHeight": true,
+                                                                                                                                            "dots": true
+                                                                                                                                        }
+                                                                                                                                    },
+                                                                                                                                    {
+                                                                                                                                        "breakpoint": 992,
+                                                                                                                                        "settings": {
+                                                                                                                                            "slidesToShow": 2,
+                                                                                                                                            "arrows": false,
+                                                                                                                                            "adaptiveHeight": true,
+                                                                                                                                            "dots": true
+                                                                                                                                        }
+                                                                                                                                    },
+                                                                                                                                    {
+                                                                                                                                        "breakpoint": 768,
+                                                                                                                                        "settings": {
+                                                                                                                                            "slidesToShow": 1,
+                                                                                                                                            "arrows": false,
+                                                                                                                                            "adaptiveHeight": true,
+                                                                                                                                            "dots": true
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                ]
+                                                                                                                             }'>
                     <div class="col-sm-6 col-lg-4">
                         <div class="icon-block">
                             <div class="custom-icon">

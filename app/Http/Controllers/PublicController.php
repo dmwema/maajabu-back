@@ -53,8 +53,25 @@ class PublicController extends Controller
         $services = Service::all();
         $studio = Studio::all()->first();
         $services = Service::all();
+        $services_ret = [];
 
-        return view('public.services', ['studio' => $studio, 'services' => $services]);
+        $i = 0;
+        $master = null;
+        foreach ($services as $service) {
+            if ($i == 0 && $service->type == 1) {
+                $master = $service;
+            } else {
+                if ($i == 1) {
+                    $services_ret[] = $service;
+                    $services_ret[] = $master;
+                } else {
+                    $services_ret[] = $service;
+                }
+            }
+            $i++;
+        }
+
+        return view('public.services', ['studio' => $studio, 'services' => $services_ret]);
     }
 
     public function packs(Request $request)
@@ -213,7 +230,7 @@ class PublicController extends Controller
             $copies = $request->copies;
             $impression_proch = $request->impression_proch;
 
-            if ($copies === null || $impression_proch === null) {
+            if ($copies === null) {
                 return redirect('/reservation/' . $pack->id)->with('service', '')->withInput();
             } else {
                 $data = [

@@ -40,7 +40,6 @@ $title = 'nos services';
                                         <span>Nous sommes un groupe</span></label>
                                     <div class="tab">
                                         <div class="col-md-12 form">
-                                            <input type="hidd1">
                                             <div class="form-group">
                                                 <label for="group_name">Nom du groupe</label>
                                                 <input type="text" autocomplete="off" value="{{ old('group_name') }}"
