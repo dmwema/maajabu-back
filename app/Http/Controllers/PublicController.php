@@ -136,7 +136,6 @@ class PublicController extends Controller
                 return redirect('/reservation/' . $pack->id)->with('groupe', '')->withInput();
             } else {
                 $groups = group::where('name', $group_name)->where('phone', $group_phone)->get();
-
                 if (count($groups) == 0) {
                     $group = group::create([
                         'name' => $group_name,
@@ -146,7 +145,7 @@ class PublicController extends Controller
                         'members' => $group_members,
                     ]);
                 } else {
-                    $group = group::where('name', $group_name)->where('phone', $group_name)->first();
+                    $group = $groups[0];
                 }
             }
         } elseif ($request->client_type == 2) {
