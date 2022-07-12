@@ -11,28 +11,33 @@ $title = 'Méthode de paiement';
             <h3>Comment souhaitez vous payer ?</h3>
             <div class="row">
                 <div class="col-md-6">
-                    <button class="pay-btn">
-                        <b>Payer cash au studio</b> <br>
-                        <hr>
-                        <p>Après une semaine la reservation sera automatiquement annulée</p>
+
+                    <form
+                        action="{{ route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack, 'service_id' => $service->id]) }}"
+                        method="get">
+                        <button class="pay-btn" type="submit">
+                            <b>Payer cash au studio</b> <br>
+                            <hr>
+                            <p>Après une semaine la reservation sera automatiquement annulée</p>
+                    </form>
                     </button>
                 </div>
-                <div class="col-md-6">  
+                <div class="col-md-6">
                     <form action="https://api.maxicashapp.com/PayEntryPost" method="POST">
                         <input type="hidden" name="PayType" value="MaxiCash">
-                        <input type="hidden" name="Amount" value="2000">
+                        <input type="hidden" name="Amount" value="{{ $reservation->total * 100 }}">
                         <input type="hidden" name="Currency" value="MaxiDollar">
-                        <input type="hidden" name="Telephone" value="0814063056">
-                        <input type="hidden" name="Email" value="danielmwemakapwe@gmail.com">
+                        <input type="hidden" name="Telephone" value="{{ $phone }}">
+                        <input type="hidden" name="Email" value="contact@neemamajabu.com">
 
                         <input type="hidden" name="MerchantID" value="fa206ebcf8fc4686ba4f271847238c15">
                         <input type="hidden" name="MerchantPassword" value="beddc523074a4d5b8431bce664d6cbbd">
                         <input type="hidden" name="Language" value="Fr">
-                        <input type="hidden" name="Reference" value="1234">
-                        <input type="hidden" name="accepturl" value="{SUCCESS_URL}">
-                        <input type="hidden" name="cancelurl" value="{CANCEL_URL}">
-                        <input type="hidden" name="declineurl" value="{FAILURE_URL}">
-                        <input type="hidden" name="notifyurl" value="{NOTIFY_URL}">
+                        <input type="hidden" name="Reference" value="Reservation#00{{ $reservation->id }}">
+                        <input type="hidden" name="accepturl" value="/">
+                        <input type="hidden" name="cancelurl" value="/">
+                        <input type="hidden" name="declineurl" value="/">
+                        <input type="hidden" name="notifyurl" value="/">
                         <button class="pay-btn">
                             <b>Payer en ligne</b> <br>
                             <hr>

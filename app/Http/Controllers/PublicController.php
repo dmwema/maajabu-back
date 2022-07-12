@@ -229,15 +229,19 @@ class PublicController extends Controller
                     'status' => 1,
                     'total' => $seance_type === 1 ? $pack->price * $songs_nb : $pack->price * $songs_nb * 2
                 ];
+
+                $phone = null;
+
                 if ($request->client_type == 1) {
                     $data['group_id'] = $group->id;
+                    $phone = $group->phone;
                 } elseif ($request->client_type == 2) {
                     $data['user_id'] = $user->id;
+                    $phone = $user->phone;
                 }
                 if ($id = Reservation::create($data)) {
-                    $reservation = Reservation::find($id);
-                    return view('public.paiement', ['studio' => $studio, 'reservation' => $reservation]);
-                    return redirect()->route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack->id, 'service_id' => $service->id])->with('success', '');
+                    return view('public.paiement', ['studio' => $studio, 'reservation' => Reservation::find($id)[0], 'id' => $id, 'phone' => $phone, 'services' => $services, 'pack' => $pack->id, 'service' => $service]);
+                    //return redirect()->route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack->id, 'service_id' => $service->id])->with('success', '');
                 }
             }
         } elseif ($service->type == 2) {
