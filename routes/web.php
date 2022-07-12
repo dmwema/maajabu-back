@@ -196,7 +196,7 @@ Route::get('/packs/{service_name}/{service_id}', [PublicController::class, 'pack
 
 Route::get('/facture/{reservation_id}/{pack_id}/{service_id}', [PublicController::class, 'invoice'])->name('public.invoice');
 
-// Route::get('/tarifs', [PublicController::class, 'rates'])->name('public.rates');
+Route::get('/paiement', [PublicController::class, 'paiement'])->name('public.paiement');
 
 Route::get('/gallerie', [PublicController::class, 'galery'])->name('public.galery');
 

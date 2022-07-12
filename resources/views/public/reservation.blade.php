@@ -183,7 +183,7 @@ $title = 'nos services';
                         </div>
                     </div>
                     <div class="text-center mt-4" style="text-align: center; width:100%">
-                        <button class="btn btn-primary mt-4">Valider la réservation</button>
+                        <button class="btn btn-primary mt-4 mr-4">Continuer</button>
                     </div>
                 </div>
 
@@ -195,8 +195,8 @@ $title = 'nos services';
 @section('style')
     <style>
         /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             * Tabs Block
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * Tabs Block
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */
         .tabs-block {
             display: flex;
             align-items: center;
@@ -204,8 +204,8 @@ $title = 'nos services';
         }
 
         /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             * Tabs
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * Tabs
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */
         .tabs {
             display: flex;
             flex-wrap: wrap;

@@ -74,6 +74,17 @@ class PublicController extends Controller
         return view('public.services', ['studio' => $studio, 'services' => $services_ret]);
     }
 
+
+    public function paiement(Request $request)
+    {
+        $services = Service::all();
+        $studio = Studio::all()->first();
+        $services = Service::all();
+        $services_ret = [];
+
+        return view('public.paiement', ['studio' => $studio, 'services' => $services]);
+    }
+
     public function packs(Request $request)
     {
         $service = Service::find($request->service_id);
@@ -215,6 +226,8 @@ class PublicController extends Controller
                     'enr_type' => $enr_type,
                     'enr_type2' => $enr_type2,
                     'songs_nb' => $songs_nb,
+                    'status' => 1,
+                    'total' => $seance_type === 1 ? $pack->price * $songs_nb : $pack->price * $songs_nb * 2
                 ];
                 if ($request->client_type == 1) {
                     $data['group_id'] = $group->id;
@@ -222,6 +235,8 @@ class PublicController extends Controller
                     $data['user_id'] = $user->id;
                 }
                 if ($id = Reservation::create($data)) {
+                    $reservation = Reservation::find($id);
+                    return view('public.paiement', ['studio' => $studio, 'reservation' => $reservation]);
                     return redirect()->route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack->id, 'service_id' => $service->id])->with('success', '');
                 }
             }

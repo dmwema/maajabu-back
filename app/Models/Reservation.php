@@ -26,12 +26,14 @@ class Reservation extends Model
         'copies',
         'impression_proch',
         'duplication_type',
+        'status',
+        'total',
         'duplication_nb'
     ];
 
     // protected $hidden = [
     //     'pivot'
-    // ];
+    // ]
 
     public function user()
     {
