@@ -30,14 +30,18 @@ $title = 'Méthode de paiement';
                         <input type="hidden" name="Telephone" value="{{ $phone }}">
                         <input type="hidden" name="Email" value="contact@neemamajabu.com">
 
-                        <input type="hidden" name="MerchantID" value="fa206ebcf8fc4686ba4f271847238c15">
-                        <input type="hidden" name="MerchantPassword" value="beddc523074a4d5b8431bce664d6cbbd">
+                        <input type="hidden" name="MerchantID" value="2bd7fd5caedc48dd8c5bcabee629812b">
+                        <input type="hidden" name="MerchantPassword" value="55a6046137584680abddafe262985ff2">
                         <input type="hidden" name="Language" value="Fr">
                         <input type="hidden" name="Reference" value="Reservation#00{{ $reservation->id }}">
-                        <input type="hidden" name="accepturl" value="/">
-                        <input type="hidden" name="cancelurl" value="/">
-                        <input type="hidden" name="declineurl" value="/">
-                        <input type="hidden" name="notifyurl" value="/">
+                        <input type="hidden" name="accepturl"
+                            value="{{ route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack, 'service_id' => $service->id]) }}">
+                        <input type="hidden" name="cancelurl"
+                            value="{{ route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack, 'service_id' => $service->id]) }}">
+                        <input type="hidden" name="declineurl"
+                            value="{{ route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack, 'service_id' => $service->id]) }}">
+                        <input type="hidden" name="notifyurl"
+                            value="{{ route('public.invoice', ['reservation_id' => $id, 'pack_id' => $pack, 'service_id' => $service->id]) }}">
                         <button class="pay-btn">
                             <b>Payer en ligne</b> <br>
                             <hr>
