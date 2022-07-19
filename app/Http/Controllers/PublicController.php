@@ -219,7 +219,7 @@ class PublicController extends Controller
                 //store
                 $data = [
                     'client_type' => $request->client_type,
-                    'service_id' => $service->id,
+                    'pack_id' => $pack->id,
                     'seance_type' => $seance_type,
                     //'seance_qte' => $seance_qte,
                     'start_date' => $start_date,

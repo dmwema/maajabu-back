@@ -19,7 +19,8 @@ $i = 0;
             </div>
             <div class="col-7">
                 <div class="text-end upgrade-btn">
-                    <a href="{{ route('reservation.new') }}" class="btn btn-success text-white" class="mdi mdi-plus"></i>
+                    <a href="{{ route('public.services') }}" target="_blank" class="btn btn-success text-white"
+                        class="mdi mdi-plus"></i>
                         Enrégistrer une reservation</a>
                 </div>
             </div>
@@ -54,7 +55,7 @@ $i = 0;
                     <div class="card-body">
                         <h4 class="card-title">Toutes les reservations enregistrées</h4>
                         <hr>
-                        @if (count($reservations) > 0)
+                        @if (count($datas) > 0)
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -62,76 +63,68 @@ $i = 0;
                                             <th scope="col">#</th>
                                             <th scope="col">Date de reservation</th>
                                             <th scope="col">Client</th>
-                                            <th scope="col">Email client</th>
                                             <th scope="col">Tél. client</th>
                                             <th scope="col">Adresse</th>
                                             <th scope="col">Service reservé</th>
-                                            <th scope="col">Quantité</th>
-                                            <th scope="col">Frais</th>
+                                            <th scope="col">Type des séances</th>
+                                            <th scope="col">Date début</th>
+                                            <th scope="col">Type d'enrégistrément</th>
+                                            <th scope="col">Type</th>
+                                            <th scope="col">Nombre de chansons</th>
+                                            <th scope="col">Statut</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($reservations as $reservation)
+                                        @foreach ($datas as $data)
                                             @php
                                                 $i++;
                                             @endphp
-                                            <tr>
-                                                <th scope="row">{{ $i }}</th>
-                                                <td>{{ $reservation->date_reservation }}</td>
-                                                @if ($reservation->user_id == 1)
-                                                    <td>{{ $reservation->name }}</td>
-                                                    <td>{{ $reservation->email }}</td>
-                                                    <td>{{ $reservation->phone }}</td>
-                                                    <td>{{ $reservation->adresse }}</td>
-                                                @else
-                                                    <td>{{ $reservation->user->name }}</td>
-                                                    <td>{{ $reservation->user->email }}</td>
-                                                    <td>{{ $reservation->user->phone }}</td>
-                                                    <td>{{ $reservation->user->adresse }}</td>
-                                                @endif
-                                                <td>
-                                                    @if (isset($reservation->service) && $reservation->service != null)
-
-                                                        {{ $reservation->service->name }}
-                                                        @if ($reservation->service->tarif != null)
-                                                            ({{ $reservation->service->tarif->price }} $ US)
-                                                        @endif
-
-                                                    @else
-                                                        Aucun service
+                                            @if ($data['service']->type == 1)
+                                                <tr>
+                                                    <th scope="row">{{ $i }}</th>
+                                                    <td>{{ $data['reservation']->created_at }}</td>
+                                                    @if ($data['reservation']->user_id != null)
+                                                        <td>{{ $data['user']->firstname . ' ' . $data['user']->name . ' (' . $data['user']->email . ')' }}
+                                                        </td>
+                                                        <td>{{ $data['user']->phone }}</td>
+                                                        <td>{{ $data['user']->adresse }}</td>
+                                                    @elseif($data['reservation']->group_id != null)
+                                                        <td>Groupe
+                                                            {{ $data['group']->name . ' (de' . $data['group']->owner . ') [' . $data['group']->members . ' Membres]' }}
+                                                        </td>
+                                                        <td>{{ $data['group']->phone }}</td>
+                                                        <td>{{ $data['group']->adresse }}</td>
                                                     @endif
-                                                </td>
-                                                <td>{{ $reservation->quatity }}</td>
-                                                <td>
-                                                    @if ($reservation->service != null)
-                                                        @if ($reservation->service->tarif != null)
-
-                                                            @if ($reservation->service->tarif->price != null)
-                                                                {{ $reservation->service->tarif->price * 1 * $reservation->quatity }}
-                                                                $ US
-                                                            @endif
-                                                        @endif
-                                                    @else
-                                                        -
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <form
-                                                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet enrégistrement ? ?')"
+                                                    <td>
+                                                        {{ $data['service']->name . ' (' . $data['pack']->name . ')' }}
+                                                    </td>
+                                                    <td>{{ $data['reservation']->seance_type == 1 ? 'Normal (9h)' : 'Lockout (33h)' }}
+                                                    </td>
+                                                    <td>{{ $data['reservation']->start_date }}</td>
+                                                    <td>{{ $data['reservation']->enr_type }}</td>
+                                                    <td>{{ $data['reservation']->enr_type2 }}</td>
+                                                    <td>{{ $data['reservation']->songs_nb }}</td>
+                                                    <td
+                                                        class="bg-{{ $data['reservation']->status == 1 ? 'warning' : '' }}">
+                                                        {{ $data['reservation']->status == 1 ? 'Non payé' : '' }}</td>
+                                                    <form onsubmit=" return confirm('Êtes-vous sûr de vouloir supprimer
+                                                                    cet enrégistrement ? ?')"
                                                         action="{{ route('reservation.delete') }}" method="POST">
                                                         @csrf
-                                                        <input type="hidden" name="id" value="{{ $reservation->id }}">
+                                                        <input type="hidden" name="id"
+                                                            value="{{ $data['reservation']->id }}">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <a title="Modifier" style="color: #fff"
-                                                            href="{{ route('reservation.edit', ['id' => $reservation->id]) }}"
+                                                            href="{{ route('reservation.edit', ['id' => $data['reservation']->id]) }}"
                                                             class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
                                                         <button title="Supprimer" style="color: #fff"
                                                             class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                                     </form>
 
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
