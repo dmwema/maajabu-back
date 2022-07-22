@@ -105,14 +105,12 @@ $title = 'nos projets';
                                 <ul class="massonry-filter-list">
                                     <li class="massonry-filter-list__item"><a href="#" class="active"
                                             data-filter="*">Tous</a></li>
-                                    <li class="massonry-filter-list__item"><a href="#"
-                                            data-filter=".BehindTheScenes">Conception graphique</a></li>
-                                    <li class="massonry-filter-list__item"><a href="#" data-filter=".Media">Mastering</a>
+                                    <li class="massonry-filter-list__item"><a href="#" data-filter="*">Mastering</a></li>
+                                    <li class="massonry-filter-list__item"><a href="#" data-filter="*">Duplication</a>
                                     </li>
-                                    <li class="massonry-filter-list__item"><a href="#"
-                                            data-filter=".MusicProductions">Productio </a></li>
-                                    <li class="massonry-filter-list__item"><a href="#"
-                                            data-filter=".VideoProductions">#VideoProductions</a></li>
+                                    <li class="massonry-filter-list__item"><a href="#" data-filter="*">Impression</a></li>
+                                    <li class="massonry-filter-list__item"><a href="#" data-filter="*">Enrégistrement</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="massonry-grid gallery-grid pt-md-25">
