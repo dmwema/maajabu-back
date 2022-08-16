@@ -1,0 +1,429 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>README.md</title>
+      </head>
+      <body>
+        <h3 id="jquery-zepto-lazy-delayed-content-image-and-background-loader">jQuery &amp; Zepto Lazy - Delayed Content, Image and Background Loader</h3>
+<p><a href="http://github.com/eisbehr-/jquery.lazy"><img src="https://badge.fury.io/gh/eisbehr-%2Fjquery.lazy.svg" alt="GitHub version"></a>
+<a href="http://www.npmjs.org/package/jquery-lazy"><img src="https://badge.fury.io/js/jquery-lazy.svg" alt="NPM version"></a>
+<a href="http://bower.io/search/?q=jquery-lazy"><img src="https://badge.fury.io/bo/jquery-lazy.svg" alt="Bower version"></a>
+<a href="https://david-dm.org/eisbehr-/jquery.lazy"><img src="https://david-dm.org/eisbehr-/jquery.lazy/status.svg" alt="Dependencies Status"></a>
+<a href="https://david-dm.org/eisbehr-/jquery.lazy?type=dev"><img src="https://david-dm.org/eisbehr-/jquery.lazy/dev-status.svg" alt="devDependencies Status"></a></p>
+<hr>
+<p><a href="https://jetbrains.com/phpstorm"><img src="http://jquery.eisbehr.de/lazy/images/git_logo_jb_ps.png" alt="JetBrains &amp; PhpStorm"></a><br><em>This project is friendly supported by <a href="https://jetbrains.com">JetBrains</a> &amp; <a href="https://jetbrains.com/phpstorm">PhpStorm</a>!</em></p>
+<hr>
+<h3 id="table-of-contents">Table of Contents</h3>
+<ul>
+<li><a href="#about-lazy">About Lazy</a></li>
+<li><a href="#compatibility">Compatibility</a></li>
+<li><a href="#documentation--examples">Documentation / Examples</a></li>
+<li><a href="#installation">Installation</a><ul>
+<li><a href="#cdn">CDN</a></li>
+<li><a href="#self-hosted">Self-Hosted</a></li>
+<li><a href="#package-managers">Package Managers</a></li>
+</ul>
+</li>
+<li><a href="#basic-usage">Basic Usage</a></li>
+<li><a href="#callbacks--events">Callbacks / Events</a></li>
+<li><a href="#instances-and-public-functions">Instances and public Functions</a></li>
+<li><a href="#custom-content-loaders">Custom Content Loaders</a></li>
+<li><a href="#loader-plugins">Loader Plugins</a></li>
+<li><a href="#configuration-parameters">Configuration Parameters</a></li>
+<li><a href="#build-and-validation">Build and Validation</a><ul>
+<li><a href="#available-gulp-tasks">Available gulp Tasks</a></li>
+</ul>
+</li>
+<li><a href="#bugs--feature-request">Bugs / Feature request</a></li>
+<li><a href="#license">License</a></li>
+<li><a href="#donation">Donation</a></li>
+</ul>
+<hr>
+<h2 id="about-lazy">About Lazy</h2>
+<p>Lazy is a fast, feature-rich and lightweight delayed content loading plugin for jQuery and Zepto. 
+It&#39;s designed to speed up page loading times and decrease traffic to your users by only loading the content in view. 
+You can use Lazy in all vertical and horizontal scroll ways.
+It supports images in <code>&lt;img /&gt;</code> tags and backgrounds, supplied with css like <code>background-image</code>, by default.
+On those elements Lazy can set an default image or a placeholder while loading and supports retina displays as well.
+But Lazy is even able to load any other content you want by <a href="#loader-plugins">plugins</a> and <a href="#custom-content-loaders">custom loaders</a>. </p>
+<h2 id="compatibility">Compatibility</h2>
+<p>Lazy will work with a wide range of browsers and support jQuery versions for years backwards and Zepto as alternative. 
+You can pick any version since jQuery 1.7.2 or Zepto 1.1.6 or greater.
+There is no way to guarantee, that Lazy will work with all browsers, but all I&#39;ve tested worked great so far.
+If you find any problems in specific browsers, <a href="http://github.com/eisbehr-/jquery.lazy/issues">please let me know</a>. </p>
+<p><strong>Tested in:</strong> IE, Chrome (+ mobile), Firefox (+ mobile), Safari (+ mobile) and Android Browser.</p>
+<h2 id="documentation-examples">Documentation / Examples</h2>
+<p>For <a href="http://jquery.eisbehr.de/lazy/#parameter">documentation</a>, <a href="http://jquery.eisbehr.de/lazy/#examples">examples</a> and other information take a look on the <a href="http://jquery.eisbehr.de/lazy/">project page</a>.</p>
+<h2 id="installation">Installation</h2>
+<p>First of all, you will need a copy of <a href="http://jquery.com">jQuery</a> or <a href="http://zeptojs.com">Zepto</a> to use Lazy successfully on your project.
+If you get this you can install Lazy by different ways.
+Some examples below:</p>
+<h4 id="cdn">CDN</h4>
+<p>Lazy and all plugins are available over <a href="http://cdnjs.com">cdnjs</a> and <a href="http://jsdelivr.com">jsDelivr</a> CDN and can directly included to every page.</p>
+<pre><code class="lang-HTML">&lt;!-- jsDeliver --&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;//cdn.jsdelivr.net/gh/eisbehr-/jquery.lazy@1.7.10/jquery.lazy.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;//cdn.jsdelivr.net/gh/eisbehr-/jquery.lazy@1.7.10/jquery.lazy.plugins.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- cdnjs --&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.10/jquery.lazy.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.10/jquery.lazy.plugins.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h4 id="self-hosted">Self-Hosted</h4>
+<p><a href="https://github.com/eisbehr-/jquery.lazy/archive/master.zip">Download</a> and save one of two available files to include Lazy to your page, either the <a href="http://raw.githubusercontent.com/eisbehr-/jquery.lazy/master/jquery.lazy.js">development</a> or the <a href="http://raw.githubusercontent.com/eisbehr-/jquery.lazy/master/jquery.lazy.min.js">minified</a> version.</p>
+<pre><code class="lang-HTML">&lt;script type=&quot;text/javascript&quot; src=&quot;jquery.lazy.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h4 id="package-managers">Package Managers</h4>
+<p>Lazy is even available through <a href="http://npmjs.org">NPM</a> and <a href="http://bower.io">Bower</a>.
+Just use one of the following commands below:</p>
+<p><a href="https://nodei.co/npm/jquery-lazy/"><img src="https://nodei.co/npm/jquery-lazy.png?compact=true" alt="NPM"></a></p>
+<pre><code class="lang-sh">$ npm install jquery-lazy
+$ bower install jquery-lazy
+</code></pre>
+<h2 id="basic-usage">Basic Usage</h2>
+<p>1.) The basic usage of Lazy ist pretty easy.
+First of all you need to prepare all elements you want to lazy load. 
+By default add a <code>data-src</code> attribute to images containing the loadable image and/or a <code>data-loader</code> attribute to elements witch shall use a <a href="#loader-plugins">plugin</a> or <a href="#custom-content-loaders">custom loaders</a>.</p>
+<pre><code class="lang-HTML">&lt;img class=&quot;lazy&quot; data-src=&quot;path/to/image_to_load.jpg&quot; src=&quot;&quot; /&gt;
+</code></pre>
+<p>2.) Start using Lazy by calling it after page load.
+You don&#39;t have to specify your elements exactly, but for better performance, or different options, load your elements over unique classes or any other selector. </p>
+<pre><code class="lang-JS">$(function($) {
+    $(&quot;img.lazy&quot;).Lazy();
+});
+</code></pre>
+<p>Take a look at the <a href="http://jquery.eisbehr.de/lazy/">documentation</a> to get an idea what Lazy is capable of.</p>
+<h2 id="callbacks-events">Callbacks / Events</h2>
+<p>Lazy comes with a bunch of <a href="http://jquery.eisbehr.de/lazy/index.php?c=callback">callbacks and events</a> you can assign to.
+Just add them by initialization settings:</p>
+<ul>
+<li><code>beforeLoad</code> - before item is about to be loaded</li>
+<li><code>afterLoad</code> - after the item was loaded successfully</li>
+<li><code>onError</code> - whenever an item could not be loaded</li>
+<li><code>onFinishedAll</code> - after all items in instance was loaded or returned an error</li>
+</ul>
+<h2 id="instances-and-public-functions">Instances and public Functions</h2>
+<p>Lazy supports multiple parallel instances.
+Just initialize them with different selectors.
+To access an instances public functions you can initialize them in an object oriented manner or grab the instance bind to every element by default:</p>
+<pre><code class="lang-JS">// object oriented way
+var instance = $(&quot;img.lazy&quot;).Lazy({chainable: false});
+
+// grab from elements (only works well if you use same selectors)
+$(&quot;img.lazy&quot;).Lazy();
+var instance = $(&quot;img.lazy&quot;).data(&quot;plugin_lazy&quot;);
+</code></pre>
+<p>Every instance has some public available functions to control it&#39;s behavior.
+There are currently six available:</p>
+<pre><code class="lang-JS">instance.config(entryName[, newValue]); // get or set an configuration entry
+instance.addItems(items); // add new items to current instance
+instance.getItems(); // get all unhandled items left of current instance
+instance.update([useThrottle]); // loads all elements in current viewport
+instance.force(items); // force loading specific items, ignoring the viewport
+instance.loadAll(); // loads all remaining available elements from this instance
+instance.destroy(); // unbinds all events and stop execution directly
+</code></pre>
+<h2 id="custom-content-loaders">Custom Content Loaders</h2>
+<p>With the custom loaders option there is a powerful solution to load every contents the Lazy way.
+Lazy will handle everything, you just create a loading method witch got triggered whenever the element hits the visibility threshold.
+It is still possible to load images and custom loaders in the same Lazy instance.</p>
+<p>To use this just define a loader function inside the Lazy initialisation and pass the loader name to the <code>data-loader</code> attribute of the elements witch should be lazy loaded.</p>
+<pre><code class="lang-HTML">&lt;div class=&quot;lazy&quot; data-loader=&quot;customLoaderName&quot;&gt;&lt;/div&gt;
+&lt;img class=&quot;lazy&quot; data-src=&quot;path/to/image_to_load.jpg&quot; src=&quot;&quot; /&gt;
+&lt;div class=&quot;lazy&quot; data-loader=&quot;customLoaderName&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;lazy&quot; data-loader=&quot;asyncLoader&quot;&gt;&lt;/div&gt;
+</code></pre>
+<pre><code class="lang-JS">$(&quot;.lazy&quot;).Lazy({
+    // callback
+    beforeLoad: function(element) {
+        console.log(&quot;start loading &quot; + element.prop(&quot;tagName&quot;));
+    },
+
+    // custom loaders
+    customLoaderName: function(element) {
+        element.html(&quot;element handled by custom loader&quot;);
+        element.load();
+    },
+    asyncLoader: function(element, response) {
+        setTimeout(function() {
+            element.html(&quot;element handled by async loader&quot;);
+            response(true);
+        }, 1000);
+    }
+});
+</code></pre>
+<h2 id="loader-plugins">Loader Plugins</h2>
+<p>The loader plugins can extend the functionality of Lazy, like loading other elements and data.
+It is basically the same as the <a href="#custom-content-loaders">custom content loaders</a>, with the difference, that plugins can extend all further instances globally at once permanently and let them handle specific elements like <code>&lt;video&gt;</code> by default, without <code>data-loader</code> attribute set. 
+With custom content loaders you have to initialize each instance on setup with the loader.
+With plugins you only load the plugin file and you&#39;re done for all instances from now on. </p>
+<p>For more information and examples, take a look at the <a href="https://github.com/eisbehr-/jquery.lazy/tree/master/plugins">existing plugins</a> or the <a href="https://github.com/eisbehr-/jquery.lazy/tree/master/plugins/README.md">readme.md</a> in there.</p>
+<h2 id="configuration-parameters">Configuration Parameters</h2>
+<p>The following configurations is available by default:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><em>string</em></td>
+<td><em>&#39;lazy&#39;</em></td>
+<td>Internal name, used for namespaces and bindings.</td>
+</tr>
+<tr>
+<td>chainable</td>
+<td><em>boolean</em></td>
+<td><em>true</em></td>
+<td>By default Lazy is chainable and will return all elements. If set to <code>false</code> Lazy will return the created plugin instance itself for further use.</td>
+</tr>
+<tr>
+<td>autoDestroy</td>
+<td><em>boolean</em></td>
+<td><em>true</em></td>
+<td>Will automatically destroy the instance when no further elements are available to handle.</td>
+</tr>
+<tr>
+<td>bind</td>
+<td><em>string</em></td>
+<td><em>&#39;load&#39;</em></td>
+<td>If set to <code>load</code>&#39; Lazy starts working directly after page load. If you want to use Lazy on own events set it to <code>event</code>&#39;.</td>
+</tr>
+<tr>
+<td>threshold</td>
+<td><em>integer</em></td>
+<td><em>500</em></td>
+<td>Amount of pixels below the viewport, in which all images gets loaded before the user sees them.</td>
+</tr>
+<tr>
+<td>visibleOnly</td>
+<td><em>boolean</em></td>
+<td><em>false</em></td>
+<td>Determine if only visible elements should be load.</td>
+</tr>
+<tr>
+<td>appendScroll</td>
+<td><em>integer</em></td>
+<td><em>window</em></td>
+<td>An element to listen on for scroll events, useful when images are stored in a container.</td>
+</tr>
+<tr>
+<td>scrollDirection</td>
+<td><em>string</em></td>
+<td><em>&#39;both&#39;</em></td>
+<td>Determines the handles scroll direction. Possible values are <code>both</code>, <code>vertical</code> and <code>horizontal</code>.</td>
+</tr>
+<tr>
+<td>imageBase</td>
+<td><em>string</em></td>
+<td><em>null</em></td>
+<td>If defined this will be used as base path for all images loaded by this instance.</td>
+</tr>
+<tr>
+<td>defaultImage</td>
+<td><em>string</em></td>
+<td><em>blank image</em></td>
+<td>Base64 image string, set as default image source for every image without a predefined source attribute.</td>
+</tr>
+<tr>
+<td>placeholder</td>
+<td><em>string</em></td>
+<td><em>null</em></td>
+<td>Base64 image string, set a background on every element as loading placeholder.</td>
+</tr>
+<tr>
+<td>delay</td>
+<td><em>integer</em></td>
+<td><em>-1</em></td>
+<td>If you want to load all elements at once after page load, then you can specify a delay time in milliseconds.</td>
+</tr>
+<tr>
+<td>combined</td>
+<td><em>boolean</em></td>
+<td><em>false</em></td>
+<td>With this parameter, Lazy will combine the event driven and delayed element loading.</td>
+</tr>
+<tr>
+<td><strong>attributes</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>attribute</td>
+<td><em>string</em></td>
+<td><em>&#39;data-src&#39;</em></td>
+<td>Name of the image tag <code>src</code> attribute, where the image path is stored.</td>
+</tr>
+<tr>
+<td>srcsetAttribute</td>
+<td><em>string</em></td>
+<td><em>&#39;data-srcset&#39;</em></td>
+<td>Name of the image tag <code>srcset</code> attribute, where the source set is stored.</td>
+</tr>
+<tr>
+<td>sizesAttribute</td>
+<td><em>string</em></td>
+<td><em>&#39;data-sizes&#39;</em></td>
+<td>Name of the image tag <code>sizes</code> attribute, where the size definition for source set is stored.</td>
+</tr>
+<tr>
+<td>retinaAttribute</td>
+<td><em>string</em></td>
+<td><em>&#39;data-retina&#39;</em></td>
+<td>Name of the image tag attribute, where the path for optional retina image is stored.</td>
+</tr>
+<tr>
+<td>loaderAttribute</td>
+<td><em>string</em></td>
+<td><em>&#39;data-loader&#39;</em></td>
+<td>Name or the element attribute, where the identifier of the plugin or customer loader is sored.</td>
+</tr>
+<tr>
+<td>imageBaseAttribute</td>
+<td><em>string</em></td>
+<td><em>&#39;data-imagebase&#39;</em></td>
+<td>Name ot the image tag element, where the specific image base is stored. This will overwrite the global <code>imageBase</code> config.</td>
+</tr>
+<tr>
+<td>removeAttribute</td>
+<td><em>boolean</em></td>
+<td><em>true</em></td>
+<td>Determine if the attribute should be removed from the element after loading.</td>
+</tr>
+<tr>
+<td>handledName</td>
+<td><em>string</em></td>
+<td><em>&#39;handled&#39;</em></td>
+<td>Name of the element tag data attribute, to determine if element is already handled.</td>
+</tr>
+<tr>
+<td>loadedName</td>
+<td><em>string</em></td>
+<td><em>&#39;loaded&#39;</em></td>
+<td>Name of the element tag data attribute, to determine if element is already loaded.</td>
+</tr>
+<tr>
+<td><strong>effect</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>effect</td>
+<td><em>string</em></td>
+<td><em>&#39;show&#39;</em></td>
+<td>Function name of the effect you want to use to show the loaded images, like <code>show</code> or <code>fadeIn</code>.</td>
+</tr>
+<tr>
+<td>effectTime</td>
+<td><em>integer</em></td>
+<td><em>0</em></td>
+<td>Time in milliseconds the effect should use to view the image.</td>
+</tr>
+<tr>
+<td><strong>throttle</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>enableThrottle</td>
+<td><em>boolean</em></td>
+<td><em>true</em></td>
+<td>Throttle down the loading calls on scrolling event.</td>
+</tr>
+<tr>
+<td>throttle</td>
+<td><em>integer</em></td>
+<td><em>250</em></td>
+<td>Time in milliseconds the throttle will use to limit the loading calls.</td>
+</tr>
+<tr>
+<td><strong>callbacks</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>beforeLoad</td>
+<td><em>function</em></td>
+<td><em>undefined</em></td>
+<td>Callback function, which will be called before the element gets loaded. Has current element and response function as parameters. <code>this</code> is the current Lazy instance.</td>
+</tr>
+<tr>
+<td>afterLoad</td>
+<td><em>function</em></td>
+<td><em>undefined</em></td>
+<td>Callback function, which will be called after the element was loaded. Has current element and response function as parameters. <code>this</code> is the current Lazy instance.</td>
+</tr>
+<tr>
+<td>onError</td>
+<td><em>function</em></td>
+<td><em>undefined</em></td>
+<td>Callback function, which will be called if the element could not be loaded. Has current element and response function as parameters. <code>this</code> is the current Lazy instance.</td>
+</tr>
+<tr>
+<td>onFinishedAll</td>
+<td><em>function</em></td>
+<td><em>undefined</em></td>
+<td>Callback function, which will be called after all elements was loaded or returned an error. The callback has no parameters. <code>this</code> is the current Lazy instance.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="build-and-validation">Build and Validation</h2>
+<p>This project includes an automated build script using <code>gulp</code>.
+To build your own versions of Lazy you need to <a href="#package-managers">install it</a> via <a href="https://www.npmjs.com/package/jquery-lazy">npm</a> first.
+Afterwards you can use the following command in your console to automatically generate all productive files.
+While building these files everything will be checked with <code>jshint</code> for validity too.</p>
+<pre><code class="lang-sh">$ gulp build
+</code></pre>
+<h3 id="available-gulp-tasks-">Available <code>gulp</code> Tasks:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>build</td>
+<td>check &amp; build everything</td>
+</tr>
+<tr>
+<td>build-main</td>
+<td>check &amp; build main project file</td>
+</tr>
+<tr>
+<td>build-plugins</td>
+<td>check &amp; build single plugin files</td>
+</tr>
+<tr>
+<td>concat-plugins</td>
+<td>build concatenated plugins file</td>
+</tr>
+<tr>
+<td>validate</td>
+<td>check all files with <code>jshint</code></td>
+</tr>
+<tr>
+<td>watch</td>
+<td>watches all files to check &amp; build everything on change</td>
+</tr>
+</tbody>
+</table>
+<h2 id="bugs-feature-request">Bugs / Feature request</h2>
+<p>Please <a href="http://github.com/eisbehr-/jquery.lazy/issues">report</a> bugs and feel free to <a href="http://github.com/eisbehr-/jquery.lazy/issues">ask</a> for new features directly on GitHub.</p>
+<h2 id="license">License</h2>
+<p>Lazy is dual-licensed under <a href="http://www.opensource.org/licenses/mit-license.php">MIT</a> and <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPL-2.0</a> license.</p>
+<h2 id="donation">Donation</h2>
+<p><em>You like to support me?</em><br><em>You appreciate my work?</em><br><em>You use it in commercial projects?</em>  </p>
+<p>Feel free to make a little <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=FFL6VQJCUZMXC">donation</a>! :wink:</p>
+
+      </body>
+    </html>
