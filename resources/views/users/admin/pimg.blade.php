@@ -19,8 +19,8 @@ $i = 0;
             </div>
             <div class="col-7">
                 <div class="text-end upgrade-btn">
-                    <a href="#" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                            class="mdi mdi-plus"></i> Nouveau</a>
+                    <a href="#" class="btn btn-success text-white" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"><i class="mdi mdi-plus"></i> Nouveau</a>
                 </div>
             </div>
         </div>
@@ -73,8 +73,8 @@ $i = 0;
                                             @endphp
                                             <tr>
                                                 <th scope="row">{{ $i }}</th>
-                                                <td><img style="width: 100px; height: 100px;"
-                                                        src="{{ Storage::url($pimg->image) }}" alt=""></td>
+                                                <td><img style="width: 100px; height: 100px;" src="{{ $pimg->image }}"
+                                                        alt=""></td>
                                                 <td>{{ $pimg->title }}</td>
                                                 <td>{{ $pimg->category }}</td>
                                                 <td>

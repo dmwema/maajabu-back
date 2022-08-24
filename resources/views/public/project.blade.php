@@ -122,7 +122,7 @@ $title = 'nos projets';
                                 @foreach ($pimages as $pimg)
                                     <a href="#" class="gallery-grid__item {{ $pimg->category }}">
                                         <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" class="lazy"
-                                            data-src="{{ Storage::url($pimg->image) }}" alt="img">
+                                            data-src="{{ $pimg->image }}" alt="img">
                                         <span class="grid-item-content">
                                             <span class="grid-item-title">{{ $pimg->title }}</span>
                                         </span>

@@ -71,8 +71,7 @@ $i = 0;
                             <div class="form-group">
                                 <label class="col-md-12">Image</label>
                                 <div class="col-md-12">
-                                    <img style="width: 200px; height:200px " src="{{ Storage::url($pimg->image) }}"
-                                        alt=""><br>
+                                    <img style="width: 200px; height:200px " src="{{ $pimg->image }}" alt=""><br>
                                     <input type="file" class="form-control form-control-line" name="image">
                                 </div>
                             </div>

@@ -34,13 +34,13 @@ class ProjectImageController extends Controller
         $pathImage = "";
         $image = $request->file('image');
         $pathImage = time() . '.' . $image->getClientOriginalExtension();
-        $path = public_path('img/projects' . $pathImage);
+        $path = public_path('img/projects/');
         $image->move($path, $pathImage);
 
         if ($project_img = ProjectImage::create([
             'title' => $request->title,
             'category' => $request->category,
-            'image' => "img/projects/" . $pathImage,
+            'image' => "/img/projects/" . $pathImage,
         ])) {
             return redirect()->back()->with('success', 'Projet à la une enregistré avec succès');
         } else {
@@ -63,14 +63,13 @@ class ProjectImageController extends Controller
         $pimg->category = $request->category;
 
         if (!empty($request->image)) {
-            $filename = time() . '.' . $request->image->extension();
-            $pathImage = $request->file('image')->storeAs(
-                'projects',
-                $filename,
-                'public'
-            );
+            $image = $request->file('image');
+            $pathImage = time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('img/projects/');
+            $image->move($path, $pathImage);
+
             Storage::disk('public')->delete($pimg->image);
-            $pimg->image = $pathImage;
+            $pimg->image = "/img/projects/" . $pathImage;
         }
 
         if ($pimg->save()) {
