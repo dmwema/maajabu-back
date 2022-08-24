@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Image;
 use App\Models\ProjectImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -30,14 +31,14 @@ class ProjectImageController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        //
-        $filename = time() . '.' . $request->image->extension();
-        $pathImage = $request->file('image')->storeAs(
-            'projects',
-            $filename,
-            'public'
-        );
+        $pathImage = "";
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $pathImage = time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('img/projects' . $pathImage);
+            Image::make($image)->save($path);
+        }
+
         if ($project_img = ProjectImage::create([
             'title' => $request->title,
             'category' => $request->category,
