@@ -32,17 +32,15 @@ class ProjectImageController extends Controller
     public function store(Request $request)
     {
         $pathImage = "";
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $pathImage = time() . '.' . $image->getClientOriginalExtension();
-            $path = public_path('img/projects' . $pathImage);
-            Image::make($image)->save($path);
-        }
+        $image = $request->file('image');
+        $pathImage = time() . '.' . $image->getClientOriginalExtension();
+        $path = public_path('img/projects' . $pathImage);
+        $image->move($path, $pathImage);
 
         if ($project_img = ProjectImage::create([
             'title' => $request->title,
             'category' => $request->category,
-            'image' => $pathImage,
+            'image' => "img/projects/" . $pathImage,
         ])) {
             return redirect()->back()->with('success', 'Projet à la une enregistré avec succès');
         } else {
