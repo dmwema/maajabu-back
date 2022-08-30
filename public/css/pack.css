@@ -1,0 +1,32 @@
+.col-div
+{
+    height: 65vh; 
+    border: 5px solid #b07a12;
+}
+.col-bg
+{
+    background-color: #fab22a
+}
+.top5
+{
+    padding-top:5vh;
+
+}
+.col-title
+{
+    color: #b07a12; 
+    padding-top:3vh;
+}
+.txt-light
+{
+    color:#f7d9a1
+
+}
+.btn-div
+{
+    bottom: 10px;
+    position:absolute;
+    right: 0;
+     left: 0;
+
+}
