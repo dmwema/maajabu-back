@@ -5,6 +5,7 @@
     <title>{{ $studio->name }} - {{ $title ?? strtoupper('BY MAAJABU') }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
 
     <!--====>> Favicon icon CSS <<====-->
     <link rel="shortcut icon" href="favicon.png">
@@ -384,6 +385,8 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuHS2And3EtzpWBoMSqCIIiJzAEynp5ms&callback=initMap"
         async defer></script>
+     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script type="text/javascript" src="{{ asset('slick/slick.min.js') }}"></script>
     @if ($page == 'galery')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
         <script>
@@ -455,6 +458,8 @@
 
         </script>
     @endif
+
+    @yield('script')
 
 </body>
 
